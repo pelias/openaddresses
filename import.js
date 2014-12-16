@@ -9,28 +9,29 @@ var path = require( 'path' );
 
 var through = require( 'through2' );
 var csvParser = require( 'fast-csv' );
-var peliasAddresses = require( 'pelias-addresses' );
+var peliasModel = require( 'pelias-model' );
 var createAdminValues = require( './lib/create_admin_values' );
 
 function importOpenAddressesFile( filePath ){
-  var recordStream = fs.createReadStream( filePath )
-    .pipe( csvParser( { headers: true } ) );
-
   var baseName = path.basename(filePath, ".csv")
   var adminValues = createAdminValues( baseName );
 
-  var addressCreator = through.obj( function write( record, enc, next ){
-    this.push( new peliasAddresses.Address(
-      undefined,
-      record[ ' NUMBER' ],
-      record[ ' STREET' ],
-      adminValues.locality,
-      adminValues.region,
-      undefined,
-      adminValues.country,
-      record[ 'LAT' ],
-      record[ 'LON' ],
-    ));
+  var uid = 0;
+  var documentCreator = through.obj( function write( record, enc, next ){
+    var addrDoc = new peliasModel.Document( 'openaddresses', toString(uid++))
+      .setName( 'default', record[ ' NUMBER' ] + ' ' + record[ ' STREET' ] )
+      .setAdmin( 'admin0', adminValues.country )
+      .setCentroid( { lat: record[ ' LAT' ], lon: record[ 'LON' ] } )
+
+    if( adminValues.region !== undefined ){
+      addrDoc.setAdmin( 'admin1', adminValues.region );
+    }
+
+    if( adminValues.locality !== undefined ){
+      addrDoc.setAdmin( 'admin2', adminValues.locality );
+    }
+
+    this.push( addrDoc );
     next();
   });
 
@@ -41,7 +42,10 @@ function importOpenAddressesFile( filePath ){
     next();
   });
 
-  recordStream.pipe( addressesPipeline );
+  var recordStream = fs.createReadStream( filePath )
+    .pipe( csvParser( { headers: true } ) )
+    .pipe( documentCreator )
+    .pipe( addressesPipeline );
 }
 
 function handleUserArgs( argv ){
