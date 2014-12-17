@@ -18,7 +18,7 @@ var createAdminValues = require( './lib/create_admin_values' );
 function importOpenAddressesFile( filePath ){
   var baseName = path.basename(filePath, ".csv");
   var sourcesDirPath = path.join(__dirname, "openaddresses_sources");
-  var adminValues = createAdminValues(baseName, sourcesDirPath);
+  var adminValues = createAdminValues.create(baseName, sourcesDirPath);
 
   var uid = 0;
   var documentCreator = through.obj( function write( record, enc, next ){
