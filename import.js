@@ -16,10 +16,9 @@ var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
 var createAdminValues = require( './lib/create_admin_values' );
 
 function importOpenAddressesFile( filePath ){
-  var baseName = path.basename(filePath, ".csv")
-  var adminValues = createAdminValues(
-    baseName, path.join(__dirname, "openaddresses_sources")
-  );
+  var baseName = path.basename(filePath, ".csv");
+  var sourcesDirPath = path.join(__dirname, "openaddresses_sources");
+  var adminValues = createAdminValues(baseName, sourcesDirPath);
 
   var uid = 0;
   var documentCreator = through.obj( function write( record, enc, next ){
@@ -44,6 +43,13 @@ function importOpenAddressesFile( filePath ){
     next();
   });
 
+  var recordStream = fs.createReadStream( filePath )
+    .pipe( csvParser( { headers: true } ) )
+    .pipe( documentCreator )
+    .pipe( createPeliasElasticsearchPipeline() )
+}
+
+function createPeliasElasticsearchPipeline(){
   var dbclientMapper = through.obj( function( model, enc, next ){
     this.push({
       _index: 'pelias',
@@ -54,12 +60,11 @@ function importOpenAddressesFile( filePath ){
     next();
   })
 
-  var recordStream = fs.createReadStream( filePath )
-    .pipe( csvParser( { headers: true } ) )
-    .pipe( documentCreator )
-    .pipe( peliasSuggesterPipeline.pipeline )
+  var entryPoint = peliasSuggesterPipeline.pipeline;
+  entryPoint
     .pipe( dbclientMapper )
     .pipe( peliasDbclient() );
+  return entryPoint;
 }
 
 function handleUserArgs( argv ){
