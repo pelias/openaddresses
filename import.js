@@ -49,6 +49,12 @@ function importOpenAddressesFile( filePath ){
     .pipe( createPeliasElasticsearchPipeline() )
 }
 
+/**
+ * Create the Pelias elasticsearch import pipeline.
+ *
+ * @return {Writable stream} The pipeline entrypoint; Document records should
+ *    be written to it.
+ */
 function createPeliasElasticsearchPipeline(){
   var dbclientMapper = through.obj( function( model, enc, next ){
     this.push({
@@ -67,6 +73,9 @@ function createPeliasElasticsearchPipeline(){
   return entryPoint;
 }
 
+/**
+ * Handle the command-line arguments passed to the script.
+ */
 function handleUserArgs( argv ){
   var usageMessage = 'TODO: usage message.';
   if( argv.length !== 1 ){
