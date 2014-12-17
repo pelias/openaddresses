@@ -10,9 +10,12 @@
     "pelias-dbclient": "0.0.6",
     "pelias-suggester-pipeline": "1.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tape": "3.0.3",
+    "tap-spec": "2.1.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test.js | tap-spec"
   },
   "repository": {
     "type": "git",
