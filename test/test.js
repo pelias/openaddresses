@@ -25,3 +25,24 @@ tape( 'createAdminValues.getCoverageObject(): ', function ( test ){
     });
   }
 });
+
+tape( 'createAdminValues.create(): ', function ( test ){
+  var testCases = [
+    [ 'us-ny-ab', [ 'United States', 'New York', 'AB' ] ],
+    [ 'cA-On-abc_def', [ 'Canada', 'Ontario', 'Abc Def' ] ],
+    [ 'US-ZT-a_small_town', [ 'United States', 'ZT', 'A Small Town' ] ],
+    [ 'ZZ-aa-a_small_town', [ 'ZZ', 'AA', 'A Small Town' ] ]
+  ];
+
+  test.plan( testCases.length );
+  for( var ind = 0; ind < testCases.length; ind++ ){
+    var actual = createAdminValues.create(
+      testCases[ ind ][ 0 ], '/dev/null'
+    );
+    test.deepEqual( actual, {
+      country: testCases[ ind ][ 1 ][ 0 ],
+      region: testCases[ ind ][ 1 ][ 1 ],
+      locality: testCases[ ind ][ 1 ][ 2 ]
+    });
+  }
+});
