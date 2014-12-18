@@ -13,6 +13,7 @@ var combinedStream = require( 'combined-stream' );
 var peliasModel = require( 'pelias-model' );
 var peliasDbclient = require( 'pelias-dbclient' );
 var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
+var addressDeduplicatorStream = require( 'address-deduplicator-stream' );
 
 var createAdminValues = require( './lib/create_admin_values' );
 
@@ -87,7 +88,9 @@ function importOpenAddressesDir( dirPath ){
       });
     }
   });
-  recordStream.pipe( createPeliasElasticsearchPipeline() );
+  recordStream
+    .pipe( addressDeduplicatorStream( 100, 10 ) )
+    .pipe( createPeliasElasticsearchPipeline() );
 }
 
 /**
