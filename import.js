@@ -9,21 +9,21 @@ var path = require( 'path' );
 
 var through = require( 'through2' );
 var csvParser = require( 'fast-csv' );
+var combinedStream = require( 'combined-stream' );
 var peliasModel = require( 'pelias-model' );
 var peliasDbclient = require( 'pelias-dbclient' );
 var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
 
 var createAdminValues = require( './lib/create_admin_values' );
 
-function importOpenAddressesFile( filePath ){
+function createRecordStream( filePath ){
   var baseName = path.basename(filePath, ".csv");
   var sourcesDirPath = path.join(__dirname, "openaddresses_sources");
   var adminValues = createAdminValues.create(baseName, sourcesDirPath);
 
-  var uid = 0;
   var documentCreator = through.obj( function write( record, enc, next ){
-    if(-90 < record[ ' LAT' ] && record[ ' LAT' ] < 90 &&
-      -180 < record[ 'LON' ] && record[ 'LON' ] < 180){
+    try {
+      process.stderr.write( '\r' + uid );
       var model_id = ( uid++ ).toString();
       var addrDoc = new peliasModel.Document( 'openaddresses', model_id )
         .setName( 'default', record[ ' NUMBER' ] + ' ' + record[ ' STREET' ] )
@@ -40,15 +40,18 @@ function importOpenAddressesFile( filePath ){
 
       this.push( addrDoc );
     }
+    catch ( ex ){
+      console.error( 'Bad data, Document could not be created:', ex );
+    }
     next();
   });
 
-  var recordStream = fs.createReadStream( filePath )
-    .pipe( csvParser( { headers: true } ) )
-    .pipe( documentCreator )
-    .pipe( createPeliasElasticsearchPipeline() )
+  return fs.createReadStream( filePath )
+    .pipe( csvParser( { headers: true, quote: null } ) )
+    .pipe( documentCreator );
 }
 
+var uid = 0;
 /**
  * Create the Pelias elasticsearch import pipeline.
  *
@@ -64,13 +67,27 @@ function createPeliasElasticsearchPipeline(){
       data: model
     });
     next();
-  })
+  });
 
   var entryPoint = peliasSuggesterPipeline.pipeline;
   entryPoint
     .pipe( dbclientMapper )
     .pipe( peliasDbclient() );
   return entryPoint;
+}
+
+function importOpenAddressesDir( dirPath ){
+  var recordStream = combinedStream.create();
+  fs.readdirSync( dirPath ).forEach( function forEach( filePath ){
+    if( filePath.match( /.csv$/ ) ){
+      console.error( 'Creating read stream for: ' + filePath );
+      var fullPath = path.join( dirPath, filePath );
+      recordStream.append( function ( next ){
+        next( createRecordStream( fullPath ) );
+      });
+    }
+  });
+  recordStream.pipe( createPeliasElasticsearchPipeline() );
 }
 
 /**
@@ -83,7 +100,7 @@ function handleUserArgs( argv ){
     process.exit( 1 );
   }
   else {
-    importOpenAddressesFile( argv[ 0 ] );
+    importOpenAddressesDir( argv[ 0 ] );
   }
 }
 
