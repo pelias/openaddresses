@@ -14,31 +14,17 @@ var peliasModel = require( 'pelias-model' );
 var peliasDbclient = require( 'pelias-dbclient' );
 var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
 var addressDeduplicatorStream = require( 'address-deduplicator-stream' );
+var peliasHierarchyLookup = require( 'pelias-hierarchy-lookup' );
 
 var createAdminValues = require( './lib/create_admin_values' );
 
 function createRecordStream( filePath ){
-  var baseName = path.basename(filePath, ".csv");
-  var sourcesDirPath = path.join(__dirname, "openaddresses_sources");
-  var adminValues = createAdminValues.create(baseName, sourcesDirPath);
-
   var documentCreator = through.obj( function write( record, enc, next ){
     try {
-      process.stderr.write( '\r' + uid );
       var model_id = ( uid++ ).toString();
       var addrDoc = new peliasModel.Document( 'openaddresses', model_id )
         .setName( 'default', record[ ' NUMBER' ] + ' ' + record[ ' STREET' ] )
-        .setAdmin( 'admin0', adminValues.country )
         .setCentroid( { lat: record[ ' LAT' ], lon: record[ 'LON' ] } )
-
-      if( adminValues.region !== undefined ){
-        addrDoc.setAdmin( 'admin1', adminValues.region );
-      }
-
-      if( adminValues.locality !== undefined ){
-        addrDoc.setAdmin( 'admin2', adminValues.locality );
-      }
-
       this.push( addrDoc );
     }
     catch ( ex ){
@@ -88,7 +74,9 @@ function importOpenAddressesDir( dirPath ){
       });
     }
   });
+
   recordStream
+    .pipe( peliasHierarchyLookup.stream() )
     .pipe( addressDeduplicatorStream( 100, 10 ) )
     .pipe( createPeliasElasticsearchPipeline() );
 }
