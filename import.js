@@ -63,7 +63,7 @@ function createPeliasElasticsearchPipeline(){
   return entryPoint;
 }
 
-function importOpenAddressesDir( dirPath ){
+function importOpenAddressesDir( dirPath, opts ){
   var recordStream = combinedStream.create();
   fs.readdirSync( dirPath ).forEach( function forEach( filePath ){
     if( filePath.match( /.csv$/ ) ){
@@ -75,10 +75,19 @@ function importOpenAddressesDir( dirPath ){
     }
   });
 
-  recordStream
-    .pipe( peliasHierarchyLookup.stream() )
-    .pipe( addressDeduplicatorStream( 100, 10 ) )
-    .pipe( createPeliasElasticsearchPipeline() );
+  if( opts.deduplicate ){
+    var deduplicatorStream = addressDeduplicatorStream( 100, 10 );
+    recordStream.pipe( deduplicatorStream );
+    recordStream = deduplicatorStream;
+  }
+
+  if( opts.adminValues ){
+    var lookupStream = peliasHierarchyLookup.stream();
+    recordStream.pipe( lookupStream );
+    recordStream = lookupStream;
+  }
+
+  recordStream.pipe( createPeliasElasticsearchPipeline() );
 }
 
 /**
@@ -88,17 +97,44 @@ function handleUserArgs( argv ){
   var usageMessage = [
     'A tool for importing OpenAddresses data into Pelias. Usage:',
     '',
-    '\tnode import.js OPENADDRESSES_DIR',
+    '\tnode import.js [--deduplicate] [--admin-values] OPENADDRESSES_DIR',
     '',
-    '\tOPENADDRESSES_DIR: A directory containing OpenAddresses CSV files.'
+    '',
+    '\tOPENADDRESSES_DIR: A directory containing OpenAddresses CSV files.',
+    '',
+    '\t--deduplicate: (advanced use) Deduplicate addresses using the',
+    '\t\tOpenVenues deduplicator: https://github.com/openvenues/address_deduper.',
+    '\t\tIt must be running at localhost:5000.',
+    '',
+    '\t--admin-values: (advanced use) OpenAddresses records lack admin values',
+    '\t\t(country, state, city, etc., names), so auto-fill them',
+    '\t\tby querying the Quattroshapes types in the Pelias',
+    '\t\telasticsearch index. You must have imported these using',
+    '\t\thttps://github.com/pelias/quattroshapes-pipeline.'
   ].join( '\n' );
-  if( argv.length !== 1 ){
-    console.error( usageMessage );
-    process.exit( 1 );
+  console.log( usageMessage ); process.exit( 0 );
+
+  var opts = {
+    deduplicate: false,
+    adminValues: false
+  };
+  for( var ind = 0; ind < argv.length - 1; ind++ ){
+    switch( argv[ ind ] ){
+      case '--deduplicate':
+        opts.deduplicate = true;
+        break;
+
+      case '--admin-values':
+        opts.adminValues = true;
+        break;
+
+      default:
+        console.error( 'ERROR. unrecognized argument:', argv[ ind ] );
+        console.error( '\nUSAGE. ' + usageMessage );
+        process.exit( 2 );
+    }
   }
-  else {
-    importOpenAddressesDir( argv[ 0 ] );
-  }
+  importOpenAddressesDir( argv[ argv.length - 1 ], opts );
 }
 
 handleUserArgs( process.argv.slice( 2 ) );
