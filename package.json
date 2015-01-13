@@ -10,7 +10,8 @@
     "address-deduplicator-stream": "1.0.1",
     "pelias-model": "0.0.0",
     "pelias-dbclient": "0.0.6",
-    "pelias-suggester-pipeline": "1.0.1"
+    "pelias-suggester-pipeline": "1.0.1",
+    "pelias-hierarchy-lookup": "0.0.1"
   },
   "devDependencies": {
     "tape": "3.0.3",
