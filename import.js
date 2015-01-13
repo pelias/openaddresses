@@ -112,7 +112,6 @@ function handleUserArgs( argv ){
     '\t\telasticsearch index. You must have imported these using',
     '\t\thttps://github.com/pelias/quattroshapes-pipeline.'
   ].join( '\n' );
-  console.log( usageMessage ); process.exit( 0 );
 
   var opts = {
     deduplicate: false,
