@@ -85,7 +85,13 @@ function importOpenAddressesDir( dirPath ){
  * Handle the command-line arguments passed to the script.
  */
 function handleUserArgs( argv ){
-  var usageMessage = 'TODO: usage message.';
+  var usageMessage = [
+    'A tool for importing OpenAddresses data into Pelias. Usage:',
+    '',
+    '\tnode import.js OPENADDRESSES_DIR',
+    '',
+    '\tOPENADDRESSES_DIR: A directory containing OpenAddresses CSV files.'
+  ].join( '\n' );
   if( argv.length !== 1 ){
     console.error( usageMessage );
     process.exit( 1 );
