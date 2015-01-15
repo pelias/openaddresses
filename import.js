@@ -58,12 +58,26 @@ function importOpenAddressesDir( dirPath, opts ){
 }
 
 /**
- * Handle the command-line arguments passed to the script.
+ * Interprets the command-line arguments passed to the script.
  *
- * @param {array} argv Should be `process.argv`.
+ * @param {array} argv Should be `process.argv.slice( 2 )`.
+ * @return {object} If arguments were succesfully parsed, an object that can be
+ *    used to call `importOpenAddressesDir`:
+ *
+ *      {
+ *        dirPath: <string>,
+ *        adminValues: <boolean>,
+ *        deduplicate: <boolean>,
+ *      }
+ *
+ *    Otherwise, an error object.
+ *
+ *      {
+ *        exitCode: <number>,
+ *        errMessage: <string>
+ *      }
  */
-function handleUserArgs( argv ){
-  argv = argv.slice( 2 );
+function interpretUserArgs( argv ){
   var usageMessage = [
     'A tool for importing OpenAddresses data into Pelias. Usage:',
     '',
@@ -85,7 +99,8 @@ function handleUserArgs( argv ){
 
   var opts = {
     deduplicate: false,
-    adminValues: false
+    adminValues: false,
+    dirPath: null
   };
   for( var ind = 0; ind < argv.length - 1; ind++ ){
     switch( argv[ ind ] ){
@@ -98,12 +113,27 @@ function handleUserArgs( argv ){
         break;
 
       default:
-        console.error( 'ERROR. unrecognized argument:', argv[ ind ] );
-        console.error( '\nUSAGE. ' + usageMessage );
-        process.exit( 2 );
+        var errMessage = [
+          'Error. unrecognized argument:', argv[ ind ], '\nUsage. ',
+          usageMessage
+        ].join( '' );
+        return { errMessage: errMessage, exitCode: 1 };
     }
   }
-  importOpenAddressesDir( argv[ argv.length - 1 ], opts );
+  opts.dirPath = argv[ argv.length - 1 ];
+  return opts;
 }
 
-handleUserArgs( process.argv );
+if( require.main === module ){
+  var opts = interpretUserArgs( process.argv.slice( 2 ) );
+  if( opts.exitCode ){
+    console.error( opts.errMessage );
+    process.exit( opts.exitCode )
+  }
+  else {
+    importOpenAddressesDir( opts.dirPath, opts );
+  }
+}
+else {
+  module.exports = interpretUserArgs; // for tests
+}
