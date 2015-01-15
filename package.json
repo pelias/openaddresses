@@ -16,7 +16,8 @@
   },
   "devDependencies": {
     "tape": "3.0.3",
-    "tap-spec": "2.1.2"
+    "tap-spec": "2.1.2",
+    "precommit-hook": "1.0.7"
   },
   "scripts": {
     "test": "node test/test.js | tap-spec"
