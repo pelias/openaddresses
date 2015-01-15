@@ -7,7 +7,41 @@
 var peliasModel = require( 'pelias-model' );
 var tape = require( 'tape' );
 var through = require( 'through2' );
+var util = require( 'util' );
+
+var importScript = require( '../import' );
 var importPipelines = require( '../lib/import_pipelines' );
+
+tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
+  var testCases = [
+    [
+      [ '--deduplicate', '--admin-values', 'dir'  ],
+      { deduplicate: true, adminValues: true, dirPath: 'dir' },
+    ],
+    [
+      [ '--admin-values', 'dir path' ],
+      { deduplicate: false, adminValues: true, dirPath: 'dir path' },
+    ],
+    [
+      [ '--deduplicate', 'dir path' ],
+      { deduplicate: true, adminValues: false, dirPath: 'dir path' },
+    ]
+  ];
+
+  test.plan( testCases.length + 1 );
+  testCases.forEach( function execTestCase( testCase, ind ){
+    test.deepEqual(
+      importScript( testCase[ 0 ] ), testCase[ 1 ],
+      util.format( 'Arguments case %d passes.', ind )
+    );
+  });
+
+  var errorObj = importScript( [ 'not an arg', 'dirPath' ] );
+  test.ok(
+    'exitCode' in errorObj &&  'errMessage' in errorObj,
+    'Invalid arguments yield an error object.'
+  );
+});
 
 /**
  * Tests whether records read from `test/openaddresses_sample.csv` are created
