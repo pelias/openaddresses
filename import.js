@@ -81,8 +81,10 @@ function interpretUserArgs( argv ){
   var usageMessage = [
     'A tool for importing OpenAddresses data into Pelias. Usage:',
     '',
-    '\tnode import.js [--deduplicate] [--admin-values] OPENADDRESSES_DIR',
+    '\tnode import.js --help | [--deduplicate] [--admin-values] OPENADDRESSES_DIR',
     '',
+    '',
+    '\t--help: Print this help message.',
     '',
     '\tOPENADDRESSES_DIR: A directory containing OpenAddresses CSV files.',
     '',
@@ -102,6 +104,11 @@ function interpretUserArgs( argv ){
     adminValues: false,
     dirPath: null
   };
+
+  if( argv[ 0 ] === '--help' ){
+    return { errMessage: usageMessage, exitCode: 0 };
+  }
+
   for( var ind = 0; ind < argv.length - 1; ind++ ){
     switch( argv[ ind ] ){
       case '--deduplicate':
@@ -125,13 +132,13 @@ function interpretUserArgs( argv ){
 }
 
 if( require.main === module ){
-  var opts = interpretUserArgs( process.argv.slice( 2 ) );
-  if( opts.exitCode ){
-    console.error( opts.errMessage );
-    process.exit( opts.exitCode )
+  var args = interpretUserArgs( process.argv.slice( 2 ) );
+  if( 'exitCode' in args ){
+    console.error( args.errMessage );
+    process.exit( args.exitCode )
   }
   else {
-    importOpenAddressesDir( opts.dirPath, opts );
+    importOpenAddressesDir( args.dirPath, args );
   }
 }
 else {
