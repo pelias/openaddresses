@@ -11,7 +11,8 @@
     "pelias-model": "0.0.0",
     "pelias-dbclient": "0.0.6",
     "pelias-suggester-pipeline": "1.0.1",
-    "pelias-hierarchy-lookup": "0.0.2"
+    "pelias-hierarchy-lookup": "0.0.2",
+    "winston": "0.8.3"
   },
   "devDependencies": {
     "tape": "3.0.3",

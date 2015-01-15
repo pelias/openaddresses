@@ -8,6 +8,7 @@ var fs = require( 'fs' );
 var path = require( 'path' );
 
 var combinedStream = require( 'combined-stream' );
+var winston = require( 'winston' );
 var addressDeduplicatorStream = require( 'address-deduplicator-stream' );
 var peliasHierarchyLookup = require( 'pelias-hierarchy-lookup' );
 
@@ -34,7 +35,7 @@ function importOpenAddressesDir( dirPath, opts ){
   var recordStream = combinedStream.create();
   fs.readdirSync( dirPath ).forEach( function forEach( filePath ){
     if( filePath.match( /.csv$/ ) ){
-      console.error( 'Creating read stream for: ' + filePath );
+      winston.info( 'Creating read stream for: ' + filePath );
       var fullPath = path.join( dirPath, filePath );
       recordStream.append( function ( next ){
         next( importPipelines.createRecordStream( fullPath ) );
@@ -121,7 +122,7 @@ function interpretUserArgs( argv ){
 
       default:
         var errMessage = [
-          'Error. unrecognized argument:', argv[ ind ], '\nUsage. ',
+          'argument: ', argv[ ind ], '\nUsage. ',
           usageMessage
         ].join( '' );
         return { errMessage: errMessage, exitCode: 1 };
@@ -134,7 +135,7 @@ function interpretUserArgs( argv ){
 if( require.main === module ){
   var args = interpretUserArgs( process.argv.slice( 2 ) );
   if( 'exitCode' in args ){
-    console.error( args.errMessage );
+    winston.error( args.errMessage );
     process.exit( args.exitCode )
   }
   else {
