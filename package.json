@@ -1,6 +1,6 @@
 {
   "name": "pelias-openaddresses",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pelias import pipeline for OpenAddresses.",
   "main": "import.js",
   "dependencies": {
@@ -11,7 +11,7 @@
     "pelias-model": "0.0.0",
     "pelias-dbclient": "0.0.6",
     "pelias-suggester-pipeline": "1.0.1",
-    "pelias-hierarchy-lookup": "0.0.1"
+    "pelias-hierarchy-lookup": "0.0.2"
   },
   "devDependencies": {
     "tape": "3.0.3",
