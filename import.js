@@ -16,8 +16,6 @@ var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
 var addressDeduplicatorStream = require( 'address-deduplicator-stream' );
 var peliasHierarchyLookup = require( 'pelias-hierarchy-lookup' );
 
-var createAdminValues = require( './lib/create_admin_values' );
-
 function createRecordStream( filePath ){
   var documentCreator = through.obj( function write( record, enc, next ){
     try {
