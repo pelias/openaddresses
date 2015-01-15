@@ -33,23 +33,27 @@ var importPipelines = require( './lib/import_pipelines' );
  */
 function importOpenAddressesDir( dirPath, opts ){
   var recordStream = combinedStream.create();
+
+  winston.info( 'Importing files in the `%s` directory.', dirPath );
   fs.readdirSync( dirPath ).forEach( function forEach( filePath ){
     if( filePath.match( /.csv$/ ) ){
-      winston.info( 'Creating read stream for: ' + filePath );
       var fullPath = path.join( dirPath, filePath );
       recordStream.append( function ( next ){
+        winston.info( 'Creating read stream for: ' + filePath );
         next( importPipelines.createRecordStream( fullPath ) );
       });
     }
   });
 
   if( opts.deduplicate ){
+    winston.info( 'Setting up deduplicator.' );
     var deduplicatorStream = addressDeduplicatorStream( 100, 10 );
     recordStream.pipe( deduplicatorStream );
     recordStream = deduplicatorStream;
   }
 
   if( opts.adminValues ){
+    winston.info( 'Setting up admin value lookup stream.' );
     var lookupStream = peliasHierarchyLookup.stream();
     recordStream.pipe( lookupStream );
     recordStream = lookupStream;
@@ -133,6 +137,11 @@ function interpretUserArgs( argv ){
 }
 
 if( require.main === module ){
+  winston.remove( winston.transports.Console );
+  winston.add( winston.transports.Console, {
+    timestamp: true, colorize: true
+  });
+
   var args = interpretUserArgs( process.argv.slice( 2 ) );
   if( 'exitCode' in args ){
     winston.error( args.errMessage );
