@@ -13,6 +13,23 @@ var peliasHierarchyLookup = require( 'pelias-hierarchy-lookup' );
 
 var importPipelines = require( './lib/import_pipelines' );
 
+/**
+ * Import all OpenAddresses CSV files in a directory into Pelias elasticsearch.
+ *
+ * @param {string} dirPath The path to a directory. All *.csv files inside of
+ *    it will be read and imported (they're assumed to contain OpenAddresses
+ *    data).
+ * @param {object} opts Options to configure the import. Supports the following
+ *    keys:
+ *
+ *      deduplicate: Pass address object through `address-deduplicator-stream`
+ *        to perform deduplication. See the documentation:
+ *        https://github.com/pelias/address-deduplicator-stream
+ *
+ *      admin-values: Add admin values to each address object (since
+ *        OpenAddresses doesn't contain any) using `hierarchy-lookup`. See the
+ *        documentation: https://github.com/pelias/hierarchy-lookup
+ */
 function importOpenAddressesDir( dirPath, opts ){
   var recordStream = combinedStream.create();
   fs.readdirSync( dirPath ).forEach( function forEach( filePath ){
@@ -42,8 +59,11 @@ function importOpenAddressesDir( dirPath, opts ){
 
 /**
  * Handle the command-line arguments passed to the script.
+ *
+ * @param {array} argv Should be `process.argv`.
  */
 function handleUserArgs( argv ){
+  argv = argv.slice( 2 );
   var usageMessage = [
     'A tool for importing OpenAddresses data into Pelias. Usage:',
     '',
@@ -86,4 +106,4 @@ function handleUserArgs( argv ){
   importOpenAddressesDir( argv[ argv.length - 1 ], opts );
 }
 
-handleUserArgs( process.argv.slice( 2 ) );
+handleUserArgs( process.argv );
