@@ -145,7 +145,7 @@ if( require.main === module ){
   var args = interpretUserArgs( process.argv.slice( 2 ) );
   if( 'exitCode' in args ){
     winston.error( args.errMessage );
-    process.exit( args.exitCode )
+    process.exit( args.exitCode );
   }
   else {
     importOpenAddressesDir( args.dirPath, args );
