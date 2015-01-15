@@ -7,60 +7,29 @@
 var fs = require( 'fs' );
 var path = require( 'path' );
 
-var through = require( 'through2' );
-var csvParser = require( 'fast-csv' );
 var combinedStream = require( 'combined-stream' );
-var peliasModel = require( 'pelias-model' );
-var peliasDbclient = require( 'pelias-dbclient' );
-var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
 var addressDeduplicatorStream = require( 'address-deduplicator-stream' );
 var peliasHierarchyLookup = require( 'pelias-hierarchy-lookup' );
 
-function createRecordStream( filePath ){
-  var documentCreator = through.obj( function write( record, enc, next ){
-    try {
-      var model_id = ( uid++ ).toString();
-      var addrDoc = new peliasModel.Document( 'openaddresses', model_id )
-        .setName( 'default', record[ ' NUMBER' ] + ' ' + record[ ' STREET' ] )
-        .setCentroid( { lat: record[ ' LAT' ], lon: record[ 'LON' ] } )
-      this.push( addrDoc );
-    }
-    catch ( ex ){
-      console.error( 'Bad data, Document could not be created:', ex );
-    }
-    next();
-  });
+var importPipelines = require( './lib/import_pipelines' );
 
-  return fs.createReadStream( filePath )
-    .pipe( csvParser( { headers: true, quote: null } ) )
-    .pipe( documentCreator );
-}
-
-var uid = 0;
 /**
- * Create the Pelias elasticsearch import pipeline.
+ * Import all OpenAddresses CSV files in a directory into Pelias elasticsearch.
  *
- * @return {Writable stream} The pipeline entrypoint; Document records should
- *    be written to it.
+ * @param {string} dirPath The path to a directory. All *.csv files inside of
+ *    it will be read and imported (they're assumed to contain OpenAddresses
+ *    data).
+ * @param {object} opts Options to configure the import. Supports the following
+ *    keys:
+ *
+ *      deduplicate: Pass address object through `address-deduplicator-stream`
+ *        to perform deduplication. See the documentation:
+ *        https://github.com/pelias/address-deduplicator-stream
+ *
+ *      admin-values: Add admin values to each address object (since
+ *        OpenAddresses doesn't contain any) using `hierarchy-lookup`. See the
+ *        documentation: https://github.com/pelias/hierarchy-lookup
  */
-function createPeliasElasticsearchPipeline(){
-  var dbclientMapper = through.obj( function( model, enc, next ){
-    this.push({
-      _index: 'pelias',
-      _type: model.getType(),
-      _id: model.getId(),
-      data: model
-    });
-    next();
-  });
-
-  var entryPoint = peliasSuggesterPipeline.pipeline;
-  entryPoint
-    .pipe( dbclientMapper )
-    .pipe( peliasDbclient() );
-  return entryPoint;
-}
-
 function importOpenAddressesDir( dirPath, opts ){
   var recordStream = combinedStream.create();
   fs.readdirSync( dirPath ).forEach( function forEach( filePath ){
@@ -68,7 +37,7 @@ function importOpenAddressesDir( dirPath, opts ){
       console.error( 'Creating read stream for: ' + filePath );
       var fullPath = path.join( dirPath, filePath );
       recordStream.append( function ( next ){
-        next( createRecordStream( fullPath ) );
+        next( importPipelines.createRecordStream( fullPath ) );
       });
     }
   });
@@ -85,13 +54,16 @@ function importOpenAddressesDir( dirPath, opts ){
     recordStream = lookupStream;
   }
 
-  recordStream.pipe( createPeliasElasticsearchPipeline() );
+  recordStream.pipe( importPipelines.createPeliasElasticsearchPipeline() );
 }
 
 /**
  * Handle the command-line arguments passed to the script.
+ *
+ * @param {array} argv Should be `process.argv`.
  */
 function handleUserArgs( argv ){
+  argv = argv.slice( 2 );
   var usageMessage = [
     'A tool for importing OpenAddresses data into Pelias. Usage:',
     '',
@@ -134,4 +106,4 @@ function handleUserArgs( argv ){
   importOpenAddressesDir( argv[ argv.length - 1 ], opts );
 }
 
-handleUserArgs( process.argv.slice( 2 ) );
+handleUserArgs( process.argv );
