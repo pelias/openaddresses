@@ -1,18 +1,18 @@
 {
   "name": "pelias-openaddresses",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Pelias import pipeline for OpenAddresses.",
   "main": "import.js",
   "dependencies": {
     "through2": "0.6.3",
-    "fast-csv": "0.5.4",
     "combined-stream": "0.0.7",
     "address-deduplicator-stream": "1.0.1",
     "pelias-model": "0.0.0",
     "pelias-dbclient": "0.0.6",
     "pelias-suggester-pipeline": "2.0.1",
     "pelias-hierarchy-lookup": "0.0.2",
-    "winston": "0.8.3"
+    "winston": "0.8.3",
+    "split": "0.3.2"
   },
   "devDependencies": {
     "tape": "3.0.3",
