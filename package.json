@@ -5,7 +5,6 @@
   "main": "import.js",
   "dependencies": {
     "through2": "0.6.3",
-    "fast-csv": "0.5.4",
     "combined-stream": "0.0.7",
     "address-deduplicator-stream": "1.0.1",
     "pelias-model": "0.0.0",
