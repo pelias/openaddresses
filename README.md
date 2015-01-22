@@ -6,6 +6,7 @@ A pipeline for importing OpenAddresses data into Pelias.
 ## installation
 ```
 git clone https://github.com/pelias/openaddresses
+cd openaddresses
 npm install
 ```
 

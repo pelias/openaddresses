@@ -15,20 +15,19 @@ var importPipelines = require( '../lib/import_pipelines' );
 tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
   var testCases = [
     [
-      [ '--deduplicate', '--admin-values', 'dir'  ],
-      { deduplicate: true, adminValues: true, dirPath: 'dir' },
+      [ '--deduplicate', '--admin-values', 'test'  ],
+      { deduplicate: true, adminValues: true, dirPath: 'test' },
     ],
     [
-      [ '--admin-values', 'dir path' ],
-      { deduplicate: false, adminValues: true, dirPath: 'dir path' },
+      [ '--admin-values', 'test' ],
+      { deduplicate: false, adminValues: true, dirPath: 'test' },
     ],
     [
-      [ '--deduplicate', 'dir path' ],
-      { deduplicate: true, adminValues: false, dirPath: 'dir path' },
+      [ '--deduplicate', 'test' ],
+      { deduplicate: true, adminValues: false, dirPath: 'test' },
     ]
   ];
 
-  test.plan( testCases.length + 1 );
   testCases.forEach( function execTestCase( testCase, ind ){
     test.deepEqual(
       importScript( testCase[ 0 ] ), testCase[ 1 ],
@@ -36,11 +35,20 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
     );
   });
 
-  var errorObj = importScript( [ 'not an arg', 'dirPath' ] );
-  test.ok(
-    'exitCode' in errorObj &&  'errMessage' in errorObj,
-    'Invalid arguments yield an error object.'
-  );
+  var badArguments = [
+    [ 'not an arg', 'some dir' ],
+    [ '--deduplicate', 'not an arg', 'some dir' ],
+    [ '--deduplicate', 'not a dir' ],
+    [ '--deduplicate', 'package.json' ],
+  ];
+  badArguments.forEach( function execTestCase( testCase, ind ){
+    var errorObj = importScript( badArguments );
+    test.ok(
+      'exitCode' in errorObj &&  'errMessage' in errorObj,
+      'Invalid arguments yield an error object: ' + ind
+    );
+  });
+  test.end();
 });
 
 /**

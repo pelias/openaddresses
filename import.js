@@ -6,6 +6,7 @@
 
 var fs = require( 'fs' );
 var path = require( 'path' );
+var util = require( 'util' );
 
 var combinedStream = require( 'combined-stream' );
 var winston = require( 'winston' );
@@ -133,6 +134,19 @@ function interpretUserArgs( argv ){
     }
   }
   opts.dirPath = argv[ argv.length - 1 ];
+  if( !fs.existsSync( opts.dirPath ) ){
+    return {
+      errMessage: util.format( 'Directory `%s` does not exist.', opts.dirPath ),
+      exitCode: 2
+    };
+  }
+  else if( !fs.statSync( opts.dirPath ).isDirectory() ){
+    return {
+      errMessage: util.format( '`%s` is not a directory.', opts.dirPath ),
+      exitCode: 2
+    };
+  }
+
   return opts;
 }
 
