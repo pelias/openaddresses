@@ -13,7 +13,7 @@ var minimist = require( 'minimist' );
 var combinedStream = require( 'combined-stream' );
 var winston = require( 'winston' );
 var addressDeduplicatorStream = require( 'address-deduplicator-stream' );
-var peliasHierarchyLookup = require( 'pelias-hierarchy-lookup' );
+var peliasAdminLookup = require( 'pelias-admin-lookup' );
 
 var importPipelines = require( './lib/import_pipelines' );
 
@@ -48,6 +48,8 @@ function importOpenAddressesDir( dirPath, opts ){
     }
   });
 
+  var esPipeline = importPipelines.createPeliasElasticsearchPipeline();
+
   if( opts.deduplicate ){
     winston.info( 'Setting up deduplicator.' );
     var deduplicatorStream = addressDeduplicatorStream( 100, 10 );
@@ -57,12 +59,14 @@ function importOpenAddressesDir( dirPath, opts ){
 
   if( opts.adminValues ){
     winston.info( 'Setting up admin value lookup stream.' );
-    var lookupStream = peliasHierarchyLookup.stream();
-    recordStream.pipe( lookupStream );
-    recordStream = lookupStream;
+    peliasAdminLookup( function ( lookupStream ){
+      winston.info( 'Lookup stream created.' );
+      recordStream.pipe( lookupStream ).pipe( esPipeline );
+    });
   }
-
-  recordStream.pipe( importPipelines.createPeliasElasticsearchPipeline() );
+  else {
+    recordStream.pipe( esPipeline );
+  }
 }
 
 /**
@@ -176,7 +180,6 @@ if( require.main === module ){
     process.exit( args.exitCode );
   }
   else {
-    console.log( args );process.exit( 0 );
     importOpenAddressesDir( args.dirPath, args );
   }
 }
