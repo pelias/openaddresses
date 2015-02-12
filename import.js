@@ -8,6 +8,8 @@ var fs = require( 'fs' );
 var path = require( 'path' );
 var util = require( 'util' );
 
+var peliasConfig = require( 'pelias-config' );
+var minimist = require( 'minimist' );
 var combinedStream = require( 'combined-stream' );
 var winston = require( 'winston' );
 var addressDeduplicatorStream = require( 'address-deduplicator-stream' );
@@ -87,12 +89,14 @@ function interpretUserArgs( argv ){
   var usageMessage = [
     'A tool for importing OpenAddresses data into Pelias. Usage:',
     '',
-    '\tnode import.js --help | [--deduplicate] [--admin-values] OPENADDRESSES_DIR',
+    '\tnode import.js --help | [--deduplicate] [--admin-values] [OPENADDRESSES_DIR]',
     '',
     '',
     '\t--help: Print this help message.',
     '',
     '\tOPENADDRESSES_DIR: A directory containing OpenAddresses CSV files.',
+    '\t\tIf none is specified, the path from your PELIAS_CONFIG\'s',
+    '\t\t`imports.openaddresses.datapath` will be used.',
     '',
     '\t--deduplicate: (advanced use) Deduplicate addresses using the',
     '\t\tOpenVenues deduplicator: https://github.com/openvenues/address_deduper.',
@@ -105,35 +109,44 @@ function interpretUserArgs( argv ){
     '\t\thttps://github.com/pelias/quattroshapes-pipeline.'
   ].join( '\n' );
 
-  var opts = {
-    deduplicate: false,
-    adminValues: false,
-    dirPath: null
-  };
+  argv = minimist(
+    argv,
+    {
+      boolean: [ 'deduplicate', 'admin-values' ],
+      default: {
+        deduplicate: false,
+        'admin-values': false,
+      }
+    }
+  );
 
-  if( argv[ 0 ] === '--help' ){
+  var validArgs = [ 'deduplicate', 'admin-values', 'help', '_' ];
+  for( var arg in argv ){
+    if( validArgs.indexOf( arg ) === -1 ){
+      return {
+        errMessage: util.format( '`%s` is not a recognized argument.', arg ),
+        exitCode: 1
+      };
+    }
+  }
+
+  if( argv.help ){
     return { errMessage: usageMessage, exitCode: 0 };
   }
 
-  for( var ind = 0; ind < argv.length - 1; ind++ ){
-    switch( argv[ ind ] ){
-      case '--deduplicate':
-        opts.deduplicate = true;
-        break;
-
-      case '--admin-values':
-        opts.adminValues = true;
-        break;
-
-      default:
-        var errMessage = [
-          'argument: ', argv[ ind ], '\nUsage. ',
-          usageMessage
-        ].join( '' );
-        return { errMessage: errMessage, exitCode: 1 };
-    }
+  var opts = {
+    deduplicate: argv.deduplicate,
+    adminValues: argv[ 'admin-values' ],
+    dirPath: null
+  };
+  if( argv._.length > 0 ){
+    opts.dirPath = argv._[ 0 ];
   }
-  opts.dirPath = argv[ argv.length - 1 ];
+  else {
+    var conf = peliasConfig.generate();
+    opts.dirPath = conf.imports.openaddresses.datapath;
+  }
+
   if( !fs.existsSync( opts.dirPath ) ){
     return {
       errMessage: util.format( 'Directory `%s` does not exist.', opts.dirPath ),
@@ -157,11 +170,13 @@ if( require.main === module ){
   });
 
   var args = interpretUserArgs( process.argv.slice( 2 ) );
+
   if( 'exitCode' in args ){
-    winston.error( args.errMessage );
+    ((args.exitCode > 0) ? winston.error : winston.info)( args.errMessage );
     process.exit( args.exitCode );
   }
   else {
+    console.log( args );process.exit( 0 );
     importOpenAddressesDir( args.dirPath, args );
   }
 }

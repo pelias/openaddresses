@@ -12,7 +12,8 @@
     "pelias-suggester-pipeline": "2.0.1",
     "pelias-hierarchy-lookup": "0.0.4",
     "winston": "0.8.3",
-    "split": "0.3.2"
+    "split": "0.3.2",
+    "mininimist": "1.1.0"
   },
   "devDependencies": {
     "tape": "3.0.3",

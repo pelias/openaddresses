@@ -42,7 +42,7 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
     [ '--deduplicate', 'package.json' ],
   ];
   badArguments.forEach( function execTestCase( testCase, ind ){
-    var errorObj = importScript( badArguments );
+    var errorObj = importScript( testCase );
     test.ok(
       'exitCode' in errorObj &&  'errMessage' in errorObj,
       'Invalid arguments yield an error object: ' + ind
