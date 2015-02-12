@@ -12,8 +12,9 @@
     "pelias-suggester-pipeline": "2.0.1",
     "pelias-admin-lookup": "^0.1.1",
     "winston": "0.8.3",
-    "split": "0.3.2",
-    "minimist": "1.1.0"
+    "minimist": "1.1.0",
+    "pelias-config": "^0.0.7",
+    "csv-parse": "0.0.6"
   },
   "devDependencies": {
     "tape": "3.0.3",
