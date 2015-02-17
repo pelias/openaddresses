@@ -12,7 +12,7 @@ var peliasConfig = require( 'pelias-config' );
 var minimist = require( 'minimist' );
 var combinedStream = require( 'combined-stream' );
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
-var addressDeduplicatorStream = require( 'address-deduplicator-stream' );
+var addressDeduplicatorStream = require( 'pelias-address-deduplicator' );
 var peliasAdminLookup = require( 'pelias-admin-lookup' );
 
 var importPipelines = require( './lib/import_pipelines' );
