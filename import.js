@@ -59,7 +59,7 @@ function importOpenAddressesDir( dirPath, opts ){
 
   if( opts.adminValues ){
     logger.info( 'Setting up admin value lookup stream.' );
-    peliasAdminLookup( function ( lookupStream ){
+    peliasAdminLookup.stream( function ( lookupStream ){
       logger.info( 'Lookup stream created.' );
       recordStream.pipe( lookupStream ).pipe( esPipeline );
     });
