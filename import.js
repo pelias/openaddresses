@@ -52,7 +52,7 @@ function importOpenAddressesDir( dirPath, opts ){
 
   if( opts.deduplicate ){
     logger.info( 'Setting up deduplicator.' );
-    var deduplicatorStream = addressDeduplicatorStream( 100, 10 );
+    var deduplicatorStream = addressDeduplicatorStream( 10000, 1 );
     recordStream.pipe( deduplicatorStream );
     recordStream = deduplicatorStream;
   }
