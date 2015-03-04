@@ -52,7 +52,7 @@ function importOpenAddressesDir( dirPath, opts ){
 
   if( opts.deduplicate ){
     logger.info( 'Setting up deduplicator.' );
-    var deduplicatorStream = addressDeduplicatorStream( 10000, 1 );
+    var deduplicatorStream = addressDeduplicatorStream();
     recordStream.pipe( deduplicatorStream );
     recordStream = deduplicatorStream;
   }
@@ -63,6 +63,18 @@ function importOpenAddressesDir( dirPath, opts ){
     recordStream.pipe( lookupStream );
     recordStream = lookupStream;
   }
+
+  // Pretty-print the total time the import took.
+  var startTime;
+  esPipeline.once( 'data', function (){
+    startTime = new Date().getTime();
+  });
+  process.on( 'exit', function (){
+    var totalTimeTaken = (new Date().getTime() - startTime).toString();
+    var seconds = totalTimeTaken.slice(0, totalTimeTaken.length - 3);
+    var milliseconds = totalTimeTaken.slice(totalTimeTaken.length - 3);
+    logger.info( 'Total time taken: %s.%ss', seconds, milliseconds );
+  });
 
   recordStream.pipe( esPipeline );
 }
