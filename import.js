@@ -39,12 +39,10 @@ function importOpenAddressesFiles( files, opts ){
 
   logger.info( 'Importing %s files.', files.length );
   files.forEach( function forEach( filePath ){
-    if( filePath.match( /.csv$/ ) ){
-      recordStream.append( function ( next ){
-        logger.info( 'Creating read stream for: ' + filePath );
-        next( importPipelines.createRecordStream( filePath ) );
-      });
-    }
+    recordStream.append( function ( next ){
+      logger.info( 'Creating read stream for: ' + filePath );
+      next( importPipelines.createRecordStream( filePath ) );
+    });
   });
 
   var esPipeline = importPipelines.createPeliasElasticsearchPipeline();
@@ -184,7 +182,9 @@ if( require.main === module ){
   }
   else {
     var files = peliasConfig.imports.openaddresses.files ||
-      fs.readdirSync( args.dirPath );
+      fs.readdirSync( args.dirPath ).filter( function ( name ){
+        return name.match( /.csv$/ );
+      });
     files = files.map( function ( fileName ){
       return path.join( args.dirPath, fileName );
     });
