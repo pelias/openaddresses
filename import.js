@@ -20,9 +20,7 @@ var importPipelines = require( './lib/import_pipelines' );
 /**
  * Import all OpenAddresses CSV files in a directory into Pelias elasticsearch.
  *
- * @param {string} dirPath The path to a directory. All *.csv files inside of
- *    it will be read and imported (they're assumed to contain OpenAddresses
- *    data).
+ * @param {array of string} files An array of the absolute file-paths to import.
  * @param {object} opts Options to configure the import. Supports the following
  *    keys:
  *
