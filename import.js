@@ -8,7 +8,7 @@ var fs = require( 'fs' );
 var path = require( 'path' );
 var util = require( 'util' );
 
-var peliasConfig = require( 'pelias-config' );
+var peliasConfig = require( 'pelias-config' ).generate();
 var minimist = require( 'minimist' );
 var combinedStream = require( 'combined-stream' );
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
@@ -34,16 +34,15 @@ var importPipelines = require( './lib/import_pipelines' );
  *        OpenAddresses doesn't contain any) using `hierarchy-lookup`. See the
  *        documentation: https://github.com/pelias/hierarchy-lookup
  */
-function importOpenAddressesDir( dirPath, opts ){
+function importOpenAddressesFiles( files, opts ){
   var recordStream = combinedStream.create();
 
-  logger.info( 'Importing files in the `%s` directory.', dirPath );
-  fs.readdirSync( dirPath ).forEach( function forEach( filePath ){
+  logger.info( 'Importing %s files.', files.length );
+  files.forEach( function forEach( filePath ){
     if( filePath.match( /.csv$/ ) ){
-      var fullPath = path.join( dirPath, filePath );
       recordStream.append( function ( next ){
         logger.info( 'Creating read stream for: ' + filePath );
-        next( importPipelines.createRecordStream( fullPath ) );
+        next( importPipelines.createRecordStream( filePath ) );
       });
     }
   });
@@ -157,8 +156,7 @@ function interpretUserArgs( argv ){
     opts.dirPath = argv._[ 0 ];
   }
   else {
-    var conf = peliasConfig.generate();
-    opts.dirPath = conf.imports.openaddresses.datapath;
+    opts.dirPath = peliasConfig.imports.openaddresses.datapath;
   }
 
   if( !fs.existsSync( opts.dirPath ) ){
@@ -185,7 +183,12 @@ if( require.main === module ){
     process.exit( args.exitCode );
   }
   else {
-    importOpenAddressesDir( args.dirPath, args );
+    var files = peliasConfig.imports.openaddresses.files ||
+      fs.readdirSync( args.dirPath );
+    files = files.map( function ( fileName ){
+      return path.join( args.dirPath, fileName );
+    });
+    importOpenAddressesFiles( files, args );
   }
 }
 else {
