@@ -179,7 +179,9 @@ if( require.main === module ){
     process.exit( args.exitCode );
   }
   else {
-    var files = peliasConfig.imports.openaddresses.files ||
+    var configFiles = peliasConfig.imports.openaddresses.files;
+    var files = (configFiles !== undefined && configFiles.length > 0) ?
+      configFiles :
       fs.readdirSync( args.dirPath ).filter( function ( name ){
         return name.match( /.csv$/ );
       });
