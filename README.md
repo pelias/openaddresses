@@ -35,4 +35,4 @@ The following properties are recognized:
   * `datapath`: The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is
     given as a command-line argument.
   * `files`: An array of the names of the files to import. If specified, *only* these files will be imported, rather
-    than *all* `.csv` files in the given directory.
+    than *all* `.csv` files in the given directory. **If the array is empty, all files will be imported.**
