@@ -8,7 +8,7 @@ var fs = require( 'fs' );
 var path = require( 'path' );
 var util = require( 'util' );
 
-var peliasConfig = require( 'pelias-config' );
+var peliasConfig = require( 'pelias-config' ).generate();
 var minimist = require( 'minimist' );
 var combinedStream = require( 'combined-stream' );
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
@@ -20,9 +20,7 @@ var importPipelines = require( './lib/import_pipelines' );
 /**
  * Import all OpenAddresses CSV files in a directory into Pelias elasticsearch.
  *
- * @param {string} dirPath The path to a directory. All *.csv files inside of
- *    it will be read and imported (they're assumed to contain OpenAddresses
- *    data).
+ * @param {array of string} files An array of the absolute file-paths to import.
  * @param {object} opts Options to configure the import. Supports the following
  *    keys:
  *
@@ -34,18 +32,15 @@ var importPipelines = require( './lib/import_pipelines' );
  *        OpenAddresses doesn't contain any) using `hierarchy-lookup`. See the
  *        documentation: https://github.com/pelias/hierarchy-lookup
  */
-function importOpenAddressesDir( dirPath, opts ){
+function importOpenAddressesFiles( files, opts ){
   var recordStream = combinedStream.create();
 
-  logger.info( 'Importing files in the `%s` directory.', dirPath );
-  fs.readdirSync( dirPath ).forEach( function forEach( filePath ){
-    if( filePath.match( /.csv$/ ) ){
-      var fullPath = path.join( dirPath, filePath );
-      recordStream.append( function ( next ){
-        logger.info( 'Creating read stream for: ' + filePath );
-        next( importPipelines.createRecordStream( fullPath ) );
-      });
-    }
+  logger.info( 'Importing %s files.', files.length );
+  files.forEach( function forEach( filePath ){
+    recordStream.append( function ( next ){
+      logger.info( 'Creating read stream for: ' + filePath );
+      next( importPipelines.createRecordStream( filePath ) );
+    });
   });
 
   var esPipeline = importPipelines.createPeliasElasticsearchPipeline();
@@ -157,8 +152,7 @@ function interpretUserArgs( argv ){
     opts.dirPath = argv._[ 0 ];
   }
   else {
-    var conf = peliasConfig.generate();
-    opts.dirPath = conf.imports.openaddresses.datapath;
+    opts.dirPath = peliasConfig.imports.openaddresses.datapath;
   }
 
   if( !fs.existsSync( opts.dirPath ) ){
@@ -185,7 +179,16 @@ if( require.main === module ){
     process.exit( args.exitCode );
   }
   else {
-    importOpenAddressesDir( args.dirPath, args );
+    var configFiles = peliasConfig.imports.openaddresses.files;
+    var files = (configFiles !== undefined && configFiles.length > 0) ?
+      configFiles :
+      fs.readdirSync( args.dirPath ).filter( function ( name ){
+        return name.match( /.csv$/ );
+      });
+    files = files.map( function ( fileName ){
+      return path.join( args.dirPath, fileName );
+    });
+    importOpenAddressesFiles( files, args );
   }
 }
 else {
