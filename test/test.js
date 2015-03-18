@@ -92,6 +92,24 @@ tape(
   }
 );
 
+tape( 'Don\'t create records for invalid data.', function ( test ){
+  var dataStream = importPipelines.createRecordStream(
+    'test/openaddresses_bad_data.csv'
+  );
+
+  dataStream.pipe( through.obj(
+    function write( data, _, next ){
+      test.fail( 'Document was created from bad data: ' + JSON.stringify( data, undefined, 4 ) );
+      next();
+    },
+    function end( done ){
+      test.pass( 'No Documents were created from bad data.' );
+      test.end();
+      done();
+    }
+  ));
+});
+
 tape(
   'importPipeline.createPeliasElasticsearchPipeline() interface',
   function ( test ){
