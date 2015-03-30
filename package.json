@@ -23,6 +23,7 @@
     "jshint": "2.5.11"
   },
   "scripts": {
+    "import": "node import.js",
     "test": "node test/test.js | tap-spec"
   },
   "repository": {
