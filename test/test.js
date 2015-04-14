@@ -68,7 +68,9 @@ tape(
       createTestRec( -118.8218384, 55.15506788763259, '712078 Rge Road 34' ),
       createTestRec( -118.79719936, 55.153343057595535, '712068 Rge Road 34' ),
       createTestRec( -118.66743097, 55.151807043809917, '712060 Rge Road 34' ),
-      createTestRec( -118.74783569, 55.155320792497442, '712082 Rge Road 35' )
+      createTestRec( -118.74783569, 55.155320792497442, '712082 Rge Road 35' ),
+      createTestRec( 1, 2, 'number too many spaces' ),
+      createTestRec( 1, 2, 'trim multiple spaces' )
     ];
     test.plan( expectedRecords.length * 4 + 1);
 
