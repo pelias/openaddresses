@@ -29,8 +29,8 @@ var importPipelines = require( './lib/import_pipelines' );
  *        https://github.com/pelias/address-deduplicator-stream
  *
  *      admin-values: Add admin values to each address object (since
- *        OpenAddresses doesn't contain any) using `hierarchy-lookup`. See the
- *        documentation: https://github.com/pelias/hierarchy-lookup
+ *        OpenAddresses doesn't contain any) using `admin-lookup`. See the
+ *        documentation: https://github.com/pelias/admin-lookup
  */
 function importOpenAddressesFiles( files, opts ){
   var recordStream = combinedStream.create();
@@ -113,9 +113,8 @@ function interpretUserArgs( argv ){
     '',
     '\t--admin-values: (advanced use) OpenAddresses records lack admin values',
     '\t\t(country, state, city, etc., names), so auto-fill them',
-    '\t\tby querying the Quattroshapes types in the Pelias',
-    '\t\telasticsearch index. You must have imported these using',
-    '\t\thttps://github.com/pelias/quattroshapes-pipeline.'
+    '\t\tusing `admin-lookup` See the documentation:',
+    '\t\thttps://github.com/pelias/admin-lookup'
   ].join( '\n' );
 
   argv = minimist(
