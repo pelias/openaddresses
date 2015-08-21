@@ -178,7 +178,7 @@ if( require.main === module ){
     process.exit( args.exitCode );
   }
   else {
-    var configFiles = peliasConfig.imports.openaddresses.files;
+    var configFiles = peliasConfig.imports.openaddresses? peliasConfig.imports.openaddresses.files : undefined;
     var files = (configFiles !== undefined && configFiles.length > 0) ?
       configFiles :
       fs.readdirSync( args.dirPath ).filter( function ( name ){
