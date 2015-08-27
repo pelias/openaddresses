@@ -13,7 +13,7 @@
     "pelias-admin-lookup": "^2.x.x",
     "pelias-logger": "^0.x.x",
     "minimist": "1.1.0",
-    "pelias-config": "^0.x.x",
+    "pelias-config": ">=0.2.0",
     "csv-parse": "0.0.6"
   },
   "devDependencies": {
