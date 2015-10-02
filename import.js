@@ -5,8 +5,8 @@
 'use strict';
 
 var fs = require( 'fs' );
-var path = require( 'path' );
 var util = require( 'util' );
+var glob = require( 'glob' );
 
 var peliasConfig = require( 'pelias-config' ).generate();
 var minimist = require( 'minimist' );
@@ -181,12 +181,8 @@ if( require.main === module ){
     var configFiles = peliasConfig.imports.openaddresses? peliasConfig.imports.openaddresses.files : undefined;
     var files = (configFiles !== undefined && configFiles.length > 0) ?
       configFiles :
-      fs.readdirSync( args.dirPath ).filter( function ( name ){
-        return name.match( /.csv$/ );
-      });
-    files = files.map( function ( fileName ){
-      return path.join( args.dirPath, fileName );
-    });
+      glob.sync( args.dirPath + '/**/*.csv' );
+
     importOpenAddressesFiles( files, args );
   }
 }
