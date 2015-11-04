@@ -58,8 +58,8 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
 tape(
   'importPipelines.createRecordStream() creates Document objects with expected values.',
   function ( test ){
-    function createTestRec( lon, lat, name ){
-      return { lon: lon, lat: lat, name: name };
+    function createTestRec( lon, lat ){
+      return { lon: lon, lat: lat };
     }
 
     var expectedRecords = [
@@ -72,7 +72,7 @@ tape(
       createTestRec( 1, 2, 'number too many spaces' ),
       createTestRec( 1, 2, 'trim multiple spaces' )
     ];
-    test.plan( expectedRecords.length * 4 + 1);
+    test.plan( expectedRecords.length * 3 + 1);
 
     var dataStream = importPipelines.createRecordStream(
       'test/openaddresses_sample.csv'
@@ -87,7 +87,6 @@ tape(
       var centroid = data.getCentroid();
       test.ok( expected.lon - centroid.lon < 1e-6, 'Longitude matches.' );
       test.ok( expected.lat - centroid.lat < 1e-6, 'Latitude matches.' );
-      test.equal( expected.name, data.getName( 'default' ), 'Name matches.' );
       next();
     });
     dataStream.pipe( testStream );
