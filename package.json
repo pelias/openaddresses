@@ -24,7 +24,9 @@
   },
   "scripts": {
     "import": "node import.js",
-    "test": "node test/test.js | tap-spec"
+    "test": "node test/test.js | tap-spec",
+    "lint": "jshint .",
+    "validate": "npm ls"
   },
   "repository": {
     "type": "git",
@@ -40,5 +42,10 @@
   "bugs": {
     "url": "https://github.com/pelias/openaddresses/issues"
   },
-  "homepage": "https://github.com/pelias/openaddresses"
+  "homepage": "https://github.com/pelias/openaddresses",
+  "pre-commit": [
+    "lint",
+    "validate",
+    "test"
+  ]
 }
