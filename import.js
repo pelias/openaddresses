@@ -7,15 +7,21 @@
 var fs = require( 'fs' );
 var util = require( 'util' );
 var glob = require( 'glob' );
+var through2sink = require( 'through2-sink');
 
 var peliasConfig = require( 'pelias-config' ).generate();
 var minimist = require( 'minimist' );
 var combinedStream = require( 'combined-stream' );
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
 var addressDeduplicatorStream = require( 'pelias-address-deduplicator' );
-var peliasAdminLookup = require( 'pelias-admin-lookup' );
+var wofAdminLookup = require( 'pelias-wof-admin-lookup' );
 
 var importPipelines = require( './lib/import_pipelines' );
+
+var count = 0;
+var sink = through2sink.obj(function (chunk) {
+    count++;
+})
 
 /**
  * Import all OpenAddresses CSV files in a directory into Pelias elasticsearch.
@@ -54,7 +60,8 @@ function importOpenAddressesFiles( files, opts ){
 
   if( opts.adminValues ){
     logger.info( 'Setting up admin value lookup stream.' );
-    var lookupStream = peliasAdminLookup.stream();
+    var resolver = wofAdminLookup.createWofPipResolver('http://localhost:8080');
+    var lookupStream = wofAdminLookup.createLookupStream(resolver, esPipeline);
     recordStream.pipe( lookupStream );
     recordStream = lookupStream;
   }
@@ -71,7 +78,7 @@ function importOpenAddressesFiles( files, opts ){
     logger.info( 'Total time taken: %s.%ss', seconds, milliseconds );
   });
 
-  recordStream.pipe( esPipeline );
+  recordStream.pipe( sink );
 }
 
 /**

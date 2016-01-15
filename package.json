@@ -9,12 +9,13 @@
     "glob": "^5.0.15",
     "minimist": "1.1.0",
     "pelias-address-deduplicator": "^1.x.x",
-    "pelias-admin-lookup": "^2.x.x",
     "pelias-config": ">=1.0.0",
     "pelias-dbclient": "^0.x.x",
     "pelias-logger": "^0.x.x",
     "pelias-model": "^0.x.x",
-    "through2": "0.6.3"
+    "pelias-wof-admin-lookup": "file:../wof-admin-lookup",
+    "through2": "0.6.3",
+    "through2-sink": "^1.0.0"
   },
   "devDependencies": {
     "tape": "3.0.3",
