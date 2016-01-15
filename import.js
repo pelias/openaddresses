@@ -13,7 +13,7 @@ var minimist = require( 'minimist' );
 var combinedStream = require( 'combined-stream' );
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
 var addressDeduplicatorStream = require( 'pelias-address-deduplicator' );
-var peliasAdminLookup = require( 'pelias-admin-lookup' );
+var wofAdminLookup = require( 'pelias-wof-admin-lookup' );
 
 var importPipelines = require( './lib/import_pipelines' );
 
@@ -54,7 +54,8 @@ function importOpenAddressesFiles( files, opts ){
 
   if( opts.adminValues ){
     logger.info( 'Setting up admin value lookup stream.' );
-    var lookupStream = peliasAdminLookup.stream();
+    var resolver = wofAdminLookup.createWofPipResolver('http://localhost:8080');
+    var lookupStream = wofAdminLookup.createLookupStream(resolver);
     recordStream.pipe( lookupStream );
     recordStream = lookupStream;
   }
