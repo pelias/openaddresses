@@ -17,10 +17,11 @@
     "through2": "0.6.3"
   },
   "devDependencies": {
-    "tape": "3.0.3",
-    "tap-spec": "2.1.2",
+    "event-stream": "^3.3.2",
+    "jshint": "2.5.11",
     "precommit-hook": "1.0.7",
-    "jshint": "2.5.11"
+    "tap-spec": "2.1.2",
+    "tape": "3.0.3"
   },
   "scripts": {
     "import": "node import.js",

@@ -6,5 +6,6 @@
 
 require( './parameters' );
 require( './isValidCsvRecord' );
+require( './documentStream' );
 require( './createPeliasElasticsearchPipeline' );
 require( './importPipelines_functional' );
