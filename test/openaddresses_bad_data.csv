@@ -7,3 +7,4 @@ LON,LAT,NUMBER,STREET,FOOBAR,DEADBEEF
 ,,,30,,,
 ,..........,,,,,,,,,,,
 40,40,5, ,,
+40,40,5," ",,
