@@ -24,3 +24,23 @@ tape( 'documentStream catches records with no street', function(test) {
   });
 
 });
+
+tape( 'documentStream does not set zipcode if zipcode is emptystring', function(test) {
+  var input = {
+    NUMBER: '5',
+    STREET: '101st Avenue',
+    LAT: 5,
+    LON: 6,
+    POSTCODE: ''
+  };
+  var stats = { badRecordCount: 0 };
+  var documentStream = importPipelines.createDocumentStream(stats);
+
+  test_stream([input], documentStream, function(err, actual) {
+    test.equal(actual.length, 1, 'the document should be pushed' );
+    test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
+    test.equal(actual[0].getAddress('zip', undefined));
+    test.end();
+  });
+
+});
