@@ -5,7 +5,6 @@
 'use strict';
 
 var peliasConfig = require( 'pelias-config' ).generate();
-var combinedStream = require( 'combined-stream' );
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
 var addressDeduplicatorStream = require( 'pelias-address-deduplicator' );
 var peliasAdminLookup = require( 'pelias-admin-lookup' );
@@ -29,15 +28,8 @@ var importPipelines = require( './lib/import_pipelines' );
  *        documentation: https://github.com/pelias/admin-lookup
  */
 function importOpenAddressesFiles( files, opts ){
-  var recordStream = combinedStream.create();
-
   logger.info( 'Importing %s files.', files.length );
-  files.forEach( function forEach( filePath ){
-    recordStream.append( function ( next ){
-      logger.info( 'Creating read stream for: ' + filePath );
-      next( importPipelines.createRecordStream( filePath ) );
-    });
-  });
+  var recordStream = importPipelines.createFullRecordStream(files);
 
   var esPipeline = importPipelines.createPeliasElasticsearchPipeline();
 
