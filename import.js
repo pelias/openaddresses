@@ -4,8 +4,6 @@
 
 'use strict';
 
-var glob = require( 'glob' );
-
 var peliasConfig = require( 'pelias-config' ).generate();
 var combinedStream = require( 'combined-stream' );
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
@@ -79,10 +77,7 @@ if( 'exitCode' in args ){
   process.exit( args.exitCode );
 }
 else {
-  var configFiles = peliasConfig.imports.openaddresses? peliasConfig.imports.openaddresses.files : undefined;
-  var files = (configFiles !== undefined && configFiles.length > 0) ?
-    configFiles :
-      glob.sync( args.dirPath + '/**/*.csv' );
+  var files = interpretUserArgs.getFileList(peliasConfig, args);
 
-      importOpenAddressesFiles( files, args );
+  importOpenAddressesFiles( files, args );
 }
