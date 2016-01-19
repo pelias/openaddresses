@@ -54,3 +54,21 @@ tape('interpretUserArgs returns given path as dirPath', function(test) {
     test.end();
   });
 });
+
+tape('interpretUserArgs returns dir from pelias config if no dir specified on command line', function(test) {
+  temp.mkdir('tmpdir2', function(err, temporary_dir) {
+    var peliasConfig = {
+      imports: {
+        openaddresses: {
+          datapath: temporary_dir
+        }
+      }
+    };
+
+    var input = [];
+    var result = interpretUserArgs.interpretUserArgs(input, peliasConfig);
+
+    test.equal(result.dirPath, temporary_dir, 'path should be equal to path from config');
+    test.end();
+  });
+});
