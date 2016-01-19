@@ -1,6 +1,7 @@
 var tape = require( 'tape' );
 var util = require( 'util' );
-var os = require( 'os' );
+
+var temp = require( 'temp' ).track();
 
 var interpretUserArgs = require( '../lib/interpretUserArgs' );
 
@@ -44,11 +45,12 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
 });
 
 tape('interpretUserArgs returns given path as dirPath', function(test) {
-  var dir_that_exists = os.tmpdir();
+  temp.mkdir('tmpdir', function(err, temporary_dir) {
 
-  var input = [dir_that_exists];
-  var result = interpretUserArgs.interpretUserArgs(input);
+    var input = [temporary_dir];
+    var result = interpretUserArgs.interpretUserArgs(input);
 
-  test.equal(result.dirPath, dir_that_exists, 'path should be equal to specified path');
-  test.end();
+    test.equal(result.dirPath, temporary_dir, 'path should be equal to specified path');
+    test.end();
+  });
 });
