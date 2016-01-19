@@ -6,11 +6,20 @@
 
 var peliasConfig = require( 'pelias-config' ).generate();
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
-var addressDeduplicatorStream = require( 'pelias-address-deduplicator' );
-var peliasAdminLookup = require( 'pelias-admin-lookup' );
 
 var interpretUserArgs = require( './lib/interpretUserArgs' );
 var importPipelines = require( './lib/import_pipelines' );
+
+// Pretty-print the total time the import took.
+function startTiming() {
+  var startTime = new Date().getTime();
+  process.on( 'exit', function (){
+    var totalTimeTaken = (new Date().getTime() - startTime).toString();
+    var seconds = totalTimeTaken.slice(0, totalTimeTaken.length - 3);
+    var milliseconds = totalTimeTaken.slice(totalTimeTaken.length - 3);
+    logger.info( 'Total time taken: %s.%ss', seconds, milliseconds );
+  });
+}
 
 /**
  * Import all OpenAddresses CSV files in a directory into Pelias elasticsearch.
@@ -29,37 +38,25 @@ var importPipelines = require( './lib/import_pipelines' );
  */
 function importOpenAddressesFiles( files, opts ){
   logger.info( 'Importing %s files.', files.length );
-  var recordStream = importPipelines.createFullRecordStream(files);
+  var pipeline = [ importPipelines.createFullRecordStream(files) ];
 
-  var esPipeline = importPipelines.createPeliasElasticsearchPipeline();
 
   if( opts.deduplicate ){
-    logger.info( 'Setting up deduplicator.' );
-    var deduplicatorStream = addressDeduplicatorStream();
-    recordStream.pipe( deduplicatorStream );
-    recordStream = deduplicatorStream;
+    pipeline.push(importPipelines.createDeduplicatorStream());
   }
 
   if( opts.adminValues ){
-    logger.info( 'Setting up admin value lookup stream.' );
-    var lookupStream = peliasAdminLookup.stream();
-    recordStream.pipe( lookupStream );
-    recordStream = lookupStream;
+    pipeline.push(importPipelines.createAdminLookupStream());
   }
 
-  // Pretty-print the total time the import took.
-  var startTime;
-  esPipeline.once( 'data', function (){
-    startTime = new Date().getTime();
-  });
-  process.on( 'exit', function (){
-    var totalTimeTaken = (new Date().getTime() - startTime).toString();
-    var seconds = totalTimeTaken.slice(0, totalTimeTaken.length - 3);
-    var milliseconds = totalTimeTaken.slice(totalTimeTaken.length - 3);
-    logger.info( 'Total time taken: %s.%ss', seconds, milliseconds );
-  });
+  pipeline.push(importPipelines.createPeliasElasticsearchPipeline());
 
-  recordStream.pipe( esPipeline );
+  startTiming();
+
+  // start the import process by piping all the streams appropriately
+  for(var i = 0; i < pipeline.length - 1; i++) {
+    pipeline[i].pipe(pipeline[i+1]);
+  }
 }
 
 var args = interpretUserArgs.interpretUserArgs( process.argv.slice( 2 ) );
