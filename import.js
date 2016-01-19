@@ -32,7 +32,7 @@ function startTiming() {
  *        to perform deduplication. See the documentation:
  *        https://github.com/pelias/address-deduplicator-stream
  *
- *      admin-values: Add admin values to each address object (since
+ *      adminValues: Add admin values to each address object (since
  *        OpenAddresses doesn't contain any) using `admin-lookup`. See the
  *        documentation: https://github.com/pelias/admin-lookup
  */
