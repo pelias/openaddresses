@@ -1,7 +1,7 @@
 var tape = require( 'tape' );
 var util = require( 'util' );
 
-var importScript = require( '../import' );
+var interpretUserArgs = require( '../lib/interpretUserArgs' );
 
 tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
   var testCases = [
@@ -21,7 +21,7 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
 
   testCases.forEach( function execTestCase( testCase, ind ){
     test.deepEqual(
-      importScript( testCase[ 0 ] ), testCase[ 1 ],
+      interpretUserArgs.interpretUserArgs( testCase[ 0 ] ), testCase[ 1 ],
       util.format( 'Arguments case %d passes.', ind )
     );
   });
@@ -33,7 +33,7 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
     [ '--deduplicate', 'package.json' ],
   ];
   badArguments.forEach( function execTestCase( testCase, ind ){
-    var errorObj = importScript( testCase );
+    var errorObj = interpretUserArgs.interpretUserArgs( testCase );
     test.ok(
       'exitCode' in errorObj &&  'errMessage' in errorObj,
       'Invalid arguments yield an error object: ' + ind
@@ -41,4 +41,3 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
   });
   test.end();
 });
-
