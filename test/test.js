@@ -6,6 +6,7 @@
 
 require( './parameters' );
 require( './isValidCsvRecord' );
+
 require( './streams/elasticsearchStream' );
 require( './streams/cleanupStream' );
 require( './streams/documentStream' );
