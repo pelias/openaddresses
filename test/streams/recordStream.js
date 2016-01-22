@@ -3,7 +3,7 @@ var through = require( 'through2' );
 
 var peliasModel = require( 'pelias-model' );
 
-var importPipelines = require( '../lib/import_pipelines' );
+var recordStream = require( '../../lib/streams/recordStream' );
 
 /**
  * Tests whether records read from `test/openaddresses_sample.csv` are created
@@ -28,9 +28,7 @@ tape(
     ];
     test.plan( expectedRecords.length * 4 + 1);
 
-    var dataStream = importPipelines.createRecordStream(
-      'test/openaddresses_sample.csv'
-    );
+    var dataStream = recordStream.create(['test/openaddresses_sample.csv']);
     test.ok( dataStream.readable, 'Stream is readable.' );
     var testStream = through.obj(function ( data, enc, next ){
       test.ok(
@@ -49,9 +47,7 @@ tape(
 );
 
 tape( 'Don\'t create records for invalid data.', function ( test ){
-  var dataStream = importPipelines.createRecordStream(
-    'test/openaddresses_bad_data.csv'
-  );
+  var dataStream = recordStream.create(['test/openaddresses_bad_data.csv']);
 
   dataStream.pipe( through.obj(
     function write( data, _, next ){

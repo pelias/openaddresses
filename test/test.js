@@ -6,7 +6,7 @@
 
 require( './parameters' );
 require( './isValidCsvRecord' );
-require( './cleanupStream' );
-require( './documentStream' );
-require( './createPeliasElasticsearchPipeline' );
-require( './importPipelines_functional' );
+require( './streams/elasticsearchStream' );
+require( './streams/cleanupStream' );
+require( './streams/documentStream' );
+require( './streams/recordStream' );

@@ -1,7 +1,7 @@
 var tape = require( 'tape' );
 var event_stream = require( 'event-stream' );
 
-var cleanup = require( '../lib/cleanupStream' );
+var CleanupStream = require( '../../lib/streams/cleanupStream' );
 
 function test_stream(input, testedStream, callback) {
   var input_stream = event_stream.readArray(input);
@@ -19,7 +19,7 @@ tape( 'cleanupStream trims whitespace from all fields', function(test) {
     POSTCODE: ' def '
   };
 
-  var cleanupStream = cleanup.createCleanupStream();
+  var cleanupStream = CleanupStream.create();
 
   test_stream([input], cleanupStream, function(err, records) {
     test.equal(records.length, 1, 'stream length unchanged');
