@@ -14,9 +14,7 @@ var inputFiles =  [ basePath + '/data/banff.csv', basePath + '/data/kodiak_islan
 tape('functional test of importing two small OA files', function(t) {
   var expected = JSON.parse(fs.readFileSync(expectedPath));
 
-
   var endStream = event_stream.writeArray(function(err, results) {
-
     // alling toJSON on a Document writes the phrase, so we have to emulate that here
     results.forEach(function(element) {
       element.phrase = element.name;
