@@ -9,7 +9,7 @@
     "glob": "^5.0.15",
     "minimist": "1.1.0",
     "pelias-address-deduplicator": "^1.x.x",
-    "pelias-admin-lookup": "^2.x.x",
+    "pelias-wof-admin-lookup": "1.0.0",
     "pelias-config": ">=1.0.0",
     "pelias-dbclient": "^0.x.x",
     "pelias-logger": "^0.x.x",
