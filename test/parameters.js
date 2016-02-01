@@ -4,7 +4,7 @@ var path = require( 'path' );
 
 var temp = require( 'temp' ).track();
 
-var interpretUserArgs = require( '../lib/interpretUserArgs' );
+var parameters = require( '../lib/parameters' );
 
 tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
   var testCases = [
@@ -24,7 +24,7 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
 
   testCases.forEach( function execTestCase( testCase, ind ){
     test.deepEqual(
-      interpretUserArgs.interpretUserArgs( testCase[ 0 ] ), testCase[ 1 ],
+      parameters.interpretUserArgs( testCase[ 0 ] ), testCase[ 1 ],
       util.format( 'Arguments case %d passes.', ind )
     );
   });
@@ -36,7 +36,7 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
     [ '--deduplicate', 'package.json' ],
   ];
   badArguments.forEach( function execTestCase( testCase, ind ){
-    var errorObj = interpretUserArgs.interpretUserArgs( testCase );
+    var errorObj = parameters.interpretUserArgs( testCase );
     test.ok(
       'exitCode' in errorObj &&  'errMessage' in errorObj,
       'Invalid arguments yield an error object: ' + ind
@@ -49,9 +49,22 @@ tape('interpretUserArgs returns given path as dirPath', function(test) {
   temp.mkdir('tmpdir', function(err, temporary_dir) {
 
     var input = [temporary_dir];
-    var result = interpretUserArgs.interpretUserArgs(input);
+    var result = parameters.interpretUserArgs(input);
 
     test.equal(result.dirPath, temporary_dir, 'path should be equal to specified path');
+    test.end();
+  });
+});
+
+tape('intepretUserArgs normalizes path given as parameter', function(test) {
+  temp.mkdir('tmpdir', function(err, temporary_dir) {
+    var input_dir = temporary_dir + path.sep + path.sep;
+
+    var input = [input_dir];
+    var result = parameters.interpretUserArgs(input);
+
+    var expected_dir = path.normalize(input_dir);
+    test.equal(result.dirPath, expected_dir, 'path should be equal to specified path');
     test.end();
   });
 });
@@ -67,9 +80,29 @@ tape('interpretUserArgs returns dir from pelias config if no dir specified on co
     };
 
     var input = [];
-    var result = interpretUserArgs.interpretUserArgs(input, peliasConfig);
+    var result = parameters.interpretUserArgs(input, peliasConfig);
 
     test.equal(result.dirPath, temporary_dir, 'path should be equal to path from config');
+    test.end();
+  });
+});
+
+tape('interpretUserArgs returns normalized path from config', function(test) {
+  temp.mkdir('tmpdir2', function(err, temporary_dir) {
+    var input_dir = path.sep + '.' + temporary_dir;
+    var peliasConfig = {
+      imports: {
+        openaddresses: {
+          datapath: input_dir
+        }
+      }
+    };
+
+    var input = [];
+    var result = parameters.interpretUserArgs(input, peliasConfig);
+
+    var expected_dir = path.normalize(input_dir);
+    test.equal(result.dirPath, expected_dir, 'path should be equal to path from config');
     test.end();
   });
 });
@@ -89,7 +122,7 @@ tape('getFileList returns fully qualified path names when config has a files lis
 
     var expected = [path.join(temporary_dir, 'filea.csv'), path.join(temporary_dir, 'fileb.csv')];
 
-    var actual = interpretUserArgs.getFileList(peliasConfig, args);
+    var actual = parameters.getFileList(peliasConfig, args);
 
     test.deepEqual(actual, expected, 'file names should be equal');
     test.end();

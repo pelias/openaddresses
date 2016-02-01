@@ -7,7 +7,7 @@
 var peliasConfig = require( 'pelias-config' ).generate();
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
 
-var interpretUserArgs = require( './lib/interpretUserArgs' );
+var parameters = require( './lib/parameters' );
 var importPipeline = require( './lib/importPipeline' );
 
 // Pretty-print the total time the import took.
@@ -21,7 +21,7 @@ function startTiming() {
   });
 }
 
-var args = interpretUserArgs.interpretUserArgs( process.argv.slice( 2 ) );
+var args = parameters.interpretUserArgs( process.argv.slice( 2 ) );
 
 if( 'exitCode' in args ){
   ((args.exitCode > 0) ? console.error : console.info)( args.errMessage );
@@ -30,7 +30,7 @@ if( 'exitCode' in args ){
 else {
   startTiming();
 
-  var files = interpretUserArgs.getFileList(peliasConfig, args);
+  var files = parameters.getFileList(peliasConfig, args);
 
   importPipeline.create( files, args );
 }

@@ -38,7 +38,8 @@ tape('functional test of importing two small OA files', function(t) {
 
   var opts = {
     deduplicate: false, // its not currently feasible to run these in this test
-    adminValues: false
+    adminValues: false,
+    dirPath: basePath
   };
 
   importPipeline.create(inputFiles, opts, endStream);
