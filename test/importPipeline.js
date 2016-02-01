@@ -20,6 +20,11 @@ tape('functional test of importing two small OA files', function(t) {
       element.phrase = element.name;
     });
 
+    // uncomment this to write the actual results to the expected file
+    // make sure they look ok though. comma left off so jshint reminds you
+    // not to commit this line
+    //fs.writeFileSync(expectedPath, JSON.stringify(results, null, 2))
+
     var diff = deep(expected, results);
 
     if (diff) {
