@@ -56,6 +56,19 @@ tape('interpretUserArgs returns given path as dirPath', function(test) {
   });
 });
 
+tape('intepretUserArgs normalizes path given as parameter', function(test) {
+  temp.mkdir('tmpdir', function(err, temporary_dir) {
+    var input_dir = temporary_dir + path.sep + path.sep;
+
+    var input = [input_dir];
+    var result = parameters.interpretUserArgs(input);
+
+    var expected_dir = path.normalize(input_dir);
+    test.equal(result.dirPath, expected_dir, 'path should be equal to specified path');
+    test.end();
+  });
+});
+
 tape('interpretUserArgs returns dir from pelias config if no dir specified on command line', function(test) {
   temp.mkdir('tmpdir2', function(err, temporary_dir) {
     var peliasConfig = {
@@ -70,6 +83,26 @@ tape('interpretUserArgs returns dir from pelias config if no dir specified on co
     var result = parameters.interpretUserArgs(input, peliasConfig);
 
     test.equal(result.dirPath, temporary_dir, 'path should be equal to path from config');
+    test.end();
+  });
+});
+
+tape('interpretUserArgs returns normalized path from config', function(test) {
+  temp.mkdir('tmpdir2', function(err, temporary_dir) {
+    var input_dir = path.sep + '.' + temporary_dir;
+    var peliasConfig = {
+      imports: {
+        openaddresses: {
+          datapath: input_dir
+        }
+      }
+    };
+
+    var input = [];
+    var result = parameters.interpretUserArgs(input, peliasConfig);
+
+    var expected_dir = path.normalize(input_dir);
+    test.equal(result.dirPath, expected_dir, 'path should be equal to path from config');
     test.end();
   });
 });
