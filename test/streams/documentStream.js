@@ -15,7 +15,7 @@ tape( 'documentStream catches records with no street', function(test) {
     NUMBER: 5
   };
   var stats = { badRecordCount: 0 };
-  var documentStream = DocumentStream.create('', stats);
+  var documentStream = DocumentStream.create('prefix', stats);
 
   test_stream([input], documentStream, function(err, actual) {
     test.equal(actual.length, 0, 'no documents should be pushed' );
@@ -33,7 +33,7 @@ tape( 'documentStream does not set zipcode if zipcode is emptystring', function(
     POSTCODE: ''
   };
   var stats = { badRecordCount: 0 };
-  var documentStream = DocumentStream.create('', stats);
+  var documentStream = DocumentStream.create('prefix', stats);
 
   test_stream([input], documentStream, function(err, actual) {
     test.equal(actual.length, 1, 'the document should be pushed' );
