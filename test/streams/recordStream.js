@@ -61,3 +61,13 @@ tape( 'Don\'t create records for invalid data.', function ( test ){
     }
   ));
 });
+
+tape( 'getIdPrefix returns basename without extension', function( test ) {
+  var filename = '/path/to/a/document.csv';
+
+  var actual = recordStream.getIdPrefix(filename);
+  var expected = 'document';
+
+  test.equal(actual, expected);
+  test.end();
+});

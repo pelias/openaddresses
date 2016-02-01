@@ -53,12 +53,12 @@ tape( 'documentStream creates id with filename-based prefix', function(test) {
   };
 
   var stats = { badRecordCount: 0 };
-  var documentStream = DocumentStream.create('somefile.csv', stats);
+  var documentStream = DocumentStream.create('prefix', stats);
 
   test_stream([input], documentStream, function(err, actual) {
     test.equal(actual.length, 1, 'the document should be pushed' );
     test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
-    test.equal(actual[0].getId(), 'somefile:0');
+    test.equal(actual[0].getId(), 'prefix:0');
     test.end();
   });
 });
