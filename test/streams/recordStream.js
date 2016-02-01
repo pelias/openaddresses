@@ -62,10 +62,33 @@ tape( 'Don\'t create records for invalid data.', function ( test ){
   ));
 });
 
-tape( 'getIdPrefix returns basename without extension', function( test ) {
-  var filename = '/path/to/a/document.csv';
+tape( 'getIdPrefix returns prefix based on OA directory structure', function( test ) {
+  var filename = '/base/path/us/ca/san_francisco.csv';
+  var basePath = '/base/path';
 
-  var actual = recordStream.getIdPrefix(filename);
+  var actual = recordStream.getIdPrefix(filename, basePath);
+
+  var expected = 'us/ca/san_francisco';
+  test.equal(actual, expected, 'correct prefix generated');
+  test.end();
+});
+
+tape( 'getIdPrefix handles multiple levels of heirarchy', function ( test ) {
+  var filename = '/base/path/cz/countrywide.csv';
+  var basePath = '/base/path';
+
+  var actual = recordStream.getIdPrefix(filename, basePath);
+
+  var expected = 'cz/countrywide';
+  test.equal(actual, expected, 'correct prefix generated');
+  test.end();
+});
+
+tape( 'getIdPrefix returns basename without extension when invalid basepath given', function( test ) {
+  var filename = '/path/to/a/document.csv';
+  var basePath = '/somewhere/else';
+
+  var actual = recordStream.getIdPrefix(filename, basePath);
   var expected = 'document';
 
   test.equal(actual, expected);
