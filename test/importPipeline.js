@@ -15,11 +15,6 @@ tape('functional test of importing two small OA files', function(t) {
   var expected = JSON.parse(fs.readFileSync(expectedPath));
 
   var endStream = event_stream.writeArray(function(err, results) {
-    // calling toJSON on a Document writes the phrase, so we have to emulate that here
-    results.forEach(function(element) {
-      element.phrase = element.name;
-    });
-
     // uncomment this to write the actual results to the expected file
     // make sure they look ok though. comma left off so jshint reminds you
     // not to commit this line
