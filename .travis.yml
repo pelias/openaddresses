@@ -3,4 +3,7 @@ language: node_js
 node_js:
   - 0.12
   - 0.10
-after_script: npm run functional
+env:
+    - TEST_SUITE=units
+    - TEST_SUITE=functional
+script: "npm run $TEST_SUITE"
