@@ -15,7 +15,7 @@
     "pelias-logger": "^0.x.x",
     "pelias-model": "1.1.0",
     "pelias-wof-admin-lookup": "1.0.2",
-    "through2": "0.6.3"
+    "through2": "2.0.1"
   },
   "devDependencies": {
     "deep-diff": "^0.3.3",
