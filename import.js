@@ -4,8 +4,11 @@
 
 'use strict';
 
+var fs = require( 'fs' );
+
 var peliasConfig = require( 'pelias-config' ).generate();
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
+var through = require( 'through2' );
 
 var parameters = require( './lib/parameters' );
 var importPipeline = require( './lib/importPipeline' );
@@ -32,5 +35,11 @@ else {
 
   var files = parameters.getFileList(peliasConfig, args);
 
-  importPipeline.create( files, args );
+  var outPath = './importer.out';
+  var stream = through.obj(function(obj, _, next) {
+    fs.appendFile(outPath, JSON.stringify(obj) + '\n');
+    return next();
+  });
+
+  importPipeline.create( files, args, stream );
 }
