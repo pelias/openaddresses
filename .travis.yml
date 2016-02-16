@@ -16,6 +16,15 @@ matrix:
         - node_js: 4.3
         - node_js: 5.6
 env:
+  global:
+    - CXX=g++-4.8
+  matrix:
     - TEST_SUITE=units
     - TEST_SUITE=functional
 script: "npm run $TEST_SUITE"
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
