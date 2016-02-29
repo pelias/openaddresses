@@ -11,7 +11,7 @@
     "minimist": "1.1.0",
     "pelias-address-deduplicator": "^1.x.x",
     "pelias-config": ">=1.0.0",
-    "pelias-dbclient": "^0.x.x",
+    "pelias-dbclient": "^1.0.0",
     "pelias-logger": "^0.x.x",
     "pelias-model": "1.1.0",
     "pelias-wof-admin-lookup": "1.1.2",
