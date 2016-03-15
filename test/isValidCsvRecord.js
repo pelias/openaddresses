@@ -16,3 +16,10 @@ tape( 'Identifies invalid CSV records.', function ( test ){
   test.ok( isValidCsvRecord( validRecord ), 'Record identified as valid.' );
   test.end();
 });
+
+tape( 'Identifies CSV files that have incorrect columns', function( test) {
+  var record = { 'notLat': 'asdf', 'notLon': 5 };
+
+  test.ok( !isValidCsvRecord( record ), 'Record identified as invalid' );
+  test.end();
+});
