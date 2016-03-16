@@ -144,3 +144,27 @@ tape ( 'cleanupStream trims white space in street field', function(test){
     });
   });
 });
+
+tape( 'cleanupStream expands tokens ending in "-str." to "-strasse" (mostly DEU)', function(test) {
+  var inputs = [
+    { STREET: 'Grolmanstr.' },
+    { STREET: 'Ohrdrufer Str' },
+    { STREET: 'str. Mircești' }, // in Moldova the 'str.' prefix means 'Strada'
+    { STREET: 'Sankt Nic Kirkestr' },
+    { STREET: 'Große Str' },
+    { STREET: 'Lindenstr' }
+  ];
+  var cleanupStream = CleanupStream.create();
+
+  test_stream(inputs, cleanupStream, function(err, records) {
+    test.equal(records.length, 6, 'stream length unchanged');
+
+    test.equal(records[0].STREET, 'Grolmanstrasse', 'expanded');
+    test.equal(records[1].STREET, 'Ohrdrufer Str', 'unchanged');
+    test.equal(records[2].STREET, 'str. Mircești', 'unchanged');
+    test.equal(records[3].STREET, 'Sankt Nic Kirkestrasse', 'expanded');
+    test.equal(records[4].STREET, 'Große Str', 'unchanged');
+    test.equal(records[5].STREET, 'Lindenstrasse', 'expanded');
+    test.end();
+  });
+});
