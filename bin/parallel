@@ -1,0 +1,13 @@
+#!/bin/bash
+
+count=$1
+shift
+
+if [[ $count -ge 1 ]]; then
+	echo "starting $count parallel builds"
+	for i in `seq 0 $(($count-1))`; do
+		cmd="node import.js --parallel-count $count --parallel-id $i $@ "
+		$cmd &
+	done
+	wait
+fi
