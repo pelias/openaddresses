@@ -10,15 +10,15 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
   var testCases = [
     [
       [ '--deduplicate', '--admin-values', 'test'  ],
-      { deduplicate: true, adminValues: true, dirPath: 'test' },
+      { deduplicate: true, adminValues: true, dirPath: 'test', 'parallel-count': undefined, 'parallel-id': undefined },
     ],
     [
       [ '--admin-values', 'test' ],
-      { deduplicate: false, adminValues: true, dirPath: 'test' },
+      { deduplicate: false, adminValues: true, dirPath: 'test', 'parallel-count': undefined, 'parallel-id': undefined },
     ],
     [
       [ '--deduplicate', 'test' ],
-      { deduplicate: true, adminValues: false, dirPath: 'test' },
+      { deduplicate: true, adminValues: false, dirPath: 'test', 'parallel-count': undefined, 'parallel-id': undefined},
     ]
   ];
 
@@ -126,5 +126,62 @@ tape('getFileList returns fully qualified path names when config has a files lis
 
     test.deepEqual(actual, expected, 'file names should be equal');
     test.end();
+  });
+});
+
+tape('getFileList handles parallel builds', function(test) {
+  var peliasConfig = {
+    imports: {
+      openaddresses: {
+        files: ['filea.csv', 'fileb.csv', 'filec.csv']
+      }
+    }
+  };
+
+  temp.mkdir('parallelBuilds', function(err, temporary_dir) {
+    test.test('3 workers, id 1', function(t) {
+      var args = {
+        dirPath: temporary_dir,
+        'parallel-count': 3,
+        'parallel-id': 1
+      };
+
+      var expected = [path.join(temporary_dir, 'fileb.csv')];
+
+      var actual = parameters.getFileList(peliasConfig, args);
+
+      t.deepEqual(actual, expected, 'only second file indexed');
+      t.end();
+    });
+
+    test.test('3 workers, id 2', function(t) {
+      var args = {
+        dirPath: temporary_dir,
+        'parallel-count': 3,
+        'parallel-id': 2
+      };
+
+      var expected = [path.join(temporary_dir, 'filec.csv')];
+
+      var actual = parameters.getFileList(peliasConfig, args);
+
+      t.deepEqual(actual, expected, 'only third file indexed');
+      t.end();
+    });
+
+    test.test('3 workers, id 3', function(t) {
+      var args = {
+        dirPath: temporary_dir,
+        'parallel-count': 3,
+        'parallel-id': 3
+      };
+
+      var expected = [];
+
+      var actual = parameters.getFileList(peliasConfig, args);
+
+      t.deepEqual(actual, expected, 'file list is empty');
+      t.end();
+    });
   });
 });
