@@ -28,6 +28,7 @@
   },
   "scripts": {
     "import": "node import.js",
+    "parallel": "./bin/parallel",
     "test": "npm run units",
     "units": "node test/test.js | tap-spec",
     "functional": "node test/functional.js | tap-spec",
