@@ -1,4 +1,24 @@
+sudo: false
 language: node_js
 node_js:
-  - 0.11
   - 0.10
+  - 0.12
+  - 4.4
+  - 5.8
+matrix:
+    allow_failures:
+        - node_js: 4.4
+        - node_js: 5.8
+env:
+  global:
+    - CXX=g++-4.8
+  matrix:
+    - TEST_SUITE=units
+    - TEST_SUITE=functional
+script: "npm run $TEST_SUITE"
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
