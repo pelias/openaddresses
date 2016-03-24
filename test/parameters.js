@@ -139,6 +139,21 @@ tape('getFileList handles parallel builds', function(test) {
   };
 
   temp.mkdir('parallelBuilds', function(err, temporary_dir) {
+    test.test('3 workers, id 0', function(t) {
+      var args = {
+        dirPath: temporary_dir,
+        'parallel-count': 3,
+        'parallel-id': 0
+      };
+
+      var expected = [path.join(temporary_dir, 'filea.csv')];
+
+      var actual = parameters.getFileList(peliasConfig, args);
+
+      t.deepEqual(actual, expected, 'only first file is indexed');
+      t.end();
+    });
+
     test.test('3 workers, id 1', function(t) {
       var args = {
         dirPath: temporary_dir,
