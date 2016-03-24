@@ -1,13 +1,21 @@
 #!/bin/bash
 
+# grab the number of workers count
 count=$1
+
+# remove the first argument from the arguments array ($@)
 shift
 
+# only do anything if count is a valid integer >= 1
 if [[ $count -ge 1 ]]; then
 	echo "starting $count parallel builds"
+
+	# spawn $count parallel builds, passing correct params and all arguments
 	for i in `seq 0 $(($count-1))`; do
 		cmd="node import.js --parallel-count $count --parallel-id $i $@ "
 		$cmd &
 	done
+
+	# don't let this script finish until all parallel builds have finished
 	wait
 fi
