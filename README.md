@@ -24,7 +24,7 @@ hash. A sample configuration file might look like:
 	"imports": {
 		"openaddresses": {
 			"datapath": "/tmp/oa-data",
-			"files": ["us-ny-nyc.csv"]
+			"files": ["us/ny/city_of_new_york.csv"]
 		}
 	}
 }
