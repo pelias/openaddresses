@@ -5,26 +5,33 @@
   "main": "import.js",
   "dependencies": {
     "combined-stream": "0.0.7",
-    "csv-parse": "0.0.6",
-    "glob": "^5.0.15",
+    "csv-parse": "1.0.2",
+    "glob": "^7.0.0",
+    "lodash": "^4.1.0",
     "minimist": "1.1.0",
     "pelias-address-deduplicator": "^1.x.x",
-    "pelias-admin-lookup": "^2.x.x",
     "pelias-config": ">=1.0.0",
-    "pelias-dbclient": "^0.x.x",
+    "pelias-dbclient": "^1.0.0",
     "pelias-logger": "^0.x.x",
-    "pelias-model": "^0.x.x",
-    "through2": "0.6.3"
+    "pelias-model": "3.1.0",
+    "pelias-wof-admin-lookup": "^1.5.0",
+    "through2": "2.0.1"
   },
   "devDependencies": {
-    "tape": "3.0.3",
-    "tap-spec": "2.1.2",
+    "deep-diff": "^0.3.3",
+    "event-stream": "^3.3.2",
+    "jshint": "2.5.11",
     "precommit-hook": "1.0.7",
-    "jshint": "2.5.11"
+    "tap-spec": "2.1.2",
+    "tape": "^4.5.0",
+    "temp": "^0.8.3"
   },
   "scripts": {
     "import": "node import.js",
-    "test": "node test/test.js | tap-spec",
+    "parallel": "./bin/parallel",
+    "test": "npm run units",
+    "units": "node test/test.js | tap-spec",
+    "functional": "node test/functional.js | tap-spec",
     "lint": "jshint .",
     "validate": "npm ls"
   },
