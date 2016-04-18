@@ -10,3 +10,4 @@ require( './isValidCsvRecord' );
 require( './streams/cleanupStream' );
 require( './streams/documentStream' );
 require( './streams/recordStream' );
+require( './streams/isUSorCAHouseNumberZero' );
