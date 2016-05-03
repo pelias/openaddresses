@@ -23,3 +23,38 @@ tape( 'Identifies CSV files that have incorrect columns', function( test) {
   test.ok( !isValidCsvRecord( record ), 'Record identified as invalid' );
   test.end();
 });
+
+tape('complete record but house number is literal word null should return false', function(test) {
+  var record = {
+    LON: '1', LAT: '2', NUMBER: 'NuLl', STREET: 'Street'
+  }
+
+  test.ok( !isValidCsvRecord(record), 'Record identified as invalid');
+  test.end();
+
+});
+
+tape('complete record but street contains literal word null should return false', function(test) {
+  var records = [
+    { LON: '1', LAT: '2', NUMBER: 'Number', STREET: 'NuLl Name St' },
+    { LON: '1', LAT: '2', NUMBER: 'Number', STREET: 'South NULL St' },
+    { LON: '1', LAT: '2', NUMBER: 'Number', STREET: 'South Name null' }
+  ];
+
+  records.forEach( function ( rec ){
+    test.ok( !isValidCsvRecord( rec ), 'Record identified as invalid' );
+  });
+
+  test.end();
+
+});
+
+tape('street with substring null but not on word boundary should return true', function(test) {
+  var record = {
+    LON: '1', LAT: '2', NUMBER: 'Number', STREET: 'Snull Street Nulls'
+  }
+
+  test.ok( isValidCsvRecord(record), 'Record identified as valid');
+  test.end();
+
+});
