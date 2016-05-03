@@ -58,3 +58,13 @@ tape('street with substring null but not on word boundary should return true', f
   test.end();
 
 });
+
+tape('street value `undefined` should return false', function(test) {
+  var record = {
+    LON: '1', LAT: '2', NUMBER: 'Number', STREET: 'uNdEfInEd'
+  }
+
+  test.ok( !isValidCsvRecord(record), 'Record identified as valid');
+  test.end();
+
+});
