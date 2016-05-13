@@ -30,7 +30,7 @@ node import.js
 node import.js --admin-values
 
 # run with admin lookup and deduplicator
-node import.js --deduplicate
+node import.js --admin-values --deduplicate
 ```
 
 ## Admin Lookup
