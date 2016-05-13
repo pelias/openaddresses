@@ -27,7 +27,7 @@ tape( 'Identifies CSV files that have incorrect columns', function( test) {
 tape('complete record but house number is literal word `null` should return false', function(test) {
   var record = {
     LON: '1', LAT: '2', NUMBER: 'NuLl', STREET: 'Street'
-  }
+  };
 
   test.ok( !isValidCsvRecord(record), 'Record identified as invalid');
   test.end();
@@ -37,7 +37,7 @@ tape('complete record but house number is literal word `null` should return fals
 tape('complete record but house number is literal word `undefined` should return false', function(test) {
   var record = {
     LON: '1', LAT: '2', NUMBER: 'uNdEfInEd', STREET: 'Street'
-  }
+  };
 
   test.ok( !isValidCsvRecord(record), 'Record identified as invalid');
   test.end();
@@ -47,7 +47,7 @@ tape('complete record but house number is literal word `undefined` should return
 tape('complete record but house number is literal word `unavailable` should return false', function(test) {
   var record = {
     LON: '1', LAT: '2', NUMBER: 'uNaVaIlAbLe', STREET: 'Street'
-  }
+  };
 
   test.ok( !isValidCsvRecord(record), 'Record identified as invalid');
   test.end();
@@ -102,7 +102,7 @@ tape('complete record but street contains literal word `unavailable` should retu
 tape('street with substring `null` but not on word boundary should return true', function(test) {
   var record = {
     LON: '1', LAT: '2', NUMBER: 'Number', STREET: 'Snull Street Nulls'
-  }
+  };
 
   test.ok( isValidCsvRecord(record), 'Record identified as valid');
   test.end();
@@ -112,7 +112,7 @@ tape('street with substring `null` but not on word boundary should return true',
 tape('street with substring `undefined` but not on word boundary should return true', function(test) {
   var record = {
     LON: '1', LAT: '2', NUMBER: 'Number', STREET: 'Sundefined Street Undefineds'
-  }
+  };
 
   test.ok( isValidCsvRecord(record), 'Record identified as valid');
   test.end();
@@ -122,7 +122,7 @@ tape('street with substring `undefined` but not on word boundary should return t
 tape('street with substring `unavailable` but not on word boundary should return true', function(test) {
   var record = {
     LON: '1', LAT: '2', NUMBER: 'Number', STREET: 'Sunavailable Street Unavailables'
-  }
+  };
 
   test.ok( isValidCsvRecord(record), 'Record identified as valid');
   test.end();
