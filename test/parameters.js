@@ -10,17 +10,17 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
   var testCases = [
     [
       [ '--deduplicate', '--admin-values', 'test'  ],
-      { deduplicate: true, adminValues: true, dirPath: 'test',
+      { deduplicate: true, adminValues: true, dirPath: 'test', 'merge': false,
 	'parallel-count': undefined, 'parallel-id': undefined, 'language': undefined },
     ],
     [
       [ '--admin-values', 'test' ],
-      { deduplicate: false, adminValues: true, dirPath: 'test',
+      { deduplicate: false, adminValues: true, dirPath: 'test', 'merge': false,
 	'parallel-count': undefined, 'parallel-id': undefined, 'language': undefined },
     ],
     [
       [ '--deduplicate', 'test' ],
-      { deduplicate: true, adminValues: false, dirPath: 'test',
+      { deduplicate: true, adminValues: false, dirPath: 'test', 'merge': false,
 	'parallel-count': undefined, 'parallel-id': undefined, 'language': undefined },
     ]
   ];
