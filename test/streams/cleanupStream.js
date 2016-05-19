@@ -31,3 +31,43 @@ tape( 'cleanupStream trims whitespace from all fields', function(test) {
     test.end();
   });
 });
+
+tape( 'cleanupStream trims leading 0\'s from house numbers', function(test) {
+  var inputs = [
+    {
+      NUMBER: ' 0030 ',
+      STREET: 'Street'
+    },
+    {
+      NUMBER: '0034560',
+      STREET: 'Street'
+    },
+    {
+      NUMBER: '12340',
+      STREET: 'Street'
+    }
+  ];
+
+  var expecteds = [
+    {
+      NUMBER: '30',
+      STREET: 'Street'
+    },
+    {
+      NUMBER: '34560',
+      STREET: 'Street'
+    },
+    {
+      NUMBER: '12340',
+      STREET: 'Street'
+    }
+  ];
+
+  var cleanupStream = CleanupStream.create();
+
+  test_stream(inputs, cleanupStream, function(err, actual) {
+    test.deepEqual(actual, expecteds, 'leading 0\'s should have been trimmed from NUMBER');
+    test.end();
+  });
+
+});
