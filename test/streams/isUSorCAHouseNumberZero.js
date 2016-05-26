@@ -12,114 +12,198 @@ function test_stream(input, testedStream, callback) {
 
 tape('isUSorCAHouseNumberZero', function(t) {
   t.test('non-0 house number in USA should return true', function(t) {
-    var record = {
-      parent: {
-        country_a: ['USA']
+    var records = [
+      {
+        parent: {
+          country_a: ['USA']
+        },
+        address_parts: {
+          number: '1007'
+        }
       },
-      address_parts: {
-        number: '17'
+      {
+        parent: {
+          country_a: ['USA']
+        },
+        address_parts: {
+          number: '0017'
+        }
+      },
+      {
+        parent: {
+          country_a: ['USA']
+        },
+        address_parts: {
+          number: '1700'
+        }
       }
-    };
+    ];
 
     var filter = isUSorCAHouseNumberZero.create();
 
-    test_stream([record], filter, function(err, actual) {
-      t.deepEqual(actual, [record], 'should have returned true');
+    test_stream(records, filter, function(err, actual) {
+      t.deepEqual(actual, records, 'none should have been filtered out');
       t.end();
     });
 
   });
 
   t.test('non-0 house number in CAN should return true', function(t) {
-    var record = {
-      parent: {
-        country_a: ['CAN']
+    var records = [
+      {
+        parent: {
+          country_a: ['CAN']
+        },
+        address_parts: {
+          number: '1007'
+        }
       },
-      address_parts: {
-        number: '17'
+      {
+        parent: {
+          country_a: ['CAN']
+        },
+        address_parts: {
+          number: '0017'
+        }
+      },
+      {
+        parent: {
+          country_a: ['CAN']
+        },
+        address_parts: {
+          number: '1700'
+        }
       }
-    };
+    ];
 
     var filter = isUSorCAHouseNumberZero.create();
 
-    test_stream([record], filter, function(err, actual) {
-      t.deepEqual(actual, [record], 'should have returned true');
+    test_stream(records, filter, function(err, actual) {
+      t.deepEqual(actual, records, 'none should have been filtered out');
       t.end();
     });
 
   });
 
   t.test('non-0 house number in non-USA/CAN should return true', function(t) {
-    var record = {
-      parent: {
-        country_a: ['GBR']
+    var records = [
+      {
+        parent: {
+          country_a: ['GBR']
+        },
+        address_parts: {
+          number: '1007'
+        }
       },
-      address_parts: {
-        number: '17'
+      {
+        parent: {
+          country_a: ['GBR']
+        },
+        address_parts: {
+          number: '0017'
+        }
+      },
+      {
+        parent: {
+          country_a: ['GBR']
+        },
+        address_parts: {
+          number: '1700'
+        }
       }
-    };
+    ];
 
     var filter = isUSorCAHouseNumberZero.create();
 
-    test_stream([record], filter, function(err, actual) {
-      t.deepEqual(actual, [record], 'should have returned true');
+    test_stream(records, filter, function(err, actual) {
+      t.deepEqual(actual, records, 'none should have been filtered out');
       t.end();
     });
 
   });
 
-  t.test('0 house number in USA should return false', function(t) {
-    var record = {
-      parent: {
-        country_a: ['USA']
+  t.test('house number reduceable to 0 in USA should return false', function(t) {
+    var records = [
+      {
+        parent: {
+          country_a: ['USA']
+        },
+        address_parts: {
+          number: '0'
+        }
       },
-      address_parts: {
-        number: '0'
+      {
+        parent: {
+          country_a: ['USA']
+        },
+        address_parts: {
+          number: '00000'
+        }
       }
-    };
+    ];
 
     var filter = isUSorCAHouseNumberZero.create();
 
-    test_stream([record], filter, function(err, actual) {
-      t.deepEqual(actual, [], 'should have returned true');
+    test_stream(records, filter, function(err, actual) {
+      t.deepEqual(actual, [], 'all should have been filtered out');
       t.end();
     });
 
   });
 
-  t.test('0 house number in CAN should return false', function(t) {
-    var record = {
-      parent: {
-        country_a: ['CAN']
+  t.test('house number reduceable to 0 in CAN should return false', function(t) {
+    var records = [
+      {
+        parent: {
+          country_a: ['CAN']
+        },
+        address_parts: {
+          number: '0'
+        }
       },
-      address_parts: {
-        number: '0'
+      {
+        parent: {
+          country_a: ['CAN']
+        },
+        address_parts: {
+          number: '00000'
+        }
       }
-    };
+    ];
 
     var filter = isUSorCAHouseNumberZero.create();
 
-    test_stream([record], filter, function(err, actual) {
-      t.deepEqual(actual, [], 'should have returned true');
+    test_stream(records, filter, function(err, actual) {
+      t.deepEqual(actual, [], 'all should have been filtered out');
       t.end();
     });
 
   });
 
-  t.test('0 house number in non-USA/CAN should return true', function(t) {
-    var record = {
-      parent: {
-        country_a: ['GBR']
+  t.test('house number reduceable to 0 in non-USA/CAN should return true', function(t) {
+    var records = [
+      {
+        parent: {
+          country_a: ['GBR']
+        },
+        address_parts: {
+          number: '0'
+        }
       },
-      address_parts: {
-        number: '0'
+      {
+        parent: {
+          country_a: ['GBR']
+        },
+        address_parts: {
+          number: '00000'
+        }
       }
-    };
+    ];
 
     var filter = isUSorCAHouseNumberZero.create();
 
-    test_stream([record], filter, function(err, actual) {
-      t.deepEqual(actual, [record], 'should have returned true');
+    test_stream(records, filter, function(err, actual) {
+      t.deepEqual(actual, records, 'none should have been filtered out');
       t.end();
     });
 
