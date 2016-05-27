@@ -16,7 +16,9 @@
     "pelias-model": "4.0.0",
     "pelias-wof-admin-lookup": "^2.0.0",
     "through2": "2.0.1",
-    "through2-filter": "^2.0.0"
+    "through2-filter": "^2.0.0",
+    "through2-map": "^2.0.0",
+    "string-hash": "^1.1.0"
   },
   "devDependencies": {
     "deep-diff": "^0.3.3",
@@ -33,8 +35,7 @@
     "test": "npm run units",
     "units": "node test/test.js | tap-spec",
     "functional": "node test/functional.js | tap-spec",
-    "lint": "jshint .",
-    "validate": "npm ls"
+    "lint": "jshint ."
   },
   "repository": {
     "type": "git",
