@@ -35,7 +35,8 @@
     "units": "node test/test.js | tap-spec",
     "functional": "node test/functional.js | tap-spec",
     "lint": "jshint .",
-    "validate": "npm ls"
+    "validate": "npm ls",
+    "travis": "npm run test && npm run functional"
   },
   "repository": {
     "type": "git",
