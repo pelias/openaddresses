@@ -25,7 +25,8 @@
     "precommit-hook": "3.0.0",
     "tap-spec": "4.1.1",
     "tape": "^4.5.0",
-    "temp": "^0.8.3"
+    "temp": "^0.8.3",
+    "semantic-release": "^4.3.5"
   },
   "scripts": {
     "import": "node import.js",
@@ -35,7 +36,8 @@
     "functional": "node test/functional.js | tap-spec",
     "lint": "jshint .",
     "validate": "npm ls",
-    "travis": "npm run test && npm run functional"
+    "travis": "npm run test && npm run functional",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
