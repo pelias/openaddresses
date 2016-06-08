@@ -37,7 +37,8 @@
     "lint": "jshint .",
     "validate": "npm ls",
     "travis": "npm run test && npm run functional",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "start": "node import.js"
   },
   "repository": {
     "type": "git",
