@@ -29,8 +29,7 @@ var args = parameters.interpretUserArgs( process.argv.slice( 2 ) );
 if( 'exitCode' in args ){
   ((args.exitCode > 0) ? console.error : console.info)( args.errMessage );
   process.exit( args.exitCode );
-}
-else {
+} else {
   startTiming();
 
   var files = parameters.getFileList(peliasConfig, args);
@@ -39,5 +38,4 @@ else {
   var adminLookup = adminLookupStream.create(args.adminValues, peliasConfig);
 
   importPipeline.create( files, args.dirPath, deduplicator, adminLookup );
-
 }
