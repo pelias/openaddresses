@@ -1,11 +1,10 @@
 {
   "name": "pelias-openaddresses",
-  "version": "2.1.0",
   "description": "Pelias import pipeline for OpenAddresses.",
   "main": "import.js",
   "dependencies": {
     "combined-stream": "1.0.5",
-    "csv-parse": "1.1.0",
+    "csv-parse": "1.1.1",
     "glob": "^7.0.0",
     "lodash": "^4.10.0",
     "minimist": "1.2.0",
@@ -26,7 +25,8 @@
     "precommit-hook": "3.0.0",
     "tap-spec": "4.1.1",
     "tape": "^4.5.0",
-    "temp": "^0.8.3"
+    "temp": "^0.8.3",
+    "semantic-release": "^4.3.5"
   },
   "scripts": {
     "import": "node import.js",
@@ -35,7 +35,10 @@
     "units": "node test/test.js | tap-spec",
     "functional": "node test/functional.js | tap-spec",
     "lint": "jshint .",
-    "validate": "npm ls"
+    "validate": "npm ls",
+    "travis": "npm run test && npm run functional",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "start": "node import.js"
   },
   "repository": {
     "type": "git",
