@@ -34,7 +34,7 @@ node import.js --admin-values --deduplicate
 ```
 
 ## Admin Lookup
-Openaddresses records do not contain information about which city, state (or
+OpenAddresses records do not contain information about which city, state (or
 other region like province), or country that they belong to. Pelias has the
 ability to compute these values from [Who's on First](http://whosonfirst.mapzen.com/) data.
 For more info on how admin lookup works, see the documentation for
@@ -47,7 +47,7 @@ lookup to be considerate of environments that are memory constrained (like the
 
 ## Deduplication
 
-Openaddresses data tends to contain lots of duplicate records. In order to avoid
+OpenAddresses data tends to contain lots of duplicate records. In order to avoid
 inserting this duplicate data into Pelias, the importer can optionally run all
 records through the [openvenues](https://github.com/openvenues) [address
 deduplicator](https://github.com/openvenues/address_deduper).
