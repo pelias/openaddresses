@@ -37,5 +37,5 @@ if( 'exitCode' in args ){
   var deduplicator = deduplicatorStream.create(args.deduplicate);
   var adminLookup = adminLookupStream.create(args.adminValues, peliasConfig);
 
-  importPipeline.create( files, args.dirPath, deduplicator, adminLookup );
+  importPipeline.create( files, args, deduplicator, adminLookup );
 }
