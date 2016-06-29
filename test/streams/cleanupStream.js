@@ -101,8 +101,15 @@ tape ( 'cleanupStream trims white space in street field', function(test){
     {
       NUMBER: '314',
       STREET: 'timid street' //should capitalize first letter of each word
-    }
-    ];
+    },
+    {
+      NUMBER: '4',
+      STREET: 'é'
+    },
+    {
+      NUMBER: '9',
+      STREET: '丁目'
+    }];
     var expecteds = [{
       NUMBER: '88',
       STREET: 'Glasgow Street'
@@ -118,6 +125,14 @@ tape ( 'cleanupStream trims white space in street field', function(test){
     {
       NUMBER: '314',
       STREET: 'Timid Street' //should capitalize first letter of each word
+    },
+    {
+      NUMBER: '4',
+      STREET: 'É' //should handle non-ASCII characters that can be capitalized
+    },
+    {
+      NUMBER: '9',
+      STREET: '丁目' //should handle non-latin characters
     }
     ];
 
