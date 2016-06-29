@@ -39,7 +39,7 @@ tape(
       var centroid = data.getCentroid();
       test.ok( expected.lon - centroid.lon < 1e-6, 'Longitude matches.' );
       test.ok( expected.lat - centroid.lat < 1e-6, 'Latitude matches.' );
-      test.equal( expected.name, data.getName( 'default' ), 'Name matches.' );
+      test.equal( data.getName( 'default' ), expected.name , 'Name matches.' );
       next();
     });
     dataStream.pipe( testStream );
