@@ -10,7 +10,7 @@
     "minimist": "1.2.0",
     "pelias-address-deduplicator": "^1.x.x",
     "pelias-config": ">=1.0.0",
-    "pelias-dbclient": "^1.0.0",
+    "pelias-dbclient": "^2.0.0",
     "pelias-logger": "^0.x.x",
     "pelias-model": "4.0.0",
     "pelias-wof-admin-lookup": "^2.0.0",
