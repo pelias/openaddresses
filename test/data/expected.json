@@ -222,10 +222,10 @@
     "_id": "data/input_file_2:2",
     "data": {
       "name": {
-        "default": "500 Calle de Lago"
+        "default": "500 Calle De Lago"
       },
       "phrase": {
-        "default": "500 Calle de Lago"
+        "default": "500 Calle De Lago"
       },
       "parent": {
         "country": [],
@@ -258,7 +258,7 @@
       },
       "address_parts": {
         "number": "500",
-        "street": "Calle de Lago"
+        "street": "Calle De Lago"
       },
       "center_point": {
         "lon": 91.919191,
