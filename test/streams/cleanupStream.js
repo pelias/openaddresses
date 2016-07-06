@@ -71,3 +71,17 @@ tape( 'cleanupStream trims leading 0\'s from house numbers', function(test) {
   });
 
 });
+
+tape ( 'cleanupStream trims white space in street field', function(test){
+  var input = {
+      STREET: '34  West\t 93rd \nst'
+  };
+
+  var cleanupStream = CleanupStream.create();
+
+  test_stream([input],cleanupStream, function(err,records){
+    test.equal(records.length, 1, 'stream length unchanged');
+    test.equal(records[0].STREET, '34 West 93rd st');
+    test.end();
+  });
+});
