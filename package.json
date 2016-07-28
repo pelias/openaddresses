@@ -4,7 +4,7 @@
   "main": "import.js",
   "dependencies": {
     "combined-stream": "1.0.5",
-    "csv-parse": "1.1.5",
+    "csv-parse": "^1.1.7",
     "glob": "^7.0.0",
     "lodash": "^4.10.0",
     "minimist": "1.2.0",
