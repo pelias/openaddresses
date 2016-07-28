@@ -95,7 +95,7 @@ var wofAdminLookup = {
   tape('disabled: return passthrough stream', function(t) {
     var config = {
     imports: {
-      openstreetmap: {
+      openaddresses: {
         adminLookup: false
       }
     }

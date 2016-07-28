@@ -26,7 +26,7 @@ tape('enabled: return deduper stream',function (t){
 tape('disabled: return passthrough stream', function(t) {
     var config = {
     imports: {
-      opensaddresses: {
+      openaddresses: {
         deduplicate: false
       }
     }
