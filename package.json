@@ -1,5 +1,6 @@
 {
   "name": "pelias-openaddresses",
+  "version": "0.0.0-semantic-release",
   "description": "Pelias import pipeline for OpenAddresses.",
   "main": "import.js",
   "dependencies": {
