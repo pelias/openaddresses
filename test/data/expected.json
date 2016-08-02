@@ -11,33 +11,33 @@
         "default": "100 Main St"
       },
       "parent": {
-        "country": ["override country"],
-        "country_a": [],
-        "country_id": [],
-        "macroregion": ["override macroregion"],
-        "macroregion_a": [],
-        "macroregion_id": [],
-        "region": ["override region"],
-        "region_a": [],
-        "region_id": [],
-        "macrocounty": ["override macrocounty"],
-        "macrocounty_a": [],
-        "macrocounty_id": [],
-        "county": ["override county"],
-        "county_a": [],
-        "county_id": [],
-        "borough": ["override borough"],
-        "borough_a": [],
-        "borough_id": [],
-        "locality": ["override locality"],
-        "locality_a": [],
-        "locality_id": [],
-        "localadmin": ["override localadmin"],
-        "localadmin_a": [],
-        "localadmin_id": [],
-        "neighbourhood": ["override neighbourhood"],
-        "neighbourhood_a": [],
-        "neighbourhood_id": []
+        "country": [
+          "override country"
+        ],
+        "macroregion": [
+          "override macroregion"
+        ],
+        "region": [
+          "override region"
+        ],
+        "macrocounty": [
+          "override macrocounty"
+        ],
+        "county": [
+          "override county"
+        ],
+        "borough": [
+          "override borough"
+        ],
+        "locality": [
+          "override locality"
+        ],
+        "localadmin": [
+          "override localadmin"
+        ],
+        "neighbourhood": [
+          "override neighbourhood"
+        ]
       },
       "address_parts": {
         "number": "100",
@@ -48,7 +48,6 @@
         "lon": 21.212121,
         "lat": 12.121212
       },
-      "category": [],
       "source": "openaddresses",
       "layer": "address",
       "source_id": "data/input_file_1:0"
@@ -65,35 +64,7 @@
       "phrase": {
         "default": "200 Main St"
       },
-      "parent": {
-        "country": [],
-        "country_a": [],
-        "country_id": [],
-        "macroregion": [],
-        "macroregion_a": [],
-        "macroregion_id": [],
-        "region": [],
-        "region_a": [],
-        "region_id": [],
-        "macrocounty": [],
-        "macrocounty_a": [],
-        "macrocounty_id": [],
-        "county": [],
-        "county_a": [],
-        "county_id": [],
-        "borough": [],
-        "borough_a": [],
-        "borough_id": [],
-        "locality": [],
-        "locality_a": [],
-        "locality_id": [],
-        "localadmin": [],
-        "localadmin_a": [],
-        "localadmin_id": [],
-        "neighbourhood": [],
-        "neighbourhood_a": [],
-        "neighbourhood_id": []
-      },
+      "parent": {},
       "address_parts": {
         "number": "200",
         "street": "Main St"
@@ -102,7 +73,6 @@
         "lon": 31.313131,
         "lat": 13.131313
       },
-      "category": [],
       "source": "openaddresses",
       "layer": "address",
       "source_id": "data/input_file_1:1"
@@ -119,35 +89,7 @@
       "phrase": {
         "default": "300 Main St"
       },
-      "parent": {
-        "country": [],
-        "country_a": [],
-        "country_id": [],
-        "macroregion": [],
-        "macroregion_a": [],
-        "macroregion_id": [],
-        "region": [],
-        "region_a": [],
-        "region_id": [],
-        "macrocounty": [],
-        "macrocounty_a": [],
-        "macrocounty_id": [],
-        "county": [],
-        "county_a": [],
-        "county_id": [],
-        "borough": [],
-        "borough_a": [],
-        "borough_id": [],
-        "locality": [],
-        "locality_a": [],
-        "locality_id": [],
-        "localadmin": [],
-        "localadmin_a": [],
-        "localadmin_id": [],
-        "neighbourhood": [],
-        "neighbourhood_a": [],
-        "neighbourhood_id": []
-      },
+      "parent": {},
       "address_parts": {
         "number": "300",
         "street": "Main St"
@@ -156,7 +98,6 @@
         "lon": 61.616161,
         "lat": 16.161616
       },
-      "category": [],
       "source": "openaddresses",
       "layer": "address",
       "source_id": "data/input_file_1:4"
@@ -173,35 +114,7 @@
       "phrase": {
         "default": "400 Vireo Rd"
       },
-      "parent": {
-        "country": [],
-        "country_a": [],
-        "country_id": [],
-        "macroregion": [],
-        "macroregion_a": [],
-        "macroregion_id": [],
-        "region": [],
-        "region_a": [],
-        "region_id": [],
-        "macrocounty": [],
-        "macrocounty_a": [],
-        "macrocounty_id": [],
-        "county": [],
-        "county_a": [],
-        "county_id": [],
-        "borough": [],
-        "borough_a": [],
-        "borough_id": [],
-        "locality": [],
-        "locality_a": [],
-        "locality_id": [],
-        "localadmin": [],
-        "localadmin_a": [],
-        "localadmin_id": [],
-        "neighbourhood": [],
-        "neighbourhood_a": [],
-        "neighbourhood_id": []
-      },
+      "parent": {},
       "address_parts": {
         "number": "400",
         "street": "Vireo Rd"
@@ -210,7 +123,6 @@
         "lon": 71.717171,
         "lat": 17.171717
       },
-      "category": [],
       "source": "openaddresses",
       "layer": "address",
       "source_id": "data/input_file_2:0"
@@ -222,49 +134,20 @@
     "_id": "data/input_file_2:2",
     "data": {
       "name": {
-        "default": "500 Calle de Lago"
+        "default": "500 Calle De Lago"
       },
       "phrase": {
-        "default": "500 Calle de Lago"
+        "default": "500 Calle De Lago"
       },
-      "parent": {
-        "country": [],
-        "country_a": [],
-        "country_id": [],
-        "macroregion": [],
-        "macroregion_a": [],
-        "macroregion_id": [],
-        "region": [],
-        "region_a": [],
-        "region_id": [],
-        "macrocounty": [],
-        "macrocounty_a": [],
-        "macrocounty_id": [],
-        "county": [],
-        "county_a": [],
-        "county_id": [],
-        "borough": [],
-        "borough_a": [],
-        "borough_id": [],
-        "locality": [],
-        "locality_a": [],
-        "locality_id": [],
-        "localadmin": [],
-        "localadmin_a": [],
-        "localadmin_id": [],
-        "neighbourhood": [],
-        "neighbourhood_a": [],
-        "neighbourhood_id": []
-      },
+      "parent": {},
       "address_parts": {
         "number": "500",
-        "street": "Calle de Lago"
+        "street": "Calle De Lago"
       },
       "center_point": {
         "lon": 91.919191,
         "lat": 19.191919
       },
-      "category": [],
       "source": "openaddresses",
       "layer": "address",
       "source_id": "data/input_file_2:2"
