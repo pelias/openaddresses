@@ -33,7 +33,7 @@ tape( 'germanStream expands tokens ending in "-str." to "-strasse" (mostly DEU)'
         street: 'Vermeerstr'
       },
       parent: {
-        country_a: ['NED']
+        country_a: ['NLD']
       }
     },
     // in Moldova the 'str.' prefix means 'Strada'
@@ -50,7 +50,7 @@ tape( 'germanStream expands tokens ending in "-str." to "-strasse" (mostly DEU)'
         street: 'Sankt Nic Kirkestr'
       },
       parent:{
-        country_a: ['DMK']
+        country_a: ['DNK']
       }
     },
     {
@@ -109,7 +109,7 @@ tape( 'germanStream expands tokens ending in "-str." to "-strasse" (mostly DEU)'
         street: 'Vermeerstraat'
       },
       parent: {
-        country_a: ['NED']
+        country_a: ['NLD']
       }
     },
     // in Moldova the 'str.' prefix means 'Strada'
@@ -126,7 +126,7 @@ tape( 'germanStream expands tokens ending in "-str." to "-strasse" (mostly DEU)'
         street: 'Sankt Nic Kirkestrade'
       },
       parent:{
-        country_a: ['DMK']
+        country_a: ['DNK']
       }
     },
     {
