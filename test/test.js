@@ -6,8 +6,9 @@
 
 require( './parameters' );
 require( './isValidCsvRecord' );
-
+require( './streams/adminLookupStream');
 require( './streams/cleanupStream' );
+require( './streams/deduplicatorStream');
 require( './streams/documentStream' );
 require( './streams/recordStream' );
 require( './streams/isUSorCAHouseNumberZero' );
