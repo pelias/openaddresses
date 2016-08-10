@@ -11,6 +11,6 @@ require( './parameters' );
 require( './streams/cleanupStream' );
 require( './streams/deduplicatorStream');
 require( './streams/documentStream' );
-require( './streams/germanAbbreviationStream');
+require( './streams/germanicAbbreviationStream');
 require( './streams/isUSorCAHouseNumberZero' );
 require( './streams/recordStream' );

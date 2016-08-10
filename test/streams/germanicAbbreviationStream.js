@@ -1,7 +1,7 @@
 var tape = require('tape');
 var event_stream = require( 'event-stream' );
 
-var germanStream = require( '../../lib/streams/germanAbbreviationStream' );
+var germanicStream = require( '../../lib/streams/germanicAbbreviationStream' );
 
 function test_stream(input, testedStream, callback) {
   var input_stream = event_stream.readArray(input);
@@ -10,7 +10,7 @@ function test_stream(input, testedStream, callback) {
   input_stream.pipe(testedStream).pipe(destination_stream);
 }
 
-tape( 'germanStream expands tokens ending in "-str." to "-strasse" (mostly DEU)', function(test) {
+tape( 'germanicStream expands tokens ending in "-str." to "-strasse" (mostly DEU)', function(test) {
   var inputs = [
     {
       address_parts:{
@@ -70,7 +70,7 @@ tape( 'germanStream expands tokens ending in "-str." to "-strasse" (mostly DEU)'
       }
     }
   ];
-  var stream = germanStream.create();
+  var stream = germanicStream.create();
 
   test_stream(inputs, stream, function(err, records) {
     test.equal(records.length, 7, 'stream length unchanged');
@@ -86,7 +86,7 @@ tape( 'germanStream expands tokens ending in "-str." to "-strasse" (mostly DEU)'
   });
 });
 
-  tape( 'germanStream leaves str in the middle alone', function(test) {
+  tape( 'germanictream leaves str in the middle alone', function(test) {
   var inputs = [
     {
       address_parts:{
@@ -146,7 +146,7 @@ tape( 'germanStream expands tokens ending in "-str." to "-strasse" (mostly DEU)'
       }
     }
   ];
-  var stream = germanStream.create();
+  var stream = germanicStream.create();
 
   test_stream(inputs, stream, function(err, records) {
     test.equal(records.length, 7, 'stream length unchanged');
