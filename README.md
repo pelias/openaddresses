@@ -23,14 +23,8 @@ npm install
 # show full command line options
 node import.js --help
 
-# run a basic import
+# run an import
 node import.js
-
-# run with admin lookup
-node import.js --admin-values
-
-# run with admin lookup and deduplicator
-node import.js --admin-values --deduplicate
 ```
 
 ## Admin Lookup
@@ -70,17 +64,20 @@ hash. A sample configuration file might look like:
 
 ```javascript
 {
-	"imports": {
-		"openaddresses": {
-			"datapath": "/tmp/oa-data",
-			"files": ["us/ny/city_of_new_york.csv"]
-		}
-	}
+  "imports": {
+  "openaddresses": {
+      "adminLookup": true,
+      "deduplicate": false,
+      "datapath": "/tmp/oa-data",
+      "files": ["us/ny/city_of_new_york.csv"]
+    }
+  }
 }
 ```
 
 The following properties are recognized:
-
+  * `adminLookup` : Boolean flag to enable admin lookup (see above).
+  * `deduplicate` : Boolean flag to enable deduplication (see above).
   * `datapath`: The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is
     given as a command-line argument.
   * `files`: An array of the names of the files to import. If specified, *only* these files will be imported, rather

@@ -1,5 +1,4 @@
 var tape = require( 'tape' );
-var util = require( 'util' );
 var path = require( 'path' );
 
 var temp = require( 'temp' ).track();
@@ -7,27 +6,15 @@ var temp = require( 'temp' ).track();
 var parameters = require( '../lib/parameters' );
 
 tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
-  var testCases = [
-    [
-      [ '--deduplicate', '--admin-values', 'test'  ],
-      { deduplicate: true, adminValues: true, dirPath: 'test', 'parallel-count': undefined, 'parallel-id': undefined },
-    ],
-    [
-      [ '--admin-values', 'test' ],
-      { deduplicate: false, adminValues: true, dirPath: 'test', 'parallel-count': undefined, 'parallel-id': undefined },
-    ],
-    [
-      [ '--deduplicate', 'test' ],
-      { deduplicate: true, adminValues: false, dirPath: 'test', 'parallel-count': undefined, 'parallel-id': undefined},
-    ]
+  var testCase = [
+      [ 'test'  ],
+      { dirPath: 'test', 'parallel-count': undefined, 'parallel-id': undefined },
   ];
 
-  testCases.forEach( function execTestCase( testCase, ind ){
-    test.deepEqual(
-      parameters.interpretUserArgs( testCase[ 0 ] ), testCase[ 1 ],
-      util.format( 'Arguments case %d passes.', ind )
-    );
-  });
+  test.deepEqual(
+    parameters.interpretUserArgs( testCase[ 0 ] ), testCase[ 1 ],
+    'Basic arguments case passes.'
+  );
 
   var badArguments = [
     [ 'not an arg', 'some dir' ],
