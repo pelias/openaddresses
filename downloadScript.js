@@ -33,7 +33,7 @@ function processEntry(rec,next){
 }
 
 https.get('https://results.openaddresses.io/state.txt', function(response){
-  fs.ensureDir(dir);
+  fs.ensureDirSync(dir);
   response
   .pipe(parse({delimiter: '\t',columns: true}))
   .pipe(parallelStream(10,function(rec,enc,next){
@@ -69,7 +69,7 @@ https.get('https://results.openaddresses.io/state.txt', function(response){
 
         //second half of this ensures that files without a hash dont get deleted
         if(result !== rec.sum && rec.sum !== ''){
-          fs.ensureDir('failures');
+          fs.ensureDirSync('failures');
           fs.createReadStream(path.join(dir,rec.name)).pipe(fs.createWriteStream(path.join('failures',rec.name)));
           failures.push(rec.name);
         }
