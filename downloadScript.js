@@ -6,6 +6,7 @@ var fs = require('fs-extra');
 var path = require('path');
 var crypto = require('crypto');
 var parallelStream = require('pelias-parallel-stream');
+var unzip = require('unzip');
 var config = require('pelias-config').generate();
 
 var dir = config.imports.openaddresses.datapath || '/tmp';
@@ -72,11 +73,23 @@ https.get('https://results.openaddresses.io/state.txt', function(response){
           fs.ensureDirSync('failures');
           fs.createReadStream(path.join(dir,rec.name)).pipe(fs.createWriteStream(path.join('failures',rec.name)));
           failures.push(rec.name);
+          next();
+        }
+        else{
+          next(null, path.join(dir,rec.name));
         }
       });
     }
+    else{
+     next();
+    }
+  })).pipe(through.obj(function(rec,enc,next){
+    if(rec){
+      fs.createReadStream(rec).pipe(unzip.Extract({path: 'unzipped_files'}));
+    }
     next();
-  })).on('finish',function(){
+  }))
+  .on('finish',function(){
     failures.forEach(function(failure){
       console.log(failure + ' could not be downloaded properly. It has been placed in the failures directory');
     });
