@@ -4,11 +4,13 @@
 
 'use strict';
 
-require( './parameters' );
 require( './isValidCsvRecord' );
 require( './streams/adminLookupStream');
+require( './importPipeline');
+require( './parameters' );
 require( './streams/cleanupStream' );
 require( './streams/deduplicatorStream');
 require( './streams/documentStream' );
-require( './streams/recordStream' );
+require( './streams/germanicAbbreviationStream');
 require( './streams/isUSorCAHouseNumberZero' );
+require( './streams/recordStream' );
