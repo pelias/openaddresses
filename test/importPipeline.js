@@ -35,11 +35,8 @@ tape('functional test of importing two small OA files', function(t) {
     if (_.isEqual(record.center_point, { lat: 12.121212, lon: 21.212121})) {
       record.parent.country.push('override country');
       record.parent.macroregion.push('override macroregion');
-      record.parent.region.push('override region');
       record.parent.macrocounty.push('override macrocounty');
-      record.parent.county.push('override county');
       record.parent.borough.push('override borough');
-      record.parent.locality.push('override locality');
       record.parent.localadmin.push('override localadmin');
       record.parent.neighbourhood.push('override neighbourhood');
     }
@@ -52,7 +49,7 @@ tape('functional test of importing two small OA files', function(t) {
     // uncomment this to write the actual results to the expected file
     // make sure they look ok though. comma left off so jshint reminds you
     // not to commit this line
-    //fs.writeFileSync(expectedPath, JSON.stringify(results, null, 2))
+    // fs.writeFileSync(expectedPath, JSON.stringify(results, null, 2))
 
     var diff = deep(expected, results);
 
@@ -65,6 +62,6 @@ tape('functional test of importing two small OA files', function(t) {
     t.end();
   });
 
-  importPipeline.create(inputFiles, basePath, deduplicatorStream, adminLookupStream, endStream);
+  importPipeline.create(inputFiles, basePath, deduplicatorStream, adminLookupStream, true, endStream);
 
 });

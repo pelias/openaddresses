@@ -40,6 +40,9 @@ if( 'exitCode' in args ){
 
   var deduplicator = deduplicatorStream.create(peliasConfig, addressDeduplicator);
   var adminLookup = adminLookupStream.create(peliasConfig, wofAdminLookup);
-
-  importPipeline.create( files, args.dirPath, deduplicator, adminLookup );
+  var useOaAdminFields = true;
+  if ( peliasConfig.imports.openaddresses.adminLookup ){
+    useOaAdminFields = false;
+  }
+  importPipeline.create( files, args.dirPath, deduplicator, adminLookup, useOaAdminFields );
 }
