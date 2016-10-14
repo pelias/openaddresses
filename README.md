@@ -11,6 +11,10 @@ official user documentation is [here](https://mapzen.com/documentation/search/).
 The OpenAddresses importer is used to process data from
 [OpenAddresses](http://openaddresses.io/) for import into the Pelias geocoder.
 
+## Requirements
+
+Node.js 4 or higher is required.
+
 ## Installation
 ```
 git clone https://github.com/pelias/openaddresses
