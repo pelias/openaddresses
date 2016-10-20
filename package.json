@@ -2,6 +2,9 @@
   "name": "pelias-openaddresses",
   "version": "0.0.0-semantic-release",
   "description": "Pelias import pipeline for OpenAddresses.",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "main": "import.js",
   "dependencies": {
     "combined-stream": "1.0.5",
@@ -10,11 +13,11 @@
     "lodash": "^4.10.0",
     "minimist": "1.2.0",
     "pelias-address-deduplicator": "1.1.0",
-    "pelias-config": "2.1.0",
+    "pelias-config": "2.3.0",
     "pelias-dbclient": "2.0.0",
-    "pelias-logger": "0.0.8",
-    "pelias-model": "4.2.0",
-    "pelias-wof-admin-lookup": "2.3.1",
+    "pelias-logger": "0.1.0",
+    "pelias-model": "4.3.0",
+    "pelias-wof-admin-lookup": "2.6.0",
     "through2": "2.0.1",
     "through2-filter": "^2.0.0",
     "through2-map": "^2.0.0",
