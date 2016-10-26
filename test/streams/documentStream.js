@@ -62,3 +62,23 @@ tape( 'documentStream creates id with filename-based prefix', function(test) {
     test.end();
   });
 });
+
+tape('documentStream uses HASH value if present', function(test) {
+  const input = {
+    NUMBER: '5',
+    STREET: '101st Avenue',
+    LAT: 5,
+    LON: 6,
+    HASH: 'abcd'
+  };
+
+  const stats = { badRecordCount: 0 };
+  const documentStream = DocumentStream.create('prefix', stats);
+
+  test_stream([input], documentStream, function(err, actual) {
+    test.equal(actual.length, 1, 'the document should be pushed' );
+    test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
+    test.equal(actual[0].getId(), 'prefix:abcd');
+    test.end();
+  });
+});
