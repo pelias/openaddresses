@@ -1,21 +1,21 @@
-var tape = require( 'tape' );
-var event_stream = require( 'event-stream' );
+const tape = require( 'tape' );
+const event_stream = require( 'event-stream' );
 
-var DocumentStream = require( '../../lib/streams/documentStream' );
+const DocumentStream = require( '../../lib/streams/documentStream' );
 
 function test_stream(input, testedStream, callback) {
-  var input_stream = event_stream.readArray(input);
-  var destination_stream = event_stream.writeArray(callback);
+  const input_stream = event_stream.readArray(input);
+  const destination_stream = event_stream.writeArray(callback);
 
   input_stream.pipe(testedStream).pipe(destination_stream);
 }
 
 tape( 'documentStream catches records with no street', function(test) {
-  var input = {
+  const input = {
     NUMBER: 5
   };
-  var stats = { badRecordCount: 0 };
-  var documentStream = DocumentStream.create('prefix', stats);
+  const stats = { badRecordCount: 0 };
+  const documentStream = DocumentStream.create('prefix', stats);
 
   test_stream([input], documentStream, function(err, actual) {
     test.equal(actual.length, 0, 'no documents should be pushed' );
@@ -25,15 +25,15 @@ tape( 'documentStream catches records with no street', function(test) {
 });
 
 tape( 'documentStream does not set zipcode if zipcode is emptystring', function(test) {
-  var input = {
+  const input = {
     NUMBER: '5',
     STREET: '101st Avenue',
     LAT: 5,
     LON: 6,
     POSTCODE: ''
   };
-  var stats = { badRecordCount: 0 };
-  var documentStream = DocumentStream.create('prefix', stats);
+  const stats = { badRecordCount: 0 };
+  const documentStream = DocumentStream.create('prefix', stats);
 
   test_stream([input], documentStream, function(err, actual) {
     test.equal(actual.length, 1, 'the document should be pushed' );
@@ -44,7 +44,7 @@ tape( 'documentStream does not set zipcode if zipcode is emptystring', function(
 });
 
 tape( 'documentStream creates id with filename-based prefix', function(test) {
-  var input = {
+  const input = {
     NUMBER: '5',
     STREET: '101st Avenue',
     LAT: 5,
@@ -52,8 +52,8 @@ tape( 'documentStream creates id with filename-based prefix', function(test) {
     POSTCODE: ''
   };
 
-  var stats = { badRecordCount: 0 };
-  var documentStream = DocumentStream.create('prefix', stats);
+  const stats = { badRecordCount: 0 };
+  const documentStream = DocumentStream.create('prefix', stats);
 
   test_stream([input], documentStream, function(err, actual) {
     test.equal(actual.length, 1, 'the document should be pushed' );
