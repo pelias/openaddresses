@@ -31,7 +31,7 @@
     "tap-spec": "4.1.1",
     "tape": "^4.5.0",
     "temp": "^0.8.3",
-    "semantic-release": "^4.3.5"
+    "semantic-release": "^6.3.2"
   },
   "scripts": {
     "import": "node import.js",
