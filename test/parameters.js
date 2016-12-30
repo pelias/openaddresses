@@ -1,5 +1,6 @@
 var tape = require( 'tape' );
 var path = require( 'path' );
+var fs = require('fs');
 
 var temp = require( 'temp' ).track();
 
@@ -91,6 +92,77 @@ tape('interpretUserArgs returns normalized path from config', function(test) {
     var expected_dir = path.normalize(input_dir);
     test.equal(result.dirPath, expected_dir, 'path should be equal to path from config');
     test.end();
+  });
+});
+
+tape('getFileList returns all .csv path names when config has empty files list', function(test) {
+  temp.mkdir('multipleFiles', function(err, temp_dir) {
+    // add some files to the data path to be globbed
+    fs.mkdirSync(path.join(temp_dir, 'dirA'));
+    fs.writeFileSync(path.join(temp_dir, 'dirA', 'fileA.csv'), '');
+
+    fs.mkdirSync(path.join(temp_dir, 'dirB'));
+    fs.writeFileSync(path.join(temp_dir, 'dirB', 'fileB.csv'), '');
+
+    fs.writeFileSync(path.join(temp_dir, 'fileC.csv'), '');
+
+    // should not be included since it's not a .csv file
+    fs.writeFileSync(path.join(temp_dir, 'fileD.txt'), '');
+
+    var peliasConfig = {
+      imports: {
+        openaddresses: {
+          files: []
+        }
+      }
+    };
+    var args = {
+      dirPath: temp_dir
+    };
+
+    var actual = parameters.getFileList(peliasConfig, args);
+
+    test.equal(actual.length, 3);
+    test.ok(actual.find((f) => f === path.join(temp_dir, 'dirA', 'fileA.csv')));
+    test.ok(actual.find((f) => f === path.join(temp_dir, 'dirB', 'fileB.csv')));
+    test.ok(actual.find((f) => f === path.join(temp_dir, 'fileC.csv')));
+    test.end();
+
+  });
+});
+
+tape('getFileList returns all .csv path names when config doesn\'t have files property', function(test) {
+  temp.mkdir('multipleFiles', function(err, temp_dir) {
+    // add some files to the data path to be globbed
+    fs.mkdirSync(path.join(temp_dir, 'dirA'));
+    fs.writeFileSync(path.join(temp_dir, 'dirA', 'fileA.csv'), '');
+
+    fs.mkdirSync(path.join(temp_dir, 'dirB'));
+    fs.writeFileSync(path.join(temp_dir, 'dirB', 'fileB.csv'), '');
+
+    fs.writeFileSync(path.join(temp_dir, 'fileC.csv'), '');
+
+    // should not be included since it's not a .csv file
+    fs.writeFileSync(path.join(temp_dir, 'fileD.txt'), '');
+
+    var peliasConfig = {
+      imports: {
+        openaddresses: {
+        }
+      }
+    };
+    var args = {
+      dirPath: temp_dir
+    };
+
+    var actual = parameters.getFileList(peliasConfig, args);
+
+    test.equal(actual.length, 3);
+    test.ok(actual.find((f) => f === path.join(temp_dir, 'dirA', 'fileA.csv')));
+    test.ok(actual.find((f) => f === path.join(temp_dir, 'dirB', 'fileB.csv')));
+    test.ok(actual.find((f) => f === path.join(temp_dir, 'fileC.csv')));
+    test.end();
+
   });
 });
 
