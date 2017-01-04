@@ -48,3 +48,38 @@ tape('disabled: return passthrough stream', function(t) {
     stream.write(dataItem);
   });
 
+  tape('absence of config.imports should return pass-through stream', function(t) {
+    var config = {};
+
+    var dataItem = { some: 'data' };
+
+    var stream = deduper(config, {});
+
+    t.equal(typeof stream, 'object', 'disabled stream is an object');
+
+    stream.pipe(sink.obj( function (doc) {
+      t.deepEqual(doc, dataItem);
+      t.end();
+    }));
+
+    stream.write(dataItem);
+  });
+
+  tape('absence of config.imports.openaddresses should return pass-through stream', function(t) {
+    var config = {
+      imports: {}
+    };
+
+    var dataItem = { some: 'data' };
+
+    var stream = deduper(config, {});
+
+    t.equal(typeof stream, 'object', 'disabled stream is an object');
+
+    stream.pipe(sink.obj( function (doc) {
+      t.deepEqual(doc, dataItem);
+      t.end();
+    }));
+
+    stream.write(dataItem);
+  });
