@@ -5,6 +5,9 @@
 'use strict';
 
 var peliasConfig = require( 'pelias-config' ).generate();
+
+require('./configValidation').validate(peliasConfig);
+
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
 
 var parameters = require( './lib/parameters' );
