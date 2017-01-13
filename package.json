@@ -18,7 +18,7 @@
     "pelias-dbclient": "2.0.0",
     "pelias-logger": "0.1.0",
     "pelias-model": "4.4.0",
-    "pelias-wof-admin-lookup": "2.8.0",
+    "pelias-wof-admin-lookup": "2.11.0",
     "through2": "^2.0.3",
     "through2-filter": "^2.0.0",
     "through2-map": "^3.0.0",
