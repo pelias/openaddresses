@@ -13,7 +13,7 @@ All issues for Pelias are housed in the [pelias/pelias](https://github.com/pelia
 ## Submitting technical bugs
 
 When submitting bug reports, please be sure to give us as much context as possible so that we can reproduce the error you encountered. Be sure to include:
-- System conditons (OS, browser, etc)
+- System conditions (OS, browser, etc)
 - Steps to reproduce
 - Expected outcome
 - Actual outcome

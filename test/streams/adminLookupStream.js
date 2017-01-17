@@ -116,3 +116,43 @@ var wofAdminLookup = {
 
     stream.write(dataItem);
   });
+
+  tape('absence of config.imports should return pass-through stream', function(t) {
+    var config = {};
+
+    t.plan(2); // expect 2 assertions
+
+    var dataItem = { some: 'data' };
+
+    var stream = adminLookup(config, {});
+
+    t.equal(typeof stream, 'object', 'disabled stream is an object');
+
+    stream.pipe(sink.obj( function (doc) {
+      t.deepEqual(doc, dataItem);
+      t.end();
+    }));
+
+    stream.write(dataItem);
+  });
+
+  tape('absence of config.imports.openaddresses should return pass-through stream', function(t) {
+    var config = {
+      imports: {}
+    };
+
+    t.plan(2); // expect 2 assertions
+
+    var dataItem = { some: 'data' };
+
+    var stream = adminLookup(config, {});
+
+    t.equal(typeof stream, 'object', 'disabled stream is an object');
+
+    stream.pipe(sink.obj( function (doc) {
+      t.deepEqual(doc, dataItem);
+      t.end();
+    }));
+
+    stream.write(dataItem);
+  });
