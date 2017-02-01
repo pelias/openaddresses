@@ -1,7 +1,7 @@
 'use strict';
 
 const tape = require( 'tape' );
-const Joi = require('Joi');
+const Joi = require('joi');
 const schema = require( '../schema' );
 
 function validate(config) {
