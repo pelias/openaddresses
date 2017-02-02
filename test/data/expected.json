@@ -18,19 +18,19 @@
           "override macroregion"
         ],
         "region": [
-          "override region"
+          "input region"
         ],
         "macrocounty": [
           "override macrocounty"
         ],
         "county": [
-          "override county"
+          "input district"
         ],
         "borough": [
           "override borough"
         ],
         "locality": [
-          "override locality"
+          "input city"
         ],
         "localadmin": [
           "override localadmin"
