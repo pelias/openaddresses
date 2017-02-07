@@ -1,73 +1,23 @@
-var sink = require('through2-sink');
-var adminLookup = require('../../lib/streams/adminLookupStream').create;
-var tape = require('tape');
+const tape = require('tape');
+const event_stream = require('event-stream');
+const through = require('through2');
+const proxyquire = require('proxyquire').noCallThru();
 
+const adminLookupStream = require('../../lib/streams/adminLookupStream').create;
 
-tape('enabled: create pipResolver', function (t) {
-    var config = {
-    imports: {
-      openaddresses:{
-        adminLookup: true
-      },
-      adminlookup: {
-        url: 'anything.org'
-      }
-    }
-  };
+function test_stream(input, testedStream, callback) {
+    const input_stream = event_stream.readArray(input);
+    const destination_stream = event_stream.writeArray(callback);
 
-var wofAdminLookup = {
-    createLocalWofPipResolver: function(){},
-    createLookupStream: function(){}
-  };
-    // assert that the PipResolver was instantiated with the correct URL
-    wofAdminLookup.createLocalWofPipResolver = function () {
-      t.pass('Resolver created');
-      t.end();
-    };
+    input_stream.pipe(testedStream).pipe(destination_stream);
+}
 
-    adminLookup(config, wofAdminLookup);
-  });
-
-tape('enabled: pip resolver is passed into stream constructor', function (t) {
-    var config = {
-    imports: {
-      openaddresses:{
-        adminLookup: true
-      },
-      adminlookup: {
-        url: 'anything.org'
-      }
-    }
-  };
-
-var wofAdminLookup = {
-    createLocalWofPipResolver: function(){},
-    createLookupStream: function(){}
-  };
-
-    t.plan(1); // expect 3 assertions
-
-    var pipResolverMock = {foo: 'bar'};
-
-    // mock the creation of pip resolver
-    wofAdminLookup.createLocalWofPipResolver = function () {
-      return pipResolverMock;
-    };
-
-    wofAdminLookup.createLookupStream = function (pipResolver) {
-      t.equal(pipResolver, pipResolverMock);
-      t.end();
-    };
-
-    adminLookup(config, wofAdminLookup);
-  });
-
-  /*
-   * There was a bug (https://github.com/pelias/wof-admin-lookup/issues/51) where admin lookup could
-   * not be enabled without the adminLookup config section
-   */
-  tape('enabled without any special adminLookup config: return pip stream', function (t) {
-    var config = {
+/*
+ * There was a bug (https://github.com/pelias/wof-admin-lookup/issues/51) where admin lookup could
+ * not be enabled without the adminLookup config section
+ */
+tape('enabled without any special adminLookup config: return pip stream', function (t) {
+  const config = {
     imports: {
       openaddresses: {
         adminLookup: true
@@ -75,25 +25,82 @@ var wofAdminLookup = {
     }
   };
 
-    t.plan(1);
+  const infoMessages = [];
 
-    var streamMock = {madeBy: 'mock'};
-
-    var wofAdminLookup = {
-      createLocalWofPipResolver: function() {
-      },
-      createLookupStream: function() {
-        return streamMock;
+  const stream = proxyquire('../../lib/streams/adminLookupStream', {
+    'pelias-wof-admin-lookup': {
+      createLookupStream: () => {
+        return through.obj(function (doc, enc, next) {
+          doc.field2 = 'value 2';
+          next(null, doc);
+        });
       }
-    };
+    },
+    'pelias-logger': {
+      get: (log_module) => {
+        t.equal(log_module, 'openaddresses');
+        return {
+          info: (message) => {
+            infoMessages.push(message);
+          }
+        };
+      }
+    }
+  }).create(config);
 
-    var stream = adminLookup(config, wofAdminLookup);
-    t.equal(stream, streamMock, 'stream created');
+  const input = {
+    field1: 'value 1'
+  };
+
+  const expected = {
+    field1: 'value 1',
+    field2: 'value 2'
+  };
+
+  test_stream([input], stream, (err, actual) => {
+    t.deepEqual(actual, [expected], 'should have changed');
+    t.deepEqual(infoMessages, ['Setting up admin value lookup stream.']);
     t.end();
   });
 
-  tape('disabled: return passthrough stream', function(t) {
-    var config = {
+});
+
+tape('absence of config.imports should return pass-through stream', function(t) {
+  const config = {};
+
+  const input = {
+    some: 'data'
+  };
+
+  const stream = adminLookupStream(config);
+
+  test_stream([input], stream, (err, actual) => {
+    t.deepEqual(actual, [input], 'nothing should have changed');
+    t.end();
+  });
+
+});
+
+tape('absence of config.imports.openaddresses should return pass-through stream', function(t) {
+  const config = {
+    imports: {}
+  };
+
+  const input = {
+    some: 'data'
+  };
+
+  const stream = adminLookupStream(config);
+
+  test_stream([input], stream, (err, actual) => {
+    t.deepEqual(actual, [input], 'nothing should have changed');
+    t.end();
+  });
+
+});
+
+tape('disabled: return passthrough stream', function(t) {
+  const config = {
     imports: {
       openaddresses: {
         adminLookup: false
@@ -101,58 +108,15 @@ var wofAdminLookup = {
     }
   };
 
-    t.plan(2); // expect 2 assertions
+  const input = {
+    some: 'data'
+  };
 
-    var dataItem = { some: 'data' };
+  const stream = adminLookupStream(config);
 
-    var stream = adminLookup(config, {});
-
-    t.equal(typeof stream, 'object', 'disabled stream is an object');
-
-    stream.pipe(sink.obj( function (doc) {
-      t.deepEqual(doc, dataItem);
-      t.end();
-    }));
-
-    stream.write(dataItem);
+  test_stream([input], stream, (err, actual) => {
+    t.deepEqual(actual, [input], 'nothing should have changed');
+    t.end();
   });
 
-  tape('absence of config.imports should return pass-through stream', function(t) {
-    var config = {};
-
-    t.plan(2); // expect 2 assertions
-
-    var dataItem = { some: 'data' };
-
-    var stream = adminLookup(config, {});
-
-    t.equal(typeof stream, 'object', 'disabled stream is an object');
-
-    stream.pipe(sink.obj( function (doc) {
-      t.deepEqual(doc, dataItem);
-      t.end();
-    }));
-
-    stream.write(dataItem);
-  });
-
-  tape('absence of config.imports.openaddresses should return pass-through stream', function(t) {
-    var config = {
-      imports: {}
-    };
-
-    t.plan(2); // expect 2 assertions
-
-    var dataItem = { some: 'data' };
-
-    var stream = adminLookup(config, {});
-
-    t.equal(typeof stream, 'object', 'disabled stream is an object');
-
-    stream.pipe(sink.obj( function (doc) {
-      t.deepEqual(doc, dataItem);
-      t.end();
-    }));
-
-    stream.write(dataItem);
-  });
+});
