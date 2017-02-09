@@ -1,15 +1,21 @@
 'use strict';
 
 const tape = require( 'tape' );
+const Joi = require('joi');
+const schema = require( '../schema' );
 
-const configValidation = require( '../configValidation' );
+function validate(config) {
+  Joi.validate(config, schema, (err) => {
+    if (err) {
+      throw new Error(err.details[0].message);
+    }
+  });
+}
 
 tape('missing imports should throw error', function(test) {
   const config = {};
 
-  test.throws(function() {
-    configValidation.validate(config);
-  }, /"imports" is required/);
+  test.throws(validate.bind(null, config), /"imports" is required/);
   test.end();
 
 });
@@ -20,9 +26,7 @@ tape('non-object imports should throw error', function(test) {
       imports: value
     };
 
-    test.throws(function() {
-      configValidation.validate(config);
-    }, /"imports" must be an object/);
+    test.throws(validate.bind(null, config), /"imports" must be an object/);
   });
 
   test.end();
@@ -35,9 +39,7 @@ tape('missing imports.openaddresses should throw error', function(test) {
     }
   };
 
-  test.throws(function() {
-    configValidation.validate(config);
-  }, /"openaddresses" is required/);
+  test.throws(validate.bind(null, config), /"openaddresses" is required/);
   test.end();
 
 });
@@ -50,9 +52,7 @@ tape('non-object imports.openaddresses should throw error', function(test) {
       }
     };
 
-    test.throws(function() {
-      configValidation.validate(config);
-    }, /"openaddresses" must be an object/);
+    test.throws(validate.bind(null, config), /"openaddresses" must be an object/);
   });
 
   test.end();
@@ -66,11 +66,9 @@ tape( 'missing datapath should throw error', function(test) {
     }
   };
 
-  test.throws(() => {
-    configValidation.validate(config);
-  }, /"datapath" is required/);
-
+  test.throws(validate.bind(null, config), /"datapath" is required/);
   test.end();
+
 });
 
 tape( 'non-string datapath should throw error', function(test) {
@@ -83,9 +81,7 @@ tape( 'non-string datapath should throw error', function(test) {
       }
     };
 
-    test.throws(() => {
-      configValidation.validate(config);
-    }, /"datapath" must be a string/);
+    test.throws(validate.bind(null, config), /"datapath" must be a string/);
 
   });
 
@@ -103,9 +99,7 @@ tape( 'non-array files should throw error', function(test) {
       }
     };
 
-    test.throws(() => {
-      configValidation.validate(config);
-    }, /"files" must be an array/);
+    test.throws(validate.bind(null, config), /"files" must be an array/);
   });
 
   test.end();
@@ -122,9 +116,7 @@ tape( 'non-string elements in files array should throw error', function(test) {
       }
     };
 
-    test.throws(() => {
-      configValidation.validate(config);
-    }, /"0" must be a string/, 'files elements must be strings');
+    test.throws(validate.bind(null, config), /"0" must be a string/, 'files elements must be strings');
   });
 
   test.end();
@@ -141,9 +133,7 @@ tape( 'non-boolean adminLookup should throw error', function(test) {
       }
     };
 
-    test.throws(() => {
-      configValidation.validate(config);
-    }, /"adminLookup" must be a boolean/);
+    test.throws(validate.bind(null, config), /"adminLookup" must be a boolean/);
   });
 
   test.end();
@@ -160,9 +150,7 @@ tape( 'non-boolean deduplicate should throw error', function(test) {
       }
     };
 
-    test.throws(() => {
-      configValidation.validate(config);
-    }, /"deduplicate" must be a boolean/);
+    test.throws(validate.bind(null, config), /"deduplicate" must be a boolean/);
   });
 
   test.end();
@@ -178,9 +166,7 @@ tape( 'unknown config fields should throw error', function(test) {
     }
   };
 
-  test.throws(() => {
-    configValidation.validate(config);
-  }, /"unknown" is not allowed/, 'unknown fields should be disallowed');
+  test.throws(validate.bind(null, config), /"unknown" is not allowed/, 'unknown fields should be disallowed');
   test.end();
 
 });
@@ -194,9 +180,7 @@ tape( 'configuration with only datapath should not throw error', function(test) 
     }
   };
 
-  test.doesNotThrow(() => {
-    configValidation.validate(config);
-  }, 'config should be valid');
+  test.doesNotThrow(validate.bind(null, config), 'config should be valid');
   test.end();
 
 });
@@ -213,9 +197,7 @@ tape( 'valid configuration should not throw error', function(test) {
     }
   };
 
-  test.doesNotThrow(() => {
-    configValidation.validate(config);
-  }, 'config should be valid');
+  test.doesNotThrow(validate.bind(null, config), 'config should be valid');
   test.end();
 
 });
@@ -233,9 +215,7 @@ tape( 'unknown children of imports should not throw error', function(test) {
     }
   };
 
-  test.doesNotThrow(() => {
-    configValidation.validate(config);
-  }, 'config should be valid');
+  test.doesNotThrow(validate.bind(null, config), 'config should be valid');
   test.end();
 
 });
@@ -253,9 +233,7 @@ tape( 'unknown children of root should not throw error', function(test) {
     other: {}
   };
 
-  test.doesNotThrow(() => {
-    configValidation.validate(config);
-  }, 'config should be valid');
+  test.doesNotThrow(validate.bind(null, config), 'config should be valid');
   test.end();
 
 });

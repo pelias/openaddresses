@@ -4,11 +4,15 @@ const tape = require( 'tape' );
 
 const proxyquire = require('proxyquire').noCallThru();
 
-tape( 'configValidation throwing error should rethrow', function(test) {
-  test.throws(function() {
+tape( 'config.generate throwing error should rethrow', (test) => {
+  test.throws(() => {
     proxyquire('../import', {
-      './configValidation': {
-        validate: () => {
+      './schema': 'this is the schema',
+      'pelias-config': {
+        generate: (schema) => {
+          // the schema passed to generate should be the require'd schema
+          test.equals(schema, 'this is the schema');
+
           throw Error('config is not valid');
         }
       }

@@ -7,7 +7,7 @@ const Joi = require('joi');
 // files: array of strings
 // deduplicate: boolean
 // adminLookup: boolean
-const schema = Joi.object().keys({
+module.exports = Joi.object().keys({
   imports: Joi.object().keys({
     openaddresses: Joi.object().keys({
       files: Joi.array().items(Joi.string()),
@@ -17,14 +17,3 @@ const schema = Joi.object().keys({
     }).requiredKeys('datapath').unknown(false)
   }).requiredKeys('openaddresses').unknown(true)
 }).requiredKeys('imports').unknown(true);
-
-module.exports = {
-  validate: function validate(config) {
-    Joi.validate(config, schema, (err) => {
-      if (err) {
-        throw new Error(err.details[0].message);
-      }
-    });
-  }
-
-};
