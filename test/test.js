@@ -6,7 +6,6 @@
 
 require( './configValidation' );
 require( './isValidCsvRecord' );
-require( './streams/adminLookupStream');
 require( './import');
 require( './importPipeline');
 require( './parameters' );
