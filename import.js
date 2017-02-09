@@ -13,7 +13,7 @@ var logger = require( 'pelias-logger' ).get( 'openaddresses' );
 var parameters = require( './lib/parameters' );
 var importPipeline = require( './lib/importPipeline' );
 
-const adminLookup = require('pelias-wof-admin-lookup').createLookupStream();
+const adminLookupStream = require('pelias-wof-admin-lookup');
 var deduplicatorStream = require('./lib/streams/deduplicatorStream');
 
 var addressDeduplicator = require('pelias-address-deduplicator');
@@ -47,5 +47,5 @@ if( 'exitCode' in args ){
 
   var deduplicator = deduplicatorStream.create(peliasConfig, addressDeduplicator);
 
-  importPipeline.create( files, args.dirPath, deduplicator, adminLookup );
+  importPipeline.create( files, args.dirPath, deduplicator, adminLookupStream.create() );
 }
