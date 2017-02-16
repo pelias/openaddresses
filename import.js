@@ -38,7 +38,7 @@ if( 'exitCode' in args ){
 
   if (peliasConfig.imports.openaddresses.hasOwnProperty('adminLookup')) {
     logger.info('imports.openaddresses.adminLookup has been deprecated, ' +
-                'enabled adminLookup using imports.adminLookup.enabled = true');
+                'enable adminLookup using imports.adminLookup.enabled = true');
   }
 
   var files = parameters.getFileList(peliasConfig, args);
