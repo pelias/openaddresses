@@ -36,12 +36,10 @@ OpenAddresses records do not contain information about which city, state (or
 other region like province), or country that they belong to. Pelias has the
 ability to compute these values from [Who's on First](http://whosonfirst.mapzen.com/) data.
 For more info on how admin lookup works, see the documentation for
-[pelias/wof-admin-lookup](https://github.com/pelias/wof-admin-lookup).
+[pelias/wof-admin-lookup](https://github.com/pelias/wof-admin-lookup). By default,
+adminLookup is enabled.  To disable, set `imports.adminLookup.enabled` to `false` in Pelias config.
 
-**Note:** Admin lookup requires loading around 5GB of data into memory, and even
-then, it's much slower. All the Pelias importers default to turning off admin
-lookup to be considerate of environments that are memory constrained (like the
-[vagrant](https://github.com/pelias/vagrant) image).
+**Note:** Admin lookup requires loading around 5GB of data into memory.
 
 ## Deduplication
 
@@ -60,8 +58,6 @@ Like admin lookup, this process slows down the importer quite a bit, and
 requires a large amount of disk space (it uses a LevelDB store to track which
 addresses it has seen), so it defaults to off.
 
-
-
 ## Configuration
 This importer can be configured in [pelias-config](https://github.com/pelias/config), in the `imports.openaddresses`
 hash. A sample configuration file might look like:
@@ -69,18 +65,16 @@ hash. A sample configuration file might look like:
 ```javascript
 {
   "imports": {
-  "openaddresses": {
-      "adminLookup": true,
-      "deduplicate": false,
-      "datapath": "/tmp/oa-data",
-      "files": ["us/ny/city_of_new_york.csv"]
+    "openaddresses": {
+        "deduplicate": false,
+        "datapath": "/tmp/oa-data",
+        "files": ["us/ny/city_of_new_york.csv"]
+      }
     }
-  }
 }
 ```
 
 The following properties are recognized:
-  * `adminLookup` : Boolean flag to enable admin lookup (see above).
   * `deduplicate` : Boolean flag to enable deduplication (see above).
   * `datapath`: The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is
     given as a command-line argument.
