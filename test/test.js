@@ -4,9 +4,8 @@
 
 'use strict';
 
-require( './configValidation' );
+require( './schema' );
 require( './isValidCsvRecord' );
-require( './streams/adminLookupStream');
 require( './import');
 require( './importPipeline');
 require( './parameters' );

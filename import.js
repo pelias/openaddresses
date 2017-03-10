@@ -4,19 +4,16 @@
 
 'use strict';
 
-var peliasConfig = require( 'pelias-config' ).generate();
-
-require('./configValidation').validate(peliasConfig);
+var peliasConfig = require( 'pelias-config' ).generate(require('./schema'));
 
 var logger = require( 'pelias-logger' ).get( 'openaddresses' );
 
 var parameters = require( './lib/parameters' );
 var importPipeline = require( './lib/importPipeline' );
 
-var adminLookupStream = require('./lib/streams/adminLookupStream');
+const adminLookupStream = require('pelias-wof-admin-lookup');
 var deduplicatorStream = require('./lib/streams/deduplicatorStream');
 
-var wofAdminLookup = require('pelias-wof-admin-lookup');
 var addressDeduplicator = require('pelias-address-deduplicator');
 
 
@@ -39,10 +36,14 @@ if( 'exitCode' in args ){
 } else {
   startTiming();
 
+  if (peliasConfig.imports.openaddresses.hasOwnProperty('adminLookup')) {
+    logger.info('imports.openaddresses.adminLookup has been deprecated, ' +
+                'enable adminLookup using imports.adminLookup.enabled = true');
+  }
+
   var files = parameters.getFileList(peliasConfig, args);
 
   var deduplicator = deduplicatorStream.create(peliasConfig, addressDeduplicator);
-  var adminLookup = adminLookupStream.create(peliasConfig, wofAdminLookup);
 
-  importPipeline.create( files, args.dirPath, deduplicator, adminLookup );
+  importPipeline.create( files, args.dirPath, deduplicator, adminLookupStream.create() );
 }
