@@ -46,7 +46,7 @@
     "validate": "npm ls",
     "travis": "npm run check-dependencies && npm run test && npm run functional",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "start": "node import.js",
+    "start": "node --max_old_space_size=4096 import.js",
     "check-dependencies": "node_modules/.bin/npm-check --production"
   },
   "repository": {
