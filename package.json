@@ -7,8 +7,10 @@
   },
   "main": "import.js",
   "dependencies": {
+    "async": "^2.5.0",
     "combined-stream": "1.0.5",
     "csv-parse": "^1.1.7",
+    "fs-extra": "^3.0.1",
     "glob": "^7.0.0",
     "joi": "^10.1.0",
     "lodash": "^4.16.0",
@@ -22,7 +24,8 @@
     "through2": "^2.0.3",
     "through2-filter": "^2.0.0",
     "through2-map": "^3.0.0",
-    "through2-sink": "^1.0.0"
+    "through2-sink": "^1.0.0",
+    "tmp": "0.0.31"
   },
   "devDependencies": {
     "deep-diff": "^0.3.3",
@@ -37,6 +40,7 @@
     "temp": "^0.8.3"
   },
   "scripts": {
+    "download": "node download.js",
     "import": "node import.js",
     "parallel": "./bin/parallel",
     "test": "npm run units",
