@@ -16,14 +16,21 @@ The OpenAddresses importer is used to process data from
 Node.js 4 or higher is required.
 
 ## Installation
-```
+```bash
 git clone https://github.com/pelias/openaddresses
 cd openaddresses
 npm install
 ```
 
-## Usage
+## Data Download
+Use the `imports.openaddresses.files` configuration option to limit the download to just the OpenAddresses files of interest.  
+
+```bash
+npm run download
 ```
+
+## Usage
+```bash
 # show full command line options
 node import.js --help
 
@@ -37,7 +44,7 @@ other region like province), or country that they belong to. Pelias has the
 ability to compute these values from [Who's on First](http://whosonfirst.mapzen.com/) data.
 For more info on how admin lookup works, see the documentation for
 [pelias/wof-admin-lookup](https://github.com/pelias/wof-admin-lookup). By default,
-adminLookup is enabled.  To disable, set `imports.adminLookup.enabled` to `false` in Pelias config.
+adminLookup is enabled.  To disable, set `imports.openaddresses.adminLookup` to `false` in Pelias config.
 
 **Note:** Admin lookup requires loading around 5GB of data into memory.
 
@@ -64,19 +71,42 @@ hash. A sample configuration file might look like:
 
 ```javascript
 {
-  "imports": {
-    "openaddresses": {
-        "deduplicate": false,
-        "datapath": "/tmp/oa-data",
-        "files": ["us/ny/city_of_new_york.csv"]
+  "esclient": {
+    "hosts": [
+      {
+        "env": "development",
+        "protocol": "http",
+        "host": "localhost",
+        "port": 9200
       }
+    ]
+  },
+  "logger": {
+    "level": "debug"
+  },
+  "imports": {
+    "whosonfirst": {
+      "datapath": "/mnt/data/whosonfirst/",
+      "importPostalcodes": false,
+      "importVenues": false
+    },
+    "openaddresses": {
+      "adminLookup": true,
+      "datapath": "/mnt/data/openaddresses/",
+      "files": [ "us/ny/city_of_new_york.csv" ]
     }
+  }
 }
 ```
 
 The following properties are recognized:
-  * `deduplicate` : Boolean flag to enable deduplication (see above).
-  * `datapath`: The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is
-    given as a command-line argument.
-  * `files`: An array of the names of the files to import. If specified, *only* these files will be imported, rather
-    than *all* `.csv` files in the given directory. **If the array is empty, all files will be imported.**
+
+This importer is configured using the [`pelias-config`](https://github.com/pelias/config) module.
+The following configuration options are supported by this importer.
+
+| key | required | default | description |
+| --- | --- | --- | --- |
+| `deduplicate` | no | `false` | Boolean flag to enable deduplication (see above). |
+| `adminLookup` | no | `true` | Boolean flag to enable admin-lookup. |
+| `datapath` | yes | | The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is given as a command-line argument. |
+| `files` | no | | An array of the names of the files to download/import. If specified, *only* these files will be downloaded and imported, rather than *all* `.csv` files in the given directory. **If the array is empty, all files will be downloaded and imported.** |
