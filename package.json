@@ -40,7 +40,7 @@
     "temp": "^0.8.3"
   },
   "scripts": {
-    "download": "node download.js",
+    "download": "node utils/download_data.js",
     "import": "node import.js",
     "parallel": "./bin/parallel",
     "test": "npm run units",
