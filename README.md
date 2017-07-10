@@ -45,7 +45,7 @@ other region like province), or country that they belong to. Pelias has the
 ability to compute these values from [Who's on First](http://whosonfirst.mapzen.com/) data.
 For more info on how admin lookup works, see the documentation for
 [pelias/wof-admin-lookup](https://github.com/pelias/wof-admin-lookup). By default,
-adminLookup is enabled.  To disable, set `imports.openaddresses.adminLookup` to `false` in Pelias config.
+adminLookup is enabled.  To disable, set `imports.adminLookup.enabled` to `false` in Pelias config.
 
 **Note:** Admin lookup requires loading around 5GB of data into memory.
 
@@ -92,7 +92,6 @@ hash. A sample configuration file might look like:
       "importVenues": false
     },
     "openaddresses": {
-      "adminLookup": true,
       "datapath": "/mnt/data/openaddresses/",
       "files": [ "us/ny/city_of_new_york.csv" ]
     }
