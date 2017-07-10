@@ -23,7 +23,8 @@ npm install
 ```
 
 ## Data Download
-Use the `imports.openaddresses.files` configuration option to limit the download to just the OpenAddresses files of interest.  
+Use the `imports.openaddresses.files` configuration option to limit the download to just the OpenAddresses files of interest.
+Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.
 
 ```bash
 npm run download
@@ -107,6 +108,5 @@ The following configuration options are supported by this importer.
 | key | required | default | description |
 | --- | --- | --- | --- |
 | `deduplicate` | no | `false` | Boolean flag to enable deduplication (see above). |
-| `adminLookup` | no | `true` | Boolean flag to enable admin-lookup. |
 | `datapath` | yes | | The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is given as a command-line argument. |
-| `files` | no | | An array of the names of the files to download/import. If specified, *only* these files will be downloaded and imported, rather than *all* `.csv` files in the given directory. **If the array is empty, all files will be downloaded and imported.** |
+| `files` | no | | An array of the names of the files to download/import. If specified, *only* these files will be downloaded and imported, rather than *all* `.csv` files in the given directory. **If the array is empty, all files will be downloaded and imported.** Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.|
