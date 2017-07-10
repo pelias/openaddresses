@@ -28,7 +28,6 @@ function downloadFiltered(config, callback) {
 function downloadSource(targetDir, file, callback) {
   logger.info(`Downloading ${file}`);
 
-  // first convert the file path to the source name, like 'us/ny/city_of_new_york.csv' -> 'us-ny-city_of_new_york.zip'
   const source = _.replace(file, '.csv', '.zip');
   const sourceUrl = `https://results.openaddresses.io/latest/run/${source}`;
   const tmpZipFile = tmp.tmpNameSync({postfix: '.zip'});
@@ -44,7 +43,9 @@ function downloadSource(targetDir, file, callback) {
       (callback) => {
         logger.debug(`unzipping ${tmpZipFile} to ${targetDir}`);
         child_process.exec(`unzip -o -qq -d ${targetDir} ${tmpZipFile}`, callback);
-      }
+      },
+      // delete the temp downloaded zip file
+      fs.remove.bind(null, tmpZipFile)
     ],
     callback);
 }

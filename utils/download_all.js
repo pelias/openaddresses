@@ -46,7 +46,9 @@ function downloadBundle(targetDir, sourceUrl, callback) {
       (callback) => {
         logger.debug(`unzipping ${tmpZipFile} to ${targetDir}`);
         child_process.exec(`unzip -o -qq -d ${targetDir} ${tmpZipFile}`, callback);
-      }
+      },
+      // delete the temp downloaded zip file
+      fs.remove.bind(null, tmpZipFile)
     ],
     callback);
 }
