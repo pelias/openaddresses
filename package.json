@@ -41,7 +41,7 @@
   },
   "scripts": {
     "download": "node utils/download_data.js",
-    "import": "node import.js",
+    "import": "npm start",
     "parallel": "./bin/parallel",
     "test": "npm run units",
     "units": "node test/test.js | tap-spec",

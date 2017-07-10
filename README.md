@@ -36,7 +36,7 @@ npm run download
 node import.js --help
 
 # run an import
-node import.js
+npm start
 ```
 
 ## Admin Lookup
