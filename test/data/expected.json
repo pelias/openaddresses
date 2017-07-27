@@ -11,33 +11,33 @@
         "default": "100 Main St"
       },
       "parent": {
-        "country": [
-          "override country"
-        ],
-        "macroregion": [
-          "override macroregion"
-        ],
-        "region": [
-          "override region"
-        ],
-        "macrocounty": [
-          "override macrocounty"
-        ],
-        "county": [
-          "override county"
-        ],
-        "borough": [
-          "override borough"
-        ],
-        "locality": [
-          "override locality"
-        ],
-        "localadmin": [
-          "override localadmin"
-        ],
-        "neighbourhood": [
-          "override neighbourhood"
-        ]
+        "country": [ "override country" ],
+        "country_id": [ "1" ],
+        "country_a": [ null ],
+        "macroregion": [ "override macroregion" ],
+        "macroregion_id": [ "2" ],
+        "macroregion_a": [ null ],
+        "region": [ "override region" ],
+        "region_id": [ "3" ],
+        "region_a": [ null ],
+        "macrocounty": [ "override macrocounty" ],
+        "macrocounty_id": [ "4" ],
+        "macrocounty_a": [ null ],
+        "county": [ "override county" ],
+        "county_id": [ "5" ],
+        "county_a": [ null ],
+        "borough": [ "override borough" ],
+        "borough_id": [ "6" ],
+        "borough_a": [ null ],
+        "locality": [ "override locality" ],
+        "locality_id": [ "7" ],
+        "locality_a": [ null ],
+        "localadmin": [ "override localadmin" ],
+        "localadmin_id": [ "8" ],
+        "localadmin_a": [ null ],
+        "neighbourhood": [ "override neighbourhood" ],
+        "neighbourhood_id": [ "9" ],
+        "neighbourhood_a": [ null ]
       },
       "address_parts": {
         "number": "100",
@@ -64,7 +64,6 @@
       "phrase": {
         "default": "200 Main St"
       },
-      "parent": {},
       "address_parts": {
         "number": "200",
         "street": "Main St"
@@ -89,7 +88,6 @@
       "phrase": {
         "default": "300 Main St"
       },
-      "parent": {},
       "address_parts": {
         "number": "300",
         "street": "Main St"
@@ -114,7 +112,6 @@
       "phrase": {
         "default": "400 Vireo Rd"
       },
-      "parent": {},
       "address_parts": {
         "number": "400",
         "street": "Vireo Rd"
@@ -139,7 +136,6 @@
       "phrase": {
         "default": "500 Calle De Lago"
       },
-      "parent": {},
       "address_parts": {
         "number": "500",
         "street": "Calle De Lago"
