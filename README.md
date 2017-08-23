@@ -28,6 +28,8 @@ npm install
 Use the `imports.openaddresses.files` configuration option to limit the download to just the OpenAddresses files of interest.
 Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.
 
+> see the 'Configuration' section below for a more detailed example of how to use `imports.openaddresses.files`
+
 ```bash
 npm run download
 ```
