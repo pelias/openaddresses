@@ -128,3 +128,42 @@ tape('street with substring `unavailable` but not on word boundary should return
   test.end();
 
 });
+
+tape('record with lon/lat parseable as 0/0 should return false', test => {
+  const record = {
+    LON: '0.000000',
+    LAT: '0.000000',
+    NUMBER: 'Number',
+    STREET: 'Street'
+  };
+
+  test.notOk( isValidCsvRecord(record), 'should be rejected');
+  test.end();
+
+});
+
+tape('record with lon/lat parseable as 0/non-0 should return true', test => {
+  const record = {
+    LON: '0.000000',
+    LAT: '0.000001',
+    NUMBER: 'Number',
+    STREET: 'Street'
+  };
+
+  test.ok( isValidCsvRecord(record), 'should be accepted');
+  test.end();
+
+});
+
+tape('record with lon/lat parseable as non-0/0 should return true', test => {
+  const record = {
+    LON: '0.000001',
+    LAT: '0.000000',
+    NUMBER: 'Number',
+    STREET: 'Street'
+  };
+
+  test.ok( isValidCsvRecord(record), 'should be accepted');
+  test.end();
+
+});
