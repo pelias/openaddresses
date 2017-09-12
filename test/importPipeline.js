@@ -33,15 +33,15 @@ tape('functional test of importing two small OA files', function(t) {
   var adminLookupStream = map.obj(function(record) {
     // we're only concerned about one record being modified
     if (_.isEqual(record.center_point, { lat: 12.121212, lon: 21.212121})) {
-      record.parent.country.push('override country');
-      record.parent.macroregion.push('override macroregion');
-      record.parent.region.push('override region');
-      record.parent.macrocounty.push('override macrocounty');
-      record.parent.county.push('override county');
-      record.parent.borough.push('override borough');
-      record.parent.locality.push('override locality');
-      record.parent.localadmin.push('override localadmin');
-      record.parent.neighbourhood.push('override neighbourhood');
+      record.addParent('country', 'override country', '1');
+      record.addParent('macroregion', 'override macroregion', '2');
+      record.addParent('region', 'override region', '3');
+      record.addParent('macrocounty', 'override macrocounty', '4');
+      record.addParent('county', 'override county', '5');
+      record.addParent('borough', 'override borough', '6');
+      record.addParent('locality', 'override locality', '7');
+      record.addParent('localadmin', 'override localadmin', '8');
+      record.addParent('neighbourhood', 'override neighbourhood', '9');
     }
 
     return record;
