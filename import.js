@@ -30,6 +30,9 @@ function startTiming() {
 
 var args = parameters.interpretUserArgs( process.argv.slice( 2 ) );
 
+const adminLayers = ['neighbourhood', 'borough', 'locality', 'localadmin',
+  'county', 'macrocounty', 'region', 'macroregion', 'dependency', 'country'];
+
 if( 'exitCode' in args ){
   ((args.exitCode > 0) ? console.error : console.info)( args.errMessage );
   process.exit( args.exitCode );
@@ -45,5 +48,5 @@ if( 'exitCode' in args ){
 
   var deduplicator = deduplicatorStream.create(peliasConfig, addressDeduplicator);
 
-  importPipeline.create( files, args.dirPath, deduplicator, adminLookupStream.create() );
+  importPipeline.create( files, args.dirPath, deduplicator, adminLookupStream.create(adminLayers) );
 }
