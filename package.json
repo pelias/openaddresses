@@ -19,7 +19,7 @@
     "pelias-dbclient": "2.2.5",
     "pelias-config": "2.12.1",
     "pelias-logger": "0.2.1",
-    "pelias-model": "5.1.0",
+    "pelias-model": "5.2.0",
     "pelias-wof-admin-lookup": "4.1.0",
     "through2": "^2.0.3",
     "through2-filter": "^2.0.0",
