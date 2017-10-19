@@ -83,13 +83,13 @@
     "_id": "data/input_file_1:4",
     "data": {
       "name": {
-        "default": "300 Main St"
+        "default": "00300 Main St"
       },
       "phrase": {
-        "default": "300 Main St"
+        "default": "00300 Main St"
       },
       "address_parts": {
-        "number": "300",
+        "number": "00300",
         "street": "Main St"
       },
       "center_point": {
@@ -131,13 +131,13 @@
     "_id": "data/input_file_2:2",
     "data": {
       "name": {
-        "default": "500 Calle De Lago"
+        "default": "00500 Calle De Lago"
       },
       "phrase": {
-        "default": "500 Calle De Lago"
+        "default": "00500 Calle De Lago"
       },
       "address_parts": {
-        "number": "500",
+        "number": "00500",
         "street": "Calle De Lago"
       },
       "center_point": {

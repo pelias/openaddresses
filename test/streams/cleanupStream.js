@@ -32,7 +32,7 @@ tape( 'cleanupStream trims whitespace from all fields', function(test) {
   });
 });
 
-tape( 'cleanupStream trims leading 0\'s from house numbers', function(test) {
+tape( 'cleanupStream does NOT trim leading 0\'s from house numbers', function(test) {
   var inputs = [
     {
       NUMBER: ' 0030 ',
@@ -50,11 +50,11 @@ tape( 'cleanupStream trims leading 0\'s from house numbers', function(test) {
 
   var expecteds = [
     {
-      NUMBER: '30',
+      NUMBER: '0030',
       STREET: 'Street'
     },
     {
-      NUMBER: '34560',
+      NUMBER: '0034560',
       STREET: 'Street'
     },
     {
@@ -66,7 +66,7 @@ tape( 'cleanupStream trims leading 0\'s from house numbers', function(test) {
   var cleanupStream = CleanupStream.create();
 
   test_stream(inputs, cleanupStream, function(err, actual) {
-    test.deepEqual(actual, expecteds, 'leading 0\'s should have been trimmed from NUMBER');
+    test.deepEqual(actual, expecteds, 'leading 0\'s should not have been trimmed from NUMBER');
     test.end();
   });
 
