@@ -10,43 +10,14 @@
       "phrase": {
         "default": "100 Main St"
       },
-      "parent": {
-        "country": [ "override country" ],
-        "country_id": [ "1" ],
-        "country_a": [ null ],
-        "macroregion": [ "override macroregion" ],
-        "macroregion_id": [ "2" ],
-        "macroregion_a": [ null ],
-        "region": [ "override region" ],
-        "region_id": [ "3" ],
-        "region_a": [ null ],
-        "macrocounty": [ "override macrocounty" ],
-        "macrocounty_id": [ "4" ],
-        "macrocounty_a": [ null ],
-        "county": [ "override county" ],
-        "county_id": [ "5" ],
-        "county_a": [ null ],
-        "borough": [ "override borough" ],
-        "borough_id": [ "6" ],
-        "borough_a": [ null ],
-        "locality": [ "override locality" ],
-        "locality_id": [ "7" ],
-        "locality_a": [ null ],
-        "localadmin": [ "override localadmin" ],
-        "localadmin_id": [ "8" ],
-        "localadmin_a": [ null ],
-        "neighbourhood": [ "override neighbourhood" ],
-        "neighbourhood_id": [ "9" ],
-        "neighbourhood_a": [ null ]
-      },
       "address_parts": {
         "number": "100",
         "street": "Main St",
         "zip": "input postcode"
       },
       "center_point": {
-        "lon": 21.212121,
-        "lat": 12.121212
+        "lon": 21.111111,
+        "lat": 12.111111
       },
       "source": "openaddresses",
       "layer": "address",
@@ -59,18 +30,103 @@
     "_id": "data/input_file_1:1",
     "data": {
       "name": {
-        "default": "200 Main St"
+        "default": "100 1 Main St"
       },
       "phrase": {
-        "default": "200 Main St"
+        "default": "100 1 Main St"
+      },
+      "parent": {
+        "country": [
+          "override country"
+        ],
+        "country_id": [
+          "1"
+        ],
+        "country_a": [
+          null
+        ],
+        "macroregion": [
+          "override macroregion"
+        ],
+        "macroregion_id": [
+          "2"
+        ],
+        "macroregion_a": [
+          null
+        ],
+        "region": [
+          "override region"
+        ],
+        "region_id": [
+          "3"
+        ],
+        "region_a": [
+          null
+        ],
+        "macrocounty": [
+          "override macrocounty"
+        ],
+        "macrocounty_id": [
+          "4"
+        ],
+        "macrocounty_a": [
+          null
+        ],
+        "county": [
+          "override county"
+        ],
+        "county_id": [
+          "5"
+        ],
+        "county_a": [
+          null
+        ],
+        "borough": [
+          "override borough"
+        ],
+        "borough_id": [
+          "6"
+        ],
+        "borough_a": [
+          null
+        ],
+        "locality": [
+          "override locality"
+        ],
+        "locality_id": [
+          "7"
+        ],
+        "locality_a": [
+          null
+        ],
+        "localadmin": [
+          "override localadmin"
+        ],
+        "localadmin_id": [
+          "8"
+        ],
+        "localadmin_a": [
+          null
+        ],
+        "neighbourhood": [
+          "override neighbourhood"
+        ],
+        "neighbourhood_id": [
+          "9"
+        ],
+        "neighbourhood_a": [
+          null
+        ]
       },
       "address_parts": {
-        "number": "200",
-        "street": "Main St"
+        "unit": "1",
+        "number": "100",
+        "street": "Main St",
+        "zip": "input postcode"
       },
       "center_point": {
-        "lon": 31.313131,
-        "lat": 13.131313
+        "lon": 21.212121,
+        "lat": 12.121212
       },
       "source": "openaddresses",
       "layer": "address",
@@ -80,7 +136,58 @@
   {
     "_index": "pelias",
     "_type": "address",
-    "_id": "data/input_file_1:4",
+    "_id": "data/input_file_1:2",
+    "data": {
+      "name": {
+        "default": "100 2 Main St"
+      },
+      "phrase": {
+        "default": "100 2 Main St"
+      },
+      "address_parts": {
+        "unit": "2",
+        "number": "100",
+        "street": "Main St",
+        "zip": "input postcode"
+      },
+      "center_point": {
+        "lon": 21.313131,
+        "lat": 12.131313
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "data/input_file_1:2"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_type": "address",
+    "_id": "data/input_file_1:3",
+    "data": {
+      "name": {
+        "default": "200 tv Main St"
+      },
+      "phrase": {
+        "default": "200 tv Main St"
+      },
+      "address_parts": {
+        "unit": "tv",
+        "number": "200",
+        "street": "Main St"
+      },
+      "center_point": {
+        "lon": 31.313131,
+        "lat": 13.131313
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "data/input_file_1:3"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_type": "address",
+    "_id": "data/input_file_1:6",
     "data": {
       "name": {
         "default": "300 Main St"
@@ -98,7 +205,7 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:4"
+      "source_id": "data/input_file_1:6"
     }
   },
   {

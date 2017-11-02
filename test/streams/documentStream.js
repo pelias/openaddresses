@@ -26,6 +26,26 @@ tape( 'documentStream catches records with no street', function(test) {
   });
 });
 
+tape( 'documentStream does not set unit if unit is emptystring', function(test) {
+  const input = {
+    NUMBER: '5',
+    STREET: '101st Avenue',
+    LAT: 5,
+    LON: 6,
+    POSTCODE: '12345',
+    UNIT: ''
+  };
+  const stats = { badRecordCount: 0 };
+  const documentStream = DocumentStream.create('prefix', stats);
+
+  test_stream([input], documentStream, function(err, actual) {
+    test.equal(actual.length, 1, 'the document should be pushed' );
+    test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
+    test.equal(actual[0].getAddress('unit', undefined));
+    test.end();
+  });
+});
+
 tape( 'documentStream does not set zipcode if zipcode is emptystring', function(test) {
   const input = {
     NUMBER: '5',
