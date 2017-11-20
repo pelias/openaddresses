@@ -30,10 +30,10 @@
     "_id": "data/input_file_1:1",
     "data": {
       "name": {
-        "default": "100 1 Main St"
+        "default": "100 Main St 1"
       },
       "phrase": {
-        "default": "100 1 Main St"
+        "default": "100 Main St 1"
       },
       "parent": {
         "country": [
@@ -139,10 +139,10 @@
     "_id": "data/input_file_1:2",
     "data": {
       "name": {
-        "default": "100 2 Main St"
+        "default": "100 Main St 2"
       },
       "phrase": {
-        "default": "100 2 Main St"
+        "default": "100 Main St 2"
       },
       "address_parts": {
         "unit": "2",
@@ -165,10 +165,10 @@
     "_id": "data/input_file_1:3",
     "data": {
       "name": {
-        "default": "200 tv Main St"
+        "default": "200 Main St tv"
       },
       "phrase": {
-        "default": "200 tv Main St"
+        "default": "200 Main St tv"
       },
       "address_parts": {
         "unit": "tv",
