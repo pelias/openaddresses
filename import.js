@@ -31,7 +31,8 @@ function startTiming() {
 var args = parameters.interpretUserArgs( process.argv.slice( 2 ) );
 
 const adminLayers = ['neighbourhood', 'borough', 'locality', 'localadmin',
-  'county', 'macrocounty', 'region', 'macroregion', 'dependency', 'country'];
+  'county', 'macrocounty', 'region', 'macroregion', 'dependency', 'country',
+  'empire', 'continent'];
 
 if( 'exitCode' in args ){
   ((args.exitCode > 0) ? console.error : console.info)( args.errMessage );
