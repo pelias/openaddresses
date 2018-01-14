@@ -54,23 +54,6 @@ adminLookup is enabled.  To disable, set `imports.adminLookup.enabled` to `false
 
 **Note:** Admin lookup requires loading around 5GB of data into memory.
 
-## Deduplication
-
-OpenAddresses data tends to contain lots of duplicate records. In order to avoid
-inserting this duplicate data into Pelias, the importer can optionally run all
-records through the [openvenues](https://github.com/openvenues) [address
-deduplicator](https://github.com/openvenues/address_deduper).
-
-**Note:** The address deduper is a Python/Flask app and defaults to running on port 5000. It must be running in order for deduplication to take place!
-
-The address deduplicator will filter out records that are both nearby, and have
-nearly identical values. The deduplicator knows to expand common abbreviations,
-so `123 Main Street` and `123 Main St` would be matched as duplicates.
-
-Like admin lookup, this process slows down the importer quite a bit, and
-requires a large amount of disk space (it uses a LevelDB store to track which
-addresses it has seen), so it defaults to off.
-
 ## Configuration
 This importer can be configured in [pelias-config](https://github.com/pelias/config), in the `imports.openaddresses`
 hash. A sample configuration file might look like:
@@ -111,6 +94,6 @@ The following configuration options are supported by this importer.
 
 | key | required | default | description |
 | --- | --- | --- | --- |
-| `deduplicate` | no | `false` | Boolean flag to enable deduplication (see above). |
 | `datapath` | yes | | The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is given as a command-line argument. |
 | `files` | no | | An array of the names of the files to download/import. If specified, *only* these files will be downloaded and imported, rather than *all* `.csv` files in the given directory. **If the array is empty, all files will be downloaded and imported.** Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.|
+| `deduplicate` | no | `false` | Boolean flag to enable deduplication (deprecated. See [pelias/address-deduplicator](https://github.com/pelias/address-deduplicator) for more info). |
