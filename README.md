@@ -1,17 +1,18 @@
+>This repository is part of the [Pelias](https://github.com/pelias/pelias) project. Pelias is an
+>open-source, open-data geocoder built by [Mapzen](https://www.mapzen.com/) that also powers
+>[Mapzen Search](https://mapzen.com/projects/search). Our official user documentation is
+>[here](https://mapzen.com/documentation/search/).
+
 # Pelias OpenAddresses importer
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/pelias/openaddresses.svg)](https://greenkeeper.io/)
 
-This repository is part of the [Pelias](https://github.com/pelias/pelias)
-project. Pelias is an open-source, open-data geocoder built by
-[Mapzen](https://www.mapzen.com/) that also powers [Mapzen Search](https://mapzen.com/projects/search). Our
-official user documentation is [here](https://mapzen.com/documentation/search/).
 [![Build Status](https://travis-ci.org/pelias/openaddresses.svg?branch=master)](https://travis-ci.org/pelias/openaddresses)
 
 ## Overview
 
-The OpenAddresses importer is used to process data from
-[OpenAddresses](http://openaddresses.io/) for import into the Pelias geocoder.
+The OpenAddresses importer is used to process data from [OpenAddresses](http://openaddresses.io/)
+for import into the Pelias geocoder.
 
 ## Requirements
 
