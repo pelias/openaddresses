@@ -16,7 +16,7 @@
     "lodash": "^4.16.0",
     "minimist": "1.2.0",
     "pelias-address-deduplicator": "1.1.0",
-    "pelias-dbclient": "2.3.0",
+    "pelias-dbclient": "2.3.1",
     "pelias-config": "2.14.0",
     "pelias-logger": "0.3.1",
     "pelias-model": "5.3.2",
