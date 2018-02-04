@@ -80,16 +80,64 @@
   {
     "_index": "pelias",
     "_type": "address",
+    "_id": "data/input_file_1:2",
+    "data": {
+      "name": {
+        "default": "0 Main St"
+      },
+      "phrase": {
+        "default": "0 Main St"
+      },
+      "address_parts": {
+        "number": "0",
+        "street": "Main St"
+      },
+      "center_point": {
+        "lon": 41.414141,
+        "lat": 14.141414
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "data/input_file_1:2"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_type": "address",
+    "_id": "data/input_file_1:3",
+    "data": {
+      "name": {
+        "default": "00 Elm St"
+      },
+      "phrase": {
+        "default": "00 Elm St"
+      },
+      "address_parts": {
+        "number": "00",
+        "street": "Elm St"
+      },
+      "center_point": {
+        "lon": 51.515151,
+        "lat": 15.151515
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "data/input_file_1:3"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_type": "address",
     "_id": "data/input_file_1:4",
     "data": {
       "name": {
-        "default": "300 Main St"
+        "default": "00300 Main St"
       },
       "phrase": {
-        "default": "300 Main St"
+        "default": "00300 Main St"
       },
       "address_parts": {
-        "number": "300",
+        "number": "00300",
         "street": "Main St"
       },
       "center_point": {
@@ -128,16 +176,40 @@
   {
     "_index": "pelias",
     "_type": "address",
+    "_id": "data/input_file_2:1",
+    "data": {
+      "name": {
+        "default": "00000 Vireo Rd"
+      },
+      "phrase": {
+        "default": "00000 Vireo Rd"
+      },
+      "address_parts": {
+        "number": "00000",
+        "street": "Vireo Rd"
+      },
+      "center_point": {
+        "lon": 81.818181,
+        "lat": 18.181818
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "data/input_file_2:1"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_type": "address",
     "_id": "data/input_file_2:2",
     "data": {
       "name": {
-        "default": "500 Calle De Lago"
+        "default": "00500 Calle De Lago"
       },
       "phrase": {
-        "default": "500 Calle De Lago"
+        "default": "00500 Calle De Lago"
       },
       "address_parts": {
-        "number": "500",
+        "number": "00500",
         "street": "Calle De Lago"
       },
       "center_point": {
