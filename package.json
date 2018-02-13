@@ -8,7 +8,7 @@
   "main": "import.js",
   "dependencies": {
     "async": "^2.5.0",
-    "combined-stream": "1.0.5",
+    "combined-stream": "1.0.6",
     "csv-parse": "^1.1.7",
     "fs-extra": "^5.0.0",
     "glob": "^7.0.0",
