@@ -19,7 +19,7 @@ function downloadFiltered(config, callback) {
       return callback(err);
     }
 
-    async.each(files, downloadSource.bind(null, targetDir), callback);
+    async.eachLimit(files, 5, downloadSource.bind(null, targetDir), callback);
 
   });
 
