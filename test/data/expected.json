@@ -11,33 +11,87 @@
         "default": "100 Main St"
       },
       "parent": {
-        "country": [ "override country" ],
-        "country_id": [ "1" ],
-        "country_a": [ null ],
-        "macroregion": [ "override macroregion" ],
-        "macroregion_id": [ "2" ],
-        "macroregion_a": [ null ],
-        "region": [ "override region" ],
-        "region_id": [ "3" ],
-        "region_a": [ null ],
-        "macrocounty": [ "override macrocounty" ],
-        "macrocounty_id": [ "4" ],
-        "macrocounty_a": [ null ],
-        "county": [ "override county" ],
-        "county_id": [ "5" ],
-        "county_a": [ null ],
-        "borough": [ "override borough" ],
-        "borough_id": [ "6" ],
-        "borough_a": [ null ],
-        "locality": [ "override locality" ],
-        "locality_id": [ "7" ],
-        "locality_a": [ null ],
-        "localadmin": [ "override localadmin" ],
-        "localadmin_id": [ "8" ],
-        "localadmin_a": [ null ],
-        "neighbourhood": [ "override neighbourhood" ],
-        "neighbourhood_id": [ "9" ],
-        "neighbourhood_a": [ null ]
+        "country": [
+          "override country"
+        ],
+        "country_id": [
+          "1"
+        ],
+        "country_a": [
+          null
+        ],
+        "macroregion": [
+          "override macroregion"
+        ],
+        "macroregion_id": [
+          "2"
+        ],
+        "macroregion_a": [
+          null
+        ],
+        "region": [
+          "override region"
+        ],
+        "region_id": [
+          "3"
+        ],
+        "region_a": [
+          null
+        ],
+        "macrocounty": [
+          "override macrocounty"
+        ],
+        "macrocounty_id": [
+          "4"
+        ],
+        "macrocounty_a": [
+          null
+        ],
+        "county": [
+          "override county"
+        ],
+        "county_id": [
+          "5"
+        ],
+        "county_a": [
+          null
+        ],
+        "borough": [
+          "override borough"
+        ],
+        "borough_id": [
+          "6"
+        ],
+        "borough_a": [
+          null
+        ],
+        "locality": [
+          "override locality"
+        ],
+        "locality_id": [
+          "7"
+        ],
+        "locality_a": [
+          null
+        ],
+        "localadmin": [
+          "override localadmin"
+        ],
+        "localadmin_id": [
+          "8"
+        ],
+        "localadmin_a": [
+          null
+        ],
+        "neighbourhood": [
+          "override neighbourhood"
+        ],
+        "neighbourhood_id": [
+          "9"
+        ],
+        "neighbourhood_a": [
+          null
+        ]
       },
       "address_parts": {
         "number": "100",
@@ -219,6 +273,30 @@
       "source": "openaddresses",
       "layer": "address",
       "source_id": "data/input_file_2:2"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_type": "address",
+    "_id": "data/input_file_2:3",
+    "data": {
+      "name": {
+        "default": "00500 Calle De Lago"
+      },
+      "phrase": {
+        "default": "00500 Calle De Lago"
+      },
+      "address_parts": {
+        "number": "00500",
+        "street": "Calle De Lago"
+      },
+      "center_point": {
+        "lon": 92.929292,
+        "lat": 29.292929
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "data/input_file_2:3"
     }
   }
 ]
