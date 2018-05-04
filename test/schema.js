@@ -139,23 +139,6 @@ tape( 'non-boolean adminLookup should throw error', function(test) {
   test.end();
 });
 
-tape( 'non-boolean deduplicate should throw error', function(test) {
-  [null, 17, {}, [], 'string'].forEach((value) => {
-    const config = {
-      imports: {
-        openaddresses: {
-          datapath: 'this is the datapath',
-          deduplicate: value
-        }
-      }
-    };
-
-    test.throws(validate.bind(null, config), /"deduplicate" must be a boolean/);
-  });
-
-  test.end();
-});
-
 tape( 'unknown config fields should throw error', function(test) {
   const config = {
     imports: {
@@ -190,7 +173,6 @@ tape( 'valid configuration should not throw error', function(test) {
     imports: {
       openaddresses: {
         datapath: 'this is the datapath',
-        deduplicate: false,
         adminLookup: false,
         files: ['file 1', 'file 2']
       }
@@ -207,7 +189,6 @@ tape( 'unknown children of imports should not throw error', function(test) {
     imports: {
       openaddresses: {
         datapath: 'this is the datapath',
-        deduplicate: false,
         adminLookup: false,
         files: ['file 1', 'file 2']
       },
@@ -225,7 +206,6 @@ tape( 'unknown children of root should not throw error', function(test) {
     imports: {
       openaddresses: {
         datapath: 'this is the datapath',
-        deduplicate: false,
         adminLookup: false,
         files: ['file 1', 'file 2']
       }
