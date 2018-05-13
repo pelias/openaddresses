@@ -48,7 +48,6 @@
     "lint": "jshint .",
     "validate": "npm ls",
     "travis": "npm run test && npm run functional",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "start": "node --max_old_space_size=4096 import.js"
   },
   "repository": {
