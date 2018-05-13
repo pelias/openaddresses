@@ -69,5 +69,9 @@
     "lint",
     "validate",
     "test"
-  ]
+  ],
+  "release": {
+    "branch": "production",
+    "success": []
+  }
 }
