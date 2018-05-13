@@ -3,7 +3,7 @@
   "version": "0.0.0-semantic-release",
   "description": "Pelias import pipeline for OpenAddresses.",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "main": "import.js",
   "dependencies": {
