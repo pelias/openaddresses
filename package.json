@@ -1,6 +1,6 @@
 {
   "name": "pelias-openaddresses",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-development",
   "description": "Pelias import pipeline for OpenAddresses.",
   "engines": {
     "node": ">=6.0.0"
