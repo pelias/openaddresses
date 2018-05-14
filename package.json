@@ -1,9 +1,9 @@
 {
   "name": "pelias-openaddresses",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-development",
   "description": "Pelias import pipeline for OpenAddresses.",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "main": "import.js",
   "dependencies": {
@@ -31,7 +31,6 @@
     "deep-diff": "^0.3.3",
     "event-stream": "^3.3.2",
     "jshint": "^2.9.4",
-    "npm-check": "git://github.com/orangejulius/npm-check.git#disable-update-check",
     "precommit-hook": "3.0.0",
     "proxyquire": "^2.0.0",
     "semantic-release": "^15.0.0",
@@ -48,10 +47,8 @@
     "functional": "NODE_ENV=test node test/functional.js | tap-spec",
     "lint": "jshint .",
     "validate": "npm ls",
-    "travis": "npm run check-dependencies && npm run test && npm run functional",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "start": "node --max_old_space_size=4096 import.js",
-    "check-dependencies": "node_modules/.bin/npm-check --production"
+    "travis": "npm run test && npm run functional",
+    "start": "node --max_old_space_size=4096 import.js"
   },
   "repository": {
     "type": "git",
@@ -71,7 +68,10 @@
   "pre-commit": [
     "lint",
     "validate",
-    "test",
-    "check-dependencies"
-  ]
+    "test"
+  ],
+  "release": {
+    "branch": "production",
+    "success": []
+  }
 }

@@ -16,7 +16,7 @@ for import into the Pelias geocoder.
 
 ## Requirements
 
-Node.js 4 or higher is required.
+Node.js 6 or higher is required.
 
 ## Installation
 ```bash
