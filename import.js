@@ -13,6 +13,8 @@ var importPipeline = require( './lib/importPipeline' );
 
 const adminLookupStream = require('pelias-wof-admin-lookup');
 
+const fileStream = require( './lib/jsonFileStream' )('/mnt/usb/pelias/oa-json-out.txt');
+
 // Pretty-print the total time the import took.
 function startTiming() {
   var startTime = new Date().getTime();
@@ -43,5 +45,5 @@ if( 'exitCode' in args ){
 
   var files = parameters.getFileList(peliasConfig, args);
 
-  importPipeline.create( files, args.dirPath, adminLookupStream.create(adminLayers) );
+  importPipeline.create( files, args.dirPath, adminLookupStream.create(adminLayers), fileStream );
 }
