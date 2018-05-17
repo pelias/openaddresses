@@ -13,7 +13,7 @@ var importPipeline = require( './lib/importPipeline' );
 
 const adminLookupStream = require('pelias-wof-admin-lookup');
 
-const fileStream = require( './lib/jsonFileStream' )('/mnt/usb/pelias/oa-json-out.txt');
+const fileStream = require( './lib/jsonFileStream' )('/home/julian/oa-json-out.txt');
 
 // Pretty-print the total time the import took.
 function startTiming() {
