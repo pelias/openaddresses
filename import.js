@@ -16,6 +16,7 @@ var deduplicatorStream = require('./lib/streams/deduplicatorStream');
 
 var addressDeduplicator = require('pelias-address-deduplicator');
 
+const fileStream = require( './lib/jsonFileStream' )('/mnt/usb/pelias/oa-json-out.txt');
 
 // Pretty-print the total time the import took.
 function startTiming() {
@@ -49,5 +50,5 @@ if( 'exitCode' in args ){
 
   var deduplicator = deduplicatorStream.create(peliasConfig, addressDeduplicator);
 
-  importPipeline.create( files, args.dirPath, deduplicator, adminLookupStream.create(adminLayers) );
+  importPipeline.create( files, args.dirPath, deduplicator, adminLookupStream.create(adminLayers), fileStream );
 }
