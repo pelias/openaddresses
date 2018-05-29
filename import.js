@@ -12,10 +12,6 @@ var parameters = require( './lib/parameters' );
 var importPipeline = require( './lib/importPipeline' );
 
 const adminLookupStream = require('pelias-wof-admin-lookup');
-var deduplicatorStream = require('./lib/streams/deduplicatorStream');
-
-var addressDeduplicator = require('pelias-address-deduplicator');
-
 
 // Pretty-print the total time the import took.
 function startTiming() {
@@ -47,7 +43,5 @@ if( 'exitCode' in args ){
 
   var files = parameters.getFileList(peliasConfig, args);
 
-  var deduplicator = deduplicatorStream.create(peliasConfig, addressDeduplicator);
-
-  importPipeline.create( files, args.dirPath, deduplicator, adminLookupStream.create(adminLayers) );
+  importPipeline.create( files, args.dirPath, adminLookupStream.create(adminLayers) );
 }
