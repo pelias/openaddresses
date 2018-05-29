@@ -14,7 +14,7 @@
     "glob": "^7.0.0",
     "joi": "^13.1.2",
     "lodash": "^4.16.0",
-    "minimist": "1.2.0",
+    "minimist": "^1.2.0",
     "pelias-dbclient": "2.4.0",
     "pelias-config": "2.14.0",
     "pelias-logger": "0.3.1",
@@ -24,16 +24,16 @@
     "through2-filter": "^2.0.0",
     "through2-map": "^3.0.0",
     "through2-sink": "^1.0.0",
-    "tmp": "0.0.33"
+    "tmp": "^0.0.33"
   },
   "devDependencies": {
     "deep-diff": "^0.3.3",
     "event-stream": "^3.3.2",
     "jshint": "^2.9.4",
-    "precommit-hook": "3.0.0",
+    "precommit-hook": "^3.0.0",
     "proxyquire": "^2.0.0",
     "semantic-release": "^15.0.0",
-    "tap-spec": "4.1.2",
+    "tap-spec": "^4.1.2",
     "tape": "^4.5.0",
     "temp": "^0.8.3"
   },
