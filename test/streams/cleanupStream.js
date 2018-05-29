@@ -143,3 +143,37 @@ tape( 'cleanupStream converts all-caps street names to Title Case', function(tes
     test.end();
   });
 });
+
+tape( 'cleanupStream converts directionals to uppercase.', function(test){
+  var inputs = [{
+    NUMBER: '88',
+    STREET: 'ne GLASGOW STREET'
+  },
+  {
+    NUMBER: '76',
+    STREET : 'Sw McCallister Street'
+  },
+  {
+    NUMBER: '9923736',
+    STREET: 'Serenity Street'//should be unchanged even though the start matches a directional
+  }];
+  var expecteds = [{
+    NUMBER: '88',
+    STREET: 'NE Glasgow Street'
+  },
+  {
+    NUMBER: '76',
+    STREET : 'SW McCallister Street'
+  },
+  {
+    NUMBER: '9923736',
+    STREET: 'Serenity Street'//should also be unchanged
+  }];
+
+  var cleanupStream = CleanupStream.create();
+
+  test_stream(inputs,cleanupStream,function(err,actual){
+    test.deepEqual(actual, expecteds,'we expect proper capitalization of street directionals');
+    test.end();
+  });
+});
