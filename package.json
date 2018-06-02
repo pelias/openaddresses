@@ -17,7 +17,7 @@
     "minimist": "^1.2.0",
     "pelias-dbclient": "2.5.4",
     "pelias-config": "2.14.0",
-    "pelias-logger": "0.3.1",
+    "pelias-logger": "0.4.1",
     "pelias-model": "5.5.1",
     "pelias-wof-admin-lookup": "4.5.6",
     "through2": "^2.0.3",
