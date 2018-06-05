@@ -22,9 +22,8 @@ function downloadAll(config, callback) {
         // all non-share-alike data
         'https://s3.amazonaws.com/data.openaddresses.io/openaddr-collected-global.zip',
 
-        // leave this out for now since we don't download it in production currently
         // all share-alike data
-        // 'https://s3.amazonaws.com/data.openaddresses.io/openaddr-collected-global-sa.zip'
+        'https://s3.amazonaws.com/data.openaddresses.io/openaddr-collected-global-sa.zip'
       ],
       downloadBundle.bind(null, targetDir),
       callback);
