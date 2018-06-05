@@ -15,7 +15,7 @@
     "joi": "^13.1.2",
     "lodash": "^4.16.0",
     "minimist": "^1.2.0",
-    "pelias-dbclient": "2.5.4",
+    "pelias-dbclient": "2.5.6",
     "pelias-config": "3.0.2",
     "pelias-logger": "0.4.2",
     "pelias-model": "5.5.1",
