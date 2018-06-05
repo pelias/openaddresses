@@ -16,7 +16,7 @@
     "lodash": "^4.16.0",
     "minimist": "^1.2.0",
     "pelias-dbclient": "2.5.4",
-    "pelias-config": "3.0.1",
+    "pelias-config": "3.0.2",
     "pelias-logger": "0.4.1",
     "pelias-model": "5.5.1",
     "pelias-wof-admin-lookup": "4.5.6",
