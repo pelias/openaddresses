@@ -31,8 +31,6 @@ npm install
 Use the `imports.openaddresses.files` configuration option to limit the download to just the OpenAddresses files of interest.
 Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.
 
-> see the 'Configuration' section below for a more detailed example of how to use `imports.openaddresses.files`
-
 ```bash
 npm run download
 ```
@@ -58,7 +56,7 @@ adminLookup is enabled.  To disable, set `imports.adminLookup.enabled` to `false
 
 ## Configuration
 This importer can be configured in [pelias-config](https://github.com/pelias/config), in the `imports.openaddresses`
-hash. A sample configuration file might look like:
+hash. A sample configuration file might look like this:
 
 ```javascript
 {
@@ -89,9 +87,6 @@ hash. A sample configuration file might look like:
 }
 ```
 
-The following properties are recognized:
-
-This importer is configured using the [`pelias-config`](https://github.com/pelias/config) module.
 The following configuration options are supported by this importer.
 
 | key | required | default | description |
