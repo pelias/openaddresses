@@ -18,6 +18,9 @@ for import into the Pelias geocoder.
 Node.js 6 or higher is required.
 
 ## Installation
+
+> For instructions on setting up Pelias as a whole, see our [getting started guide](https://github.com/pelias/documentation/blob/master/getting_started_install.md). Further instructions here pertain to the OpenAddresses importer only
+
 ```bash
 git clone https://github.com/pelias/openaddresses
 cd openaddresses
