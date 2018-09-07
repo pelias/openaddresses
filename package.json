@@ -33,7 +33,6 @@
     "jshint": "^2.9.4",
     "precommit-hook": "^3.0.0",
     "proxyquire": "^2.0.0",
-    "semantic-release": "^15.0.0",
     "tap-spec": "^5.0.0",
     "tape": "^4.5.0",
     "temp": "^0.8.3"
