@@ -19,9 +19,9 @@ tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
 
   var badArguments = [
     [ 'not an arg', 'some dir' ],
-    [ '--deduplicate', 'not an arg', 'some dir' ],
-    [ '--deduplicate', 'not a dir' ],
-    [ '--deduplicate', 'package.json' ],
+    [ 'not an arg', 'some dir' ],
+    [ 'not a dir' ],
+    [ 'package.json' ],
   ];
   badArguments.forEach( function execTestCase( testCase, ind ){
     var errorObj = parameters.interpretUserArgs( testCase );

@@ -1,7 +1,7 @@
->This repository is part of the [Pelias](https://github.com/pelias/pelias) project. Pelias is an
->open-source, open-data geocoder built by [Mapzen](https://www.mapzen.com/) that also powers
->[Mapzen Search](https://mapzen.com/projects/search). Our official user documentation is
->[here](https://mapzen.com/documentation/search/).
+>This repository is part of the [Pelias](https://github.com/pelias/pelias)
+>project. Pelias is an open-source, open-data geocoder originally sponsored by
+>[Mapzen](https://www.mapzen.com/). Our official user documentation is
+>[here](https://github.com/pelias/documentation).
 
 # Pelias OpenAddresses importer
 
@@ -16,7 +16,7 @@ for import into the Pelias geocoder.
 
 ## Requirements
 
-Node.js 4 or higher is required.
+Node.js 6 or higher is required.
 
 ## Installation
 ```bash
@@ -96,4 +96,3 @@ The following configuration options are supported by this importer.
 | --- | --- | --- | --- |
 | `datapath` | yes | | The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is given as a command-line argument. |
 | `files` | no | | An array of the names of the files to download/import. If specified, *only* these files will be downloaded and imported, rather than *all* `.csv` files in the given directory. **If the array is empty, all files will be downloaded and imported.** Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.|
-| `deduplicate` | no | `false` | Boolean flag to enable deduplication (deprecated. See [pelias/address-deduplicator](https://github.com/pelias/address-deduplicator) for more info). |
