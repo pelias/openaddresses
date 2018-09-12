@@ -45,7 +45,7 @@ tape('functional test of importing two small OA files', function(t) {
     var diff = deep(expected, results);
 
     if (diff) {
-      t.fail('expected and actual output are the same');
+      t.fail('expected and actual output are not the same');
       console.log(diff);
     } else {
       t.pass('expected and actual output are the same');
