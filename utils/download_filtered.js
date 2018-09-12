@@ -5,7 +5,7 @@ const async = require('async');
 const fs = require('fs-extra');
 const tmp = require('tmp');
 const _ = require('lodash');
-const logger = require('pelias-logger').get('download');
+const logger = require('pelias-logger').get('openaddresses-download');
 
 function downloadFiltered(config, callback) {
   const targetDir = config.imports.openaddresses.datapath;
