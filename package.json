@@ -38,7 +38,7 @@
     "temp": "^0.8.3"
   },
   "scripts": {
-    "download": "node utils/download_data.js",
+    "download": "./bin/download",
     "import": "./bin/start",
     "parallel": "./bin/parallel",
     "test": "NODE_ENV=test npm run units",
