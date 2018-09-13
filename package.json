@@ -42,7 +42,7 @@
     "import": "npm start",
     "parallel": "./bin/parallel",
     "test": "NODE_ENV=test npm run units",
-    "units": "node test/test.js | tap-spec",
+    "units": "./bin/units",
     "functional": "NODE_ENV=test node test/functional.js | tap-spec",
     "lint": "jshint .",
     "validate": "npm ls",
