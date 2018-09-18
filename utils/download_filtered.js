@@ -30,7 +30,7 @@ function downloadSource(targetDir, file, callback) {
   const source = file.replace('.csv', '.zip');
   const name = file.replace('.csv', '').replace(/\//g,'-');
   const sourceUrl = `https://results.openaddresses.io/latest/run/${source}`;
-  const tmpZipFile = tmp.tmpNameSync({prefix: name, postfix: '.zip'});
+  const tmpZipFile = tmp.tmpNameSync({prefix: name, dir: targetDir, postfix: '.zip'});
 
   async.series(
     [
