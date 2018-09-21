@@ -38,8 +38,8 @@
     "temp": "^0.8.3"
   },
   "scripts": {
-    "download": "node utils/download_data.js",
-    "import": "npm start",
+    "download": "./bin/download",
+    "import": "./bin/start",
     "parallel": "./bin/parallel",
     "test": "NODE_ENV=test npm run units",
     "units": "./bin/units",
@@ -47,7 +47,7 @@
     "lint": "jshint .",
     "validate": "npm ls",
     "travis": "npm run test && npm run functional",
-    "start": "node --max_old_space_size=4096 import.js"
+    "start": "./bin/start"
   },
   "repository": {
     "type": "git",
