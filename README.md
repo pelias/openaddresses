@@ -6,7 +6,6 @@
 # Pelias OpenAddresses importer
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/pelias/openaddresses.svg)](https://greenkeeper.io/)
-
 [![Build Status](https://travis-ci.org/pelias/openaddresses.svg?branch=master)](https://travis-ci.org/pelias/openaddresses)
 
 ## Overview
@@ -19,6 +18,9 @@ for import into the Pelias geocoder.
 Node.js 6 or higher is required.
 
 ## Installation
+
+> For instructions on setting up Pelias as a whole, see our [getting started guide](https://github.com/pelias/documentation/blob/master/getting_started_install.md). Further instructions here pertain to the OpenAddresses importer only
+
 ```bash
 git clone https://github.com/pelias/openaddresses
 cd openaddresses
@@ -28,8 +30,6 @@ npm install
 ## Data Download
 Use the `imports.openaddresses.files` configuration option to limit the download to just the OpenAddresses files of interest.
 Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.
-
-> see the 'Configuration' section below for a more detailed example of how to use `imports.openaddresses.files`
 
 ```bash
 npm run download
@@ -56,7 +56,7 @@ adminLookup is enabled.  To disable, set `imports.adminLookup.enabled` to `false
 
 ## Configuration
 This importer can be configured in [pelias-config](https://github.com/pelias/config), in the `imports.openaddresses`
-hash. A sample configuration file might look like:
+hash. A sample configuration file might look like this:
 
 ```javascript
 {
@@ -87,12 +87,21 @@ hash. A sample configuration file might look like:
 }
 ```
 
-The following properties are recognized:
-
-This importer is configured using the [`pelias-config`](https://github.com/pelias/config) module.
 The following configuration options are supported by this importer.
 
 | key | required | default | description |
 | --- | --- | --- | --- |
 | `datapath` | yes | | The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is given as a command-line argument. |
 | `files` | no | | An array of the names of the files to download/import. If specified, *only* these files will be downloaded and imported, rather than *all* `.csv` files in the given directory. **If the array is empty, all files will be downloaded and imported.** Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.|
+
+## Parallel Importing
+
+Because OpenAddresses consists of many small files, this importer can be configured to run several instances in parallel that coordinate to import all the data.
+
+To use this functionality, replace calls to `npm start` with
+
+```bash
+npm run parallel 3 # replace 3 with your desired level of paralellism
+```
+
+Generally, a paralellism of 2 or 3 is suitable for most tasks.

@@ -9,11 +9,15 @@ RUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
 ENV WORKDIR /code/pelias/openaddresses
 WORKDIR ${WORKDIR}
 
+# copy package.json first to prevent npm install being rerun when only code changes
+COPY ./package.json ${WORKDIR}
+RUN npm install
+
 # copy code into image
 ADD . ${WORKDIR}
 
-# install npm dependencies
-RUN npm install
-
 # run tests
 RUN npm test
+
+# run as the pelias user
+USER pelias

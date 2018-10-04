@@ -4,8 +4,7 @@ const child_process = require('child_process');
 const async = require('async');
 const fs = require('fs-extra');
 const tmp = require('tmp');
-const _ = require('lodash');
-const logger = require('pelias-logger').get('download');
+const logger = require('pelias-logger').get('openaddresses-download');
 
 function downloadFiltered(config, callback) {
   const targetDir = config.imports.openaddresses.datapath;
@@ -28,9 +27,10 @@ function downloadFiltered(config, callback) {
 function downloadSource(targetDir, file, callback) {
   logger.info(`Downloading ${file}`);
 
-  const source = _.replace(file, '.csv', '.zip');
+  const source = file.replace('.csv', '.zip');
+  const name = file.replace('.csv', '').replace(/\//g,'-');
   const sourceUrl = `https://results.openaddresses.io/latest/run/${source}`;
-  const tmpZipFile = tmp.tmpNameSync({postfix: '.zip'});
+  const tmpZipFile = tmp.tmpNameSync({prefix: name, dir: targetDir, postfix: '.zip'});
 
   async.series(
     [
