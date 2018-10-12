@@ -93,6 +93,7 @@ The following configuration options are supported by this importer.
 | --- | --- | --- | --- |
 | `datapath` | yes | | The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is given as a command-line argument. |
 | `files` | no | | An array of the names of the files to download/import. If specified, *only* these files will be downloaded and imported, rather than *all* `.csv` files in the given directory. **If the array is empty, all files will be downloaded and imported.** Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.|
+| `missingFilesAreFatal` | no | false | If set to true, any missing files will immediately halt the importer with an error. Otherwise, the importer will continue processing with a warning |
 
 ## Parallel Importing
 
