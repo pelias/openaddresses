@@ -15,7 +15,7 @@ for import into the Pelias geocoder.
 
 ## Requirements
 
-Node.js 6 or higher is required.
+Node.js is required. See [Pelias software requirements](https://github.com/pelias/documentation/blob/master/requirements.md) for supported versions.
 
 ## Installation
 
