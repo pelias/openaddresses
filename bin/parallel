@@ -7,8 +7,8 @@ count=$1
 shift
 
 # only do anything if count is a valid integer >= 1
-if [[ $count -ge 1 ]]; then
-	echo "starting $count parallel builds"
+if [[ $count -gt 1 ]]; then
+	echo "openaddresses: starting $count parallel builds"
 
 	# spawn $count parallel builds, passing correct params and all arguments
 	for i in `seq 0 $(($count-1))`; do
@@ -18,4 +18,7 @@ if [[ $count -ge 1 ]]; then
 
 	# don't let this script finish until all parallel builds have finished
 	wait
+else
+	# invalid count value, run normal build
+	exec ./bin/start $@
 fi
