@@ -4,7 +4,7 @@ const child_process = require('child_process');
 const async = require('async');
 const fs = require('fs-extra');
 const tmp = require('tmp');
-const logger = require('pelias-logger').get('download');
+const logger = require('pelias-logger').get('openaddresses-download');
 
 function downloadAll(config, callback) {
   logger.info('Attempting to download all data');
