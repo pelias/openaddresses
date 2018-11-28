@@ -9,7 +9,7 @@
   "dependencies": {
     "async": "^2.5.0",
     "combined-stream": "1.0.5",
-    "csv-parse": "^3.0.0",
+    "csv-parse": "^4.0.0",
     "fs-extra": "^7.0.0",
     "glob": "^7.0.0",
     "joi": "^14.0.0",
