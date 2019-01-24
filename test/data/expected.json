@@ -98,6 +98,9 @@
         "street": "Main St",
         "zip": "input postcode"
       },
+      "addendum": {
+        "oa": "{\"city\":\"input city\",\"district\":\"input district\",\"region\":\"input region\"}"
+      },
       "center_point": {
         "lon": 21.212121,
         "lat": 12.121212
