@@ -43,5 +43,12 @@ if( 'exitCode' in args ){
 
   var files = parameters.getFileList(peliasConfig, args);
 
-  importPipeline.create( files, args.dirPath, adminLookupStream.create(adminLayers) );
+  const importer_id = args['parallel-id'];
+  let importer_name = 'openstreetmap';
+
+  if (importer_id !== undefined) {
+    importer_name = `openstreetmap-${importer_id}`;
+  }
+
+  importPipeline.create( files, args.dirPath, adminLookupStream.create(adminLayers), importer_name);
 }

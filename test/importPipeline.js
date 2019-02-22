@@ -6,8 +6,8 @@ var event_stream = require( 'event-stream' );
 var deep = require( 'deep-diff' );
 var map = require('through2-map');
 var _ = require('lodash');
+var proxyquire = require('proxyquire');
 
-var importPipeline = require( '../lib/importPipeline' );
 
 var basePath = path.resolve(__dirname);
 var expectedPath = basePath + '/data/expected.json';
@@ -15,6 +15,30 @@ var inputFiles =  [ basePath + '/data/input_file_1.csv', basePath + '/data/input
 
 tape('functional test of importing two small OA files', function(t) {
   var expected = JSON.parse(fs.readFileSync(expectedPath));
+
+  // return a stream that does the actual test
+  function fakeDbclient() {
+    return event_stream.writeArray(function(err, results) {
+      // uncomment this to write the actual results to the expected file
+      // make sure they look ok though. comma left off so jshint reminds you
+      // not to commit this line
+      //fs.writeFileSync(expectedPath, JSON.stringify(results, null, 2))
+
+      var diff = deep(expected, results);
+
+      if (diff) {
+        t.fail('expected and actual output are not the same');
+        console.log(diff);
+      } else {
+        t.pass('expected and actual output are the same');
+      }
+      t.end();
+    });
+  }
+
+  var importPipeline = proxyquire( '../lib/importPipeline', {
+  'pelias-dbclient': fakeDbclient
+  });
 
   // mock admin lookup stream to show that input file admin values are ignored
   // and replaced with overrides from adminLookup
@@ -35,24 +59,6 @@ tape('functional test of importing two small OA files', function(t) {
     return record;
   });
 
-  // this stream is the final destination that does the actual test
-  var endStream = event_stream.writeArray(function(err, results) {
-    // uncomment this to write the actual results to the expected file
-    // make sure they look ok though. comma left off so jshint reminds you
-    // not to commit this line
-    //fs.writeFileSync(expectedPath, JSON.stringify(results, null, 2))
-
-    var diff = deep(expected, results);
-
-    if (diff) {
-      t.fail('expected and actual output are not the same');
-      console.log(diff);
-    } else {
-      t.pass('expected and actual output are the same');
-    }
-    t.end();
-  });
-
-  importPipeline.create(inputFiles, basePath, adminLookupStream, endStream);
+  importPipeline.create(inputFiles, basePath, adminLookupStream);
 
 });
