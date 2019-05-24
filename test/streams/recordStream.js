@@ -1,9 +1,7 @@
-var tape = require( 'tape' );
-var through = require( 'through2' );
-
-var peliasModel = require( 'pelias-model' );
-
-var recordStream = require( '../../lib/streams/recordStream' );
+const tape = require( 'tape' );
+const through = require( 'through2' );
+const peliasModel = require( 'pelias-model' );
+const recordStream = require( '../../lib/streams/recordStream' );
 
 /**
  * Tests whether records read from `test/openaddresses_sample.csv` are created
@@ -12,36 +10,46 @@ var recordStream = require( '../../lib/streams/recordStream' );
 tape(
   'importPipelines.createRecordStream() creates Document objects with expected values.',
   function ( test ){
-    function createTestRec( lon, lat, name ){
-      return { lon: lon, lat: lat, name: name };
+    function createTestRec( lon, lat, postcode, street, number ){
+      return { lon: lon, lat: lat, postcode: postcode, street: street, number: number };
     }
 
-    var expectedRecords = [
-      createTestRec( -118.0170157, 55.546026835788886, '23042 Twp Road 755 A' ),
-      createTestRec( -118.75318353, 55.14959214890181, '712046 Rge Road 34' ),
-      createTestRec( -118.8218384, 55.15506788763259, '712078 Rge Road 34' ),
-      createTestRec( -118.79719936, 55.153343057595535, '712068 Rge Road 34' ),
-      createTestRec( -118.66743097, 55.151807043809917, '712060 Rge Road 34' ),
-      createTestRec( -118.74783569, 55.155320792497442, '712082 Rge Road 35' ),
-      createTestRec( 1, 2, 'number Too Many Spaces' ),
-      createTestRec( 1, 2, 'trim Multiple Spaces' )
+    let expectedRecords = [
+      createTestRec( -118.0170157, 55.546026835788886, '23042', 'Twp Road', '755 A' ),
+      createTestRec( -118.75318353, 55.14959214890181, '712046', 'Rge Road', '34' ),
+      createTestRec( -118.8218384, 55.15506788763259, '712078', 'Rge Road', '34' ),
+      createTestRec( -118.79719936, 55.153343057595535, '712068', 'Rge Road', '34' ),
+      createTestRec( -118.66743097, 55.151807043809917, '712060', 'Rge Road', '34' ),
+      createTestRec( -118.74783569, 55.155320792497442, '712082', 'Rge Road', '35' ),
+      createTestRec( 1, 2, 'number', 'Too Many Spaces', '36' ),
+      createTestRec( 1, 2, 'trim', 'Multiple Spaces', '37' )
     ];
-    test.plan( expectedRecords.length * 4 + 1);
+    test.plan(( expectedRecords.length * 7 ) + 1);
 
-    var dataStream = recordStream.create(['test/openaddresses_sample.csv']);
+    let dataStream = recordStream.create(['test/openaddresses_sample.csv']);
     test.ok( dataStream.readable, 'Stream is readable.' );
-    var testStream = through.obj(function ( data, enc, next ){
+
+    let currentTestRecord = 0;
+    let testStream = through.obj(( data, _, next ) => {
       test.ok(
         data instanceof peliasModel.Document, 'Data is a Document object.'
       );
 
-      var expected = expectedRecords.splice( 0, 1 )[ 0 ];
-      var centroid = data.getCentroid();
+      let expected = expectedRecords[ currentTestRecord ];
+      let centroid = data.getCentroid();
       test.ok( expected.lon - centroid.lon < 1e-6, 'Longitude matches.' );
       test.ok( expected.lat - centroid.lat < 1e-6, 'Latitude matches.' );
-      test.equal( data.getName( 'default' ), expected.name , 'Name matches.' );
+      test.false( data.getName( 'default' ) , 'Name not set.' );
+      test.equal( data.getAddress( 'zip' ), expected.postcode , 'Postcode matches.' );
+      test.equal( data.getAddress( 'street' ), expected.street , 'Street matches.' );
+      test.equal( data.getAddress( 'number' ), expected.number , 'Number matches.' );
+
+      currentTestRecord++;
       next();
+    }, () => {
+      test.end();
     });
+
     dataStream.pipe( testStream );
   }
 );

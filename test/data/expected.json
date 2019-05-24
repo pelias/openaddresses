@@ -4,12 +4,8 @@
     "_type": "address",
     "_id": "data/input_file_1:0",
     "data": {
-      "name": {
-        "default": "100 Main St"
-      },
-      "phrase": {
-        "default": "100 Main St"
-      },
+      "name": {},
+      "phrase": {},
       "parent": {
         "country": [
           "override country"
@@ -112,12 +108,8 @@
     "_type": "address",
     "_id": "data/input_file_1:1",
     "data": {
-      "name": {
-        "default": "200 Main St"
-      },
-      "phrase": {
-        "default": "200 Main St"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "200",
         "street": "Main St"
@@ -136,12 +128,8 @@
     "_type": "address",
     "_id": "data/input_file_1:2",
     "data": {
-      "name": {
-        "default": "0 Main St"
-      },
-      "phrase": {
-        "default": "0 Main St"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "0",
         "street": "Main St"
@@ -160,12 +148,8 @@
     "_type": "address",
     "_id": "data/input_file_1:3",
     "data": {
-      "name": {
-        "default": "00 Elm St"
-      },
-      "phrase": {
-        "default": "00 Elm St"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00",
         "street": "Elm St"
@@ -184,12 +168,8 @@
     "_type": "address",
     "_id": "data/input_file_1:4",
     "data": {
-      "name": {
-        "default": "00300 Main St"
-      },
-      "phrase": {
-        "default": "00300 Main St"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00300",
         "street": "Main St"
@@ -208,12 +188,8 @@
     "_type": "address",
     "_id": "data/input_file_2:0",
     "data": {
-      "name": {
-        "default": "400 Vireo Rd"
-      },
-      "phrase": {
-        "default": "400 Vireo Rd"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "400",
         "street": "Vireo Rd"
@@ -232,12 +208,8 @@
     "_type": "address",
     "_id": "data/input_file_2:1",
     "data": {
-      "name": {
-        "default": "00000 Vireo Rd"
-      },
-      "phrase": {
-        "default": "00000 Vireo Rd"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00000",
         "street": "Vireo Rd"
@@ -256,12 +228,8 @@
     "_type": "address",
     "_id": "data/input_file_2:2",
     "data": {
-      "name": {
-        "default": "00500 Calle De Lago"
-      },
-      "phrase": {
-        "default": "00500 Calle De Lago"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00500",
         "street": "Calle De Lago"
@@ -280,12 +248,8 @@
     "_type": "address",
     "_id": "data/input_file_2:3",
     "data": {
-      "name": {
-        "default": "00500 Calle De Lago"
-      },
-      "phrase": {
-        "default": "00500 Calle De Lago"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00500",
         "street": "Calle De Lago"
