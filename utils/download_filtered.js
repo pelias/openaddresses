@@ -1,6 +1,5 @@
-'use strict';
-
 const child_process = require('child_process');
+const config = require( 'pelias-config' ).generate();
 const async = require('async');
 const fs = require('fs-extra');
 const tmp = require('tmp');
@@ -24,7 +23,7 @@ function downloadFiltered(config, callback) {
 
 }
 
-function downloadSource(targetDir, file, callback) {
+function downloadSource(targetDir, file, main_callback) {
   logger.info(`Downloading ${file}`);
 
   const source = file.replace('.csv', '.zip');
@@ -47,7 +46,14 @@ function downloadSource(targetDir, file, callback) {
       // delete the temp downloaded zip file
       fs.remove.bind(null, tmpZipFile)
     ],
-    callback);
+    function(err) {
+      if (err) {
+          logger.warn(`failed to download ${sourceUrl}: ${err}`);
+      }
+
+      const errorsFatal = config.get('imports.openaddresses.missingFilesAreFatal');
+      main_callback(errorsFatal ? err : null);
+    });
 }
 
 module.exports = downloadFiltered;
