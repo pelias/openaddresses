@@ -24,11 +24,23 @@ function downloadFiltered(config, callback) {
 }
 
 function downloadSource(targetDir, file, main_callback) {
+  const errorsFatal = config.get('imports.openaddresses.missingFilesAreFatal');
   logger.info(`Downloading ${file}`);
 
   const source = file.replace('.csv', '.zip');
-  const name = file.replace('.csv', '').replace(/\//g,'-');
   const sourceUrl = `https://results.openaddresses.io/latest/run/${source}`;
+
+  // sources MUST end with '.csv'
+  if( !source.endsWith('.csv') ){
+    let msg = `invalid source '${source}': MUST end with '.csv'`;
+    logger.warn(msg);
+
+    // respect 'imports.openaddresses.missingFilesAreFatal' setting
+    main_callback(errorsFatal ? msg : null);
+    return;
+  }
+
+  const name = file.replace('.csv', '').replace(/\//g,'-');
   const tmpZipFile = tmp.tmpNameSync({prefix: name, dir: targetDir, postfix: '.zip'});
 
   async.series(
@@ -51,7 +63,7 @@ function downloadSource(targetDir, file, main_callback) {
           logger.warn(`failed to download ${sourceUrl}: ${err}`);
       }
 
-      const errorsFatal = config.get('imports.openaddresses.missingFilesAreFatal');
+      // honour 'imports.openaddresses.missingFilesAreFatal' setting
       main_callback(errorsFatal ? err : null);
     });
 }
