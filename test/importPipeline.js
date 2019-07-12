@@ -1,48 +1,40 @@
-var fs = require( 'fs' );
-var path = require( 'path');
+const _ = require('lodash');
+const path = require('path');
+const tape = require('tape');
+const map = require('through2-map');
+const proxyquire = require('proxyquire');
+const stream_mock = require('stream-mock');
 
-var tape = require( 'tape' );
-var event_stream = require( 'event-stream' );
-var deep = require( 'deep-diff' );
-var map = require('through2-map');
-var _ = require('lodash');
-var proxyquire = require('proxyquire');
-
-
-var basePath = path.resolve(__dirname);
-var expectedPath = basePath + '/data/expected.json';
-var inputFiles =  [ basePath + '/data/input_file_1.csv', basePath + '/data/input_file_2.csv'];
+const expectedPath = path.join(__dirname, 'data/expected.json');
+const expected = require(expectedPath);
 
 tape('functional test of importing two small OA files', function(t) {
-  var expected = JSON.parse(fs.readFileSync(expectedPath));
+  // expect two assertions, one for the error and one for the data
+  t.plan(2);
 
-  // return a stream that does the actual test
-  function fakeDbclient() {
-    return event_stream.writeArray(function(err, results) {
-      // uncomment this to write the actual results to the expected file
-      // make sure they look ok though. comma left off so jshint reminds you
-      // not to commit this line
-      //fs.writeFileSync(expectedPath, JSON.stringify(results, null, 2))
+  const assert = (err, actual) => {
+    // uncomment this to write the actual results to the expected file
+    // make sure they look ok though. comma left off so jshint reminds you
+    // not to commit this line
+    // fs.writeFileSync(expectedPath, JSON.stringify(actual, null, 2))
 
-      var diff = deep(expected, results);
+    t.error(err);
+    t.deepEquals(actual, expected);
+    t.end();
+  };
 
-      if (diff) {
-        t.fail('expected and actual output are not the same');
-        console.log(diff);
-      } else {
-        t.pass('expected and actual output are the same');
-      }
-      t.end();
-    });
-  }
-
-  var importPipeline = proxyquire( '../lib/importPipeline', {
-  'pelias-dbclient': fakeDbclient
+  const importPipeline = proxyquire('../lib/importPipeline', {
+    'pelias-dbclient': () => {
+      const dbclient = new stream_mock.ObjectWritableMock();
+      dbclient.on('error', (e) => assert(e));
+      dbclient.on('finish', () => assert(null, dbclient.data));
+      return dbclient;
+    }
   });
 
   // mock admin lookup stream to show that input file admin values are ignored
   // and replaced with overrides from adminLookup
-  var adminLookupStream = map.obj(function(record) {
+  const adminLookupStream = map.obj((record) => {
     // we're only concerned about one record being modified
     if (_.isEqual(record.center_point, { lat: 12.121212, lon: 21.212121})) {
       record.addParent('country', 'override country', '1');
@@ -59,6 +51,11 @@ tape('functional test of importing two small OA files', function(t) {
     return record;
   });
 
-  importPipeline.create(inputFiles, basePath, adminLookupStream);
+  // test fixtures
+  const inputFiles = [
+    path.join(__dirname, 'data/input_file_1.csv'),
+    path.join(__dirname, 'data/input_file_2.csv')
+  ];
 
+  importPipeline.create(inputFiles, path.resolve(__dirname), adminLookupStream);
 });
