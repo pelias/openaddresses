@@ -1,15 +1,17 @@
 'use strict';
 
 const tape = require( 'tape' );
-const event_stream = require( 'event-stream' );
+
+const stream_mock = require('stream-mock');
 
 const DocumentStream = require( '../../lib/streams/documentStream' );
 
 function test_stream(input, testedStream, callback) {
-  const input_stream = event_stream.readArray(input);
-  const destination_stream = event_stream.writeArray(callback);
-
-  input_stream.pipe(testedStream).pipe(destination_stream);
+  const reader = new stream_mock.ObjectReadableMock(input);
+  const writer = new stream_mock.ObjectWritableMock();
+  writer.on('error', (e) => callback(e));
+  writer.on('finish', () => callback(null, writer.data));
+  reader.pipe(testedStream).pipe(writer);
 }
 
 tape( 'documentStream catches records with no street', function(test) {

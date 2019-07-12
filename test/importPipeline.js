@@ -2,23 +2,40 @@ var fs = require( 'fs' );
 var path = require( 'path');
 
 var tape = require( 'tape' );
-var event_stream = require( 'event-stream' );
 var deep = require( 'deep-diff' );
 var map = require('through2-map');
 var _ = require('lodash');
 var proxyquire = require('proxyquire');
-
+const stream = require('stream');
 
 var basePath = path.resolve(__dirname);
 var expectedPath = basePath + '/data/expected.json';
 var inputFiles =  [ basePath + '/data/input_file_1.csv', basePath + '/data/input_file_2.csv'];
+
+function writableStreamArray(cb) {
+
+  const s = new stream.Stream();
+  let arr = [];
+  let streamFinished = false;
+
+  s.end = function() {
+    streamFinished = true;
+    cb(null, arr);
+  };
+
+  s.write = function (ele) {
+    arr.push(ele);
+  };
+
+  return s;
+}
 
 tape('functional test of importing two small OA files', function(t) {
   var expected = JSON.parse(fs.readFileSync(expectedPath));
 
   // return a stream that does the actual test
   function fakeDbclient() {
-    return event_stream.writeArray(function(err, results) {
+    return writableStreamArray(function(err, results) {
       // uncomment this to write the actual results to the expected file
       // make sure they look ok though. comma left off so jshint reminds you
       // not to commit this line
