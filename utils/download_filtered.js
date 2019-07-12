@@ -31,13 +31,12 @@ function downloadSource(targetDir, file, main_callback) {
   const sourceUrl = `https://results.openaddresses.io/latest/run/${source}`;
 
   // sources MUST end with '.csv'
-  if( !source.endsWith('.csv') ){
-    let msg = `invalid source '${source}': MUST end with '.csv'`;
+  if( !file.endsWith('.csv') ){
+    const msg = `invalid source '${file}': MUST end with '.csv'`;
     logger.warn(msg);
 
     // respect 'imports.openaddresses.missingFilesAreFatal' setting
-    main_callback(errorsFatal ? msg : null);
-    return;
+    return main_callback(errorsFatal ? msg : null);
   }
 
   const name = file.replace('.csv', '').replace(/\//g,'-');
