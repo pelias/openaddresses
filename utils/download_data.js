@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 const config = require( 'pelias-config' ).generate(require('../schema'));
-const logger = require('pelias-logger').get('download');
+const logger = require('pelias-logger').get('openaddresses-download');
 
 const downloadAll = require('./download_all');
 const downloadFiltered = require('./download_filtered');
