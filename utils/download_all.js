@@ -20,10 +20,10 @@ function downloadAll(config, callback) {
     async.each(
       [
         // all non-share-alike data
-        'https://s3.amazonaws.com/data.openaddresses.io/openaddr-collected-global.zip',
+        'https://data.openaddresses.io/openaddr-collected-global.zip',
 
         // all share-alike data
-        'https://s3.amazonaws.com/data.openaddresses.io/openaddr-collected-global-sa.zip'
+        'https://data.openaddresses.io/openaddr-collected-global-sa.zip'
       ],
       downloadBundle.bind(null, targetDir),
       callback);
