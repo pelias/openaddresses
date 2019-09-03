@@ -23,10 +23,14 @@ function downloadFiltered(config, callback) {
       maxConcurrent: 1,
       minTime: 3000
     };
-    const limiter = new Bottleneck(options)
-      .on('empty', callback); // This will be called when `limiter.empty()` becomes true.
+    const limiter = new Bottleneck(options);
+    const callbackOnLastOne = () => {
+      if (limiter.empty()) {
+        callback();
+      }
+    };
     files.map(file => {
-      limiter.submit(downloadSource, targetDir, file, null);
+      limiter.submit(downloadSource, targetDir, file, callbackOnLastOne);
     });
     process.on('SIGINT', () => {
       limiter.stop({dropWaitingJobs: true});
