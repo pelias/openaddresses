@@ -8,6 +8,7 @@
   "main": "import.js",
   "dependencies": {
     "async": "^2.5.0",
+    "bottleneck": "^2.19.5",
     "combined-stream": "^1.0.7",
     "csv-parse": "^4.0.0",
     "fs-extra": "^7.0.0",
