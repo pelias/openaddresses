@@ -28,6 +28,10 @@ function downloadFiltered(config, callback) {
     files.map(file => {
       limiter.submit(downloadSource, targetDir, file, null);
     });
+    process.on('SIGINT', () => {
+      limiter.stop({dropWaitingJobs: true});
+      process.exit();
+    });
   });
 
 }
