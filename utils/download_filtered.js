@@ -19,9 +19,11 @@ function downloadFiltered(config, callback) {
     logger.info(`Attempting to download selected data files: ${files.map(file => file.csv)}`);
 
     // limit requests to avoid being banned by openaddresses.io
+    // current policy is 10 request per minute
+    // https://github.com/pelias/openaddresses/issues/433#issuecomment-527383976
     const options = {
       maxConcurrent: 1,
-      minTime: 3000
+      minTime: 6000
     };
     const limiter = new Bottleneck(options);
     const callbackOnLastOne = () => {
