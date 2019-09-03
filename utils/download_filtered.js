@@ -4,8 +4,7 @@ const async = require('async');
 const fs = require('fs-extra');
 const tmp = require('tmp');
 const logger = require('pelias-logger').get('openaddresses-download');
-const RequestQueue = require('limited-request-queue');
-const URL = require('url').URL;
+const Bottleneck = require('bottleneck/es5');
 
 function downloadFiltered(config, callback) {
   const targetDir = config.imports.openaddresses.datapath;
@@ -19,18 +18,15 @@ function downloadFiltered(config, callback) {
     const files = getFiles(config, targetDir, callback);
     logger.info(`Attempting to download selected data files: ${files.map(file => file.csv)}`);
 
-    // wait to avoid being banned by openaddresses.io
+    // limit requests to avoid being banned by openaddresses.io
     const options = {
-      maxSockets: 1,
-      rateLimit: 3000
+      maxConcurrent: 1,
+      minTime: 3000
     };
-    const queue = new RequestQueue.default(options)
-      .on(RequestQueue.ITEM_EVENT, (url, data, done) => {
-        downloadSource(targetDir, data.file, () => done());
-      })
-      .on(RequestQueue.END_EVENT, callback);
+    const limiter = new Bottleneck(options)
+      .on('empty', callback); // This will be called when `limiter.empty()` becomes true.
     files.map(file => {
-      queue.enqueue(new URL(file.url), {file: file});
+      limiter.submit(downloadSource, targetDir, file, null);
     });
   });
 
