@@ -89,11 +89,31 @@ hash. A sample configuration file might look like this:
 
 The following configuration options are supported by this importer.
 
-| key | required | default | description |
-| --- | --- | --- | --- |
-| `datapath` | yes | | The absolute path of the directory containing OpenAddresses files. Must be specified if no directory is given as a command-line argument. |
-| `files` | no | | An array of the names of the files to download/import. If specified, *only* these files will be downloaded and imported, rather than *all* `.csv` files in the given directory. **If the array is empty, all files will be downloaded and imported.** Refer to the [OpenAddresses data listing]( http://results.openaddresses.io/?runs=all#runs) for file names.|
-| `missingFilesAreFatal` | no | false | If set to true, any missing files will immediately halt the importer with an error. Otherwise, the importer will continue processing with a warning |
+### `imports.openaddresses.datapath`
+
+* Required: yes
+* Default: ``
+
+The absolute path to a directory where OpenAddresses data is located. The download command will also automatically place downloaded files in this directory.
+
+### `imports.openaddresses.files`
+
+* Required: no
+* Default: `[]`
+
+An array of OpenAddresses files to be downloaded (full list can be found on the
+[OpenAddresses results site](http://results.openaddresses.io/?runs=all#runs)).
+If no files are specified, the full planet data files (11GB+) will be
+downloaded.
+
+### `imports.openaddresses.missingFilesAreFatal
+
+* Required: no
+* Default: `false`
+
+If set to true, any missing files will immediately halt the importer with an
+error. Otherwise, the importer will continue processing with a warning. The
+data downloader will also continue if any download errors were encountered with this set to false.
 
 ## Parallel Importing
 
