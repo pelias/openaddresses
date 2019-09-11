@@ -115,6 +115,17 @@ If set to true, any missing files will immediately halt the importer with an
 error. Otherwise, the importer will continue processing with a warning. The
 data downloader will also continue if any download errors were encountered with this set to false.
 
+### `imports.openaddresses.dataHost`
+
+* Required: no
+* Default: `https://data.openaddresses.io`
+
+The location from which to download OpenAddresses data from. By default, the
+primary OpenAddresses servers will be used. This can be overrriden to allow
+downloading customized data. Paths are supported (for example,
+`https://yourhost.com/path/to/your/data`), but must not end with a trailing
+slash.
+
 ## Parallel Importing
 
 Because OpenAddresses consists of many small files, this importer can be configured to run several instances in parallel that coordinate to import all the data.

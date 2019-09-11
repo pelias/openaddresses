@@ -15,13 +15,15 @@ function downloadAll(config, callback) {
       return callback(err);
     }
 
+    const dataHost = config.get('imports.openaddresses.dataHost') || 'https://data.openaddresses.io';
+
     async.each(
       [
         // all non-share-alike data
-        'https://data.openaddresses.io/openaddr-collected-global.zip',
+        `${dataHost}/openaddr-collected-global.zip`,
 
         // all share-alike data
-        'https://data.openaddresses.io/openaddr-collected-global-sa.zip'
+        `${dataHost}/openaddr-collected-global-sa.zip`
       ],
       downloadBundle.bind(null, targetDir),
       callback);
