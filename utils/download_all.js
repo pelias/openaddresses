@@ -1,5 +1,3 @@
-'use strict';
-
 const child_process = require('child_process');
 const async = require('async');
 const fs = require('fs-extra');

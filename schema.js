@@ -1,5 +1,3 @@
-'use strict';
-
 const Joi = require('joi');
 
 // Schema Configuration

@@ -1,5 +1,3 @@
-'use strict';
-
 const tape = require( 'tape' );
 const Joi = require('joi');
 const schema = require( '../schema' );

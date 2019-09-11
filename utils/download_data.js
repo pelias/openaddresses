@@ -1,5 +1,3 @@
-'use strict';
-
 const _ = require('lodash');
 const config = require( 'pelias-config' ).generate(require('../schema'));
 const logger = require('pelias-logger').get('openaddresses-download');
