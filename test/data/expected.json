@@ -1,8 +1,8 @@
 [
   {
     "_index": "pelias",
-    "_type": "address",
     "_id": "openaddresses:address:data/input_file_1:0",
+    "_type": "doc",
     "data": {
       "name": {
         "default": "100 Main St"
@@ -109,8 +109,8 @@
   },
   {
     "_index": "pelias",
-    "_type": "address",
     "_id": "openaddresses:address:data/input_file_1:1",
+    "_type": "doc",
     "data": {
       "name": {
         "default": "200 Main St"
@@ -133,8 +133,8 @@
   },
   {
     "_index": "pelias",
-    "_type": "address",
     "_id": "openaddresses:address:data/input_file_1:2",
+    "_type": "doc",
     "data": {
       "name": {
         "default": "0 Main St"
@@ -157,8 +157,8 @@
   },
   {
     "_index": "pelias",
-    "_type": "address",
     "_id": "openaddresses:address:data/input_file_1:3",
+    "_type": "doc",
     "data": {
       "name": {
         "default": "00 Elm St"
@@ -181,8 +181,8 @@
   },
   {
     "_index": "pelias",
-    "_type": "address",
     "_id": "openaddresses:address:data/input_file_1:4",
+    "_type": "doc",
     "data": {
       "name": {
         "default": "00300 Main St"
@@ -205,8 +205,8 @@
   },
   {
     "_index": "pelias",
-    "_type": "address",
     "_id": "openaddresses:address:data/input_file_2:0",
+    "_type": "doc",
     "data": {
       "name": {
         "default": "400 Vireo Rd"
@@ -229,8 +229,8 @@
   },
   {
     "_index": "pelias",
-    "_type": "address",
     "_id": "openaddresses:address:data/input_file_2:1",
+    "_type": "doc",
     "data": {
       "name": {
         "default": "00000 Vireo Rd"
@@ -253,8 +253,8 @@
   },
   {
     "_index": "pelias",
-    "_type": "address",
     "_id": "openaddresses:address:data/input_file_2:2",
+    "_type": "doc",
     "data": {
       "name": {
         "default": "00500 Calle De Lago"
@@ -277,8 +277,8 @@
   },
   {
     "_index": "pelias",
-    "_type": "address",
     "_id": "openaddresses:address:data/input_file_2:3",
+    "_type": "doc",
     "data": {
       "name": {
         "default": "00500 Calle De Lago"
