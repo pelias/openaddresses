@@ -17,7 +17,7 @@
     "lodash": "^4.16.0",
     "minimist": "^1.2.0",
     "pelias-blacklist-stream": "^1.0.0",
-    "pelias-config": "^3.3.0",
+    "pelias-config": "^4.1.0",
     "pelias-dbclient": "^2.8.0",
     "pelias-logger": "^1.2.1",
     "pelias-model": "^6.0.0",
