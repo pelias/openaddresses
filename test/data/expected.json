@@ -1,7 +1,7 @@
 [
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:0",
+    "_id": "openaddresses:address:data/input_file_1:30ffa79e5dc1a56d",
     "_type": "doc",
     "data": {
       "name": {
@@ -104,12 +104,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:0"
+      "source_id": "data/input_file_1:30ffa79e5dc1a56d"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:1",
+    "_id": "openaddresses:address:data/input_file_1:bbf7eee6b93e0a98",
     "_type": "doc",
     "data": {
       "name": {
@@ -128,12 +128,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:1"
+      "source_id": "data/input_file_1:bbf7eee6b93e0a98"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:2",
+    "_id": "openaddresses:address:data/input_file_1:2376569de5cd9453",
     "_type": "doc",
     "data": {
       "name": {
@@ -152,12 +152,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:2"
+      "source_id": "data/input_file_1:2376569de5cd9453"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:3",
+    "_id": "openaddresses:address:data/input_file_1:1b2747d60708b5da",
     "_type": "doc",
     "data": {
       "name": {
@@ -176,12 +176,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:3"
+      "source_id": "data/input_file_1:1b2747d60708b5da"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:4",
+    "_id": "openaddresses:address:data/input_file_1:f3434edf57eff004",
     "_type": "doc",
     "data": {
       "name": {
@@ -200,12 +200,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:4"
+      "source_id": "data/input_file_1:f3434edf57eff004"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_2:0",
+    "_id": "openaddresses:address:data/input_file_2:0d9f51f5926d3373",
     "_type": "doc",
     "data": {
       "name": {
@@ -224,12 +224,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_2:0"
+      "source_id": "data/input_file_2:0d9f51f5926d3373"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_2:1",
+    "_id": "openaddresses:address:data/input_file_2:1f21520c9f4df36f",
     "_type": "doc",
     "data": {
       "name": {
@@ -248,12 +248,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_2:1"
+      "source_id": "data/input_file_2:1f21520c9f4df36f"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_2:2",
+    "_id": "openaddresses:address:data/input_file_2:b87805454ead82d0",
     "_type": "doc",
     "data": {
       "name": {
@@ -272,12 +272,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_2:2"
+      "source_id": "data/input_file_2:b87805454ead82d0"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_2:3",
+    "_id": "openaddresses:address:data/input_file_2:eba176e31fdf30d7",
     "_type": "doc",
     "data": {
       "name": {
@@ -296,7 +296,7 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_2:3"
+      "source_id": "data/input_file_2:eba176e31fdf30d7"
     }
   }
 ]
