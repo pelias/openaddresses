@@ -20,7 +20,7 @@
     "pelias-config": "^4.1.0",
     "pelias-dbclient": "^2.8.0",
     "pelias-logger": "^1.2.1",
-    "pelias-model": "^7.0.0",
+    "pelias-model": "git://github.com/pelias/model.git#seperable_street_names",
     "pelias-wof-admin-lookup": "^5.3.0",
     "through2": "^3.0.0",
     "through2-filter": "^3.0.0",
