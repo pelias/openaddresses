@@ -106,7 +106,7 @@ An array of OpenAddresses files to be downloaded (full list can be found on the
 If no files are specified, the full planet data files (11GB+) will be
 downloaded.
 
-### `imports.openaddresses.missingFilesAreFatal
+### `imports.openaddresses.missingFilesAreFatal`
 
 * Required: no
 * Default: `false`
