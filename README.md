@@ -136,4 +136,4 @@ To use this functionality, replace calls to `npm start` with
 npm run parallel 3 # replace 3 with your desired level of paralellism
 ```
 
-Generally, a paralellism of 2 or 3 is suitable for most tasks.
+Generally, a parallelism of 2 or 3 is suitable for most tasks.
