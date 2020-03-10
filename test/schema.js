@@ -1,13 +1,11 @@
 const tape = require( 'tape' );
-const Joi = require('joi');
 const schema = require( '../schema' );
 
 function validate(config) {
-  Joi.validate(config, schema, (err) => {
-    if (err) {
-      throw new Error(err.details[0].message);
-    }
-  });
+  const result = schema.validate(config);
+  if (result.error) {
+    throw new Error(result.error.details[0].message);
+  }
 }
 
 tape('missing imports should throw error', function(test) {
@@ -24,7 +22,7 @@ tape('non-object imports should throw error', function(test) {
       imports: value
     };
 
-    test.throws(validate.bind(null, config), /"imports" must be an object/);
+    test.throws(validate.bind(null, config), /"imports" must be of type object/);
   });
 
   test.end();
@@ -37,7 +35,7 @@ tape('missing imports.openaddresses should throw error', function(test) {
     }
   };
 
-  test.throws(validate.bind(null, config), /"openaddresses" is required/);
+  test.throws(validate.bind(null, config), /"imports.openaddresses" is required/);
   test.end();
 
 });
@@ -50,7 +48,7 @@ tape('non-object imports.openaddresses should throw error', function(test) {
       }
     };
 
-    test.throws(validate.bind(null, config), /"openaddresses" must be an object/);
+    test.throws(validate.bind(null, config), /"imports.openaddresses" must be of type object/);
   });
 
   test.end();
@@ -64,7 +62,7 @@ tape( 'missing datapath should throw error', function(test) {
     }
   };
 
-  test.throws(validate.bind(null, config), /"datapath" is required/);
+  test.throws(validate.bind(null, config), /"imports.openaddresses.datapath" is required/);
   test.end();
 
 });
@@ -79,7 +77,7 @@ tape( 'non-string datapath should throw error', function(test) {
       }
     };
 
-    test.throws(validate.bind(null, config), /"datapath" must be a string/);
+    test.throws(validate.bind(null, config), /"imports.openaddresses.datapath" must be a string/);
 
   });
 
@@ -97,7 +95,7 @@ tape( 'non-array files should throw error', function(test) {
       }
     };
 
-    test.throws(validate.bind(null, config), /"files" must be an array/);
+    test.throws(validate.bind(null, config), /"imports.openaddresses.files" must be an array/);
   });
 
   test.end();
@@ -114,7 +112,8 @@ tape( 'non-string elements in files array should throw error', function(test) {
       }
     };
 
-    test.throws(validate.bind(null, config), /"0" must be a string/, 'files elements must be strings');
+    test.throws(validate.bind(null, config),
+      /"imports.openaddresses.files\[0\]" must be a string/, 'files elements must be strings');
   });
 
   test.end();
@@ -131,7 +130,8 @@ tape( 'non-boolean adminLookup should throw error', function(test) {
       }
     };
 
-    test.throws(validate.bind(null, config), /"adminLookup" must be a boolean/);
+    test.throws(validate.bind(null, config),
+      /"imports.openaddresses.adminLookup" must be a boolean/);
   });
 
   test.end();
@@ -147,7 +147,8 @@ tape( 'unknown config fields should throw error', function(test) {
     }
   };
 
-  test.throws(validate.bind(null, config), /"unknown" is not allowed/, 'unknown fields should be disallowed');
+  test.throws(validate.bind(null, config),
+    /"imports.openaddresses.unknown" is not allowed/, 'unknown fields should be disallowed');
   test.end();
 
 });
