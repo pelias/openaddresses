@@ -1,17 +1,17 @@
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
 // Schema Configuration
 // datapath: string (required)
 // files: array of strings
 // adminLookup: boolean
 module.exports = Joi.object().keys({
-  imports: Joi.object().keys({
-    openaddresses: Joi.object().keys({
+  imports: Joi.object().required().keys({
+    openaddresses: Joi.object().required().keys({
       files: Joi.array().items(Joi.string()),
-      datapath: Joi.string(),
+      datapath: Joi.string().required(true),
       dataHost: Joi.string(),
       adminLookup: Joi.boolean(),
-      missingFilesAreFatal: Joi.boolean().default(false).truthy('yes').falsy('no').insensitive(true)
-    }).requiredKeys('datapath').unknown(false)
-  }).requiredKeys('openaddresses').unknown(true)
-}).requiredKeys('imports').unknown(true);
+      missingFilesAreFatal: Joi.boolean().default(false).truthy('yes').falsy('no')
+    }).unknown(false)
+  }).unknown(true)
+}).unknown(true);
