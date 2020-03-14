@@ -7,7 +7,7 @@
   },
   "main": "import.js",
   "dependencies": {
-    "@hapi/joi": "^16.0.1",
+    "@hapi/joi": "^17.1.1",
     "async": "^3.1.0",
     "bottleneck": "^2.19.5",
     "combined-stream": "^1.0.7",
