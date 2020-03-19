@@ -1,6 +1,6 @@
 const child_process = require('child_process');
 const async = require('async');
-const fs = require('fs-extra');
+const fs = require('fs');
 const tmp = require('tmp');
 const logger = require('pelias-logger').get('openaddresses-download');
 
@@ -9,7 +9,7 @@ function downloadAll(config, callback) {
 
   const targetDir = config.imports.openaddresses.datapath;
 
-  fs.ensureDir(targetDir, (err) => {
+  fs.mkdir(targetDir, { recursive: true }, (err) => {
     if (err) {
       logger.error(`error making directory ${targetDir}`, err);
       return callback(err);
