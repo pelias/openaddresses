@@ -9,6 +9,7 @@ require( './importPipeline');
 require( './parameters' );
 require( './streams/cleanupStream' );
 require( './streams/contentHashStream' );
+require( './streams/streetlessAddressStream' );
 require( './streams/documentStream' );
 require( './streams/germanicAbbreviationStream');
 require( './streams/isUSorCAHouseNumberZero' );
