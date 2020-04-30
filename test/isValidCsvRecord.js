@@ -144,8 +144,8 @@ tape('record with lon/lat parseable as 0/0 should return false', test => {
 
 tape('record with lon/lat parseable as 0/non-0 should return true', test => {
   const record = {
-    LON: '0.000000',
-    LAT: '0.000001',
+    LON: '0.0000',
+    LAT: '0.0006',
     NUMBER: 'Number',
     STREET: 'Street'
   };
@@ -157,13 +157,39 @@ tape('record with lon/lat parseable as 0/non-0 should return true', test => {
 
 tape('record with lon/lat parseable as non-0/0 should return true', test => {
   const record = {
+    LON: '0.0006',
+    LAT: '0.0000',
+    NUMBER: 'Number',
+    STREET: 'Street'
+  };
+
+  test.ok( isValidCsvRecord(record), 'should be accepted');
+  test.end();
+
+});
+
+tape('record with lon/lat very close to 0,0 should return false', test => {
+  const record = {
+    LON: '0.000000',
+    LAT: '0.000001',
+    NUMBER: 'Number',
+    STREET: 'Street'
+  };
+
+  test.notOk(isValidCsvRecord(record), 'should not be accepted - too near to 0,0');
+  test.end();
+
+});
+
+tape('record with lon/lat very close to 0,0 should return false', test => {
+  const record = {
     LON: '0.000001',
     LAT: '0.000000',
     NUMBER: 'Number',
     STREET: 'Street'
   };
 
-  test.ok( isValidCsvRecord(record), 'should be accepted');
+  test.notOk(isValidCsvRecord(record), 'should not be accepted - too near to 0,0');
   test.end();
 
 });
