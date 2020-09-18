@@ -2,7 +2,7 @@ const child_process = require('child_process');
 const config = require( 'pelias-config' ).generate();
 const async = require('async');
 const fs = require('fs-extra');
-const tmp = require('tmp');
+const temp = require('temp');
 const logger = require('pelias-logger').get('openaddresses-download');
 const Bottleneck = require('bottleneck/es5');
 
@@ -61,7 +61,7 @@ function getFiles(config, targetDir, main_callback){
     return {
       csv: file,
       url: `https://results.openaddresses.io/latest/run/${source}`,
-      zip: tmp.tmpNameSync({prefix: name, dir: targetDir, postfix: '.zip'})
+      zip: temp.path({prefix: name, dir: targetDir, suffix: '.zip'})
     };
   });
 }
