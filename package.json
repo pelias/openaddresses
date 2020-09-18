@@ -22,11 +22,11 @@
     "pelias-logger": "^1.2.1",
     "pelias-model": "^7.1.0",
     "pelias-wof-admin-lookup": "^7.3.0",
+    "temp": "^0.9.1",
     "through2": "^3.0.0",
     "through2-filter": "^3.0.0",
     "through2-map": "^3.0.0",
-    "through2-sink": "^1.0.0",
-    "tmp": "^0.1.0"
+    "through2-sink": "^1.0.0"
   },
   "devDependencies": {
     "jshint": "^2.9.4",
@@ -34,8 +34,7 @@
     "proxyquire": "^2.0.0",
     "stream-mock": "^2.0.3",
     "tap-spec": "^5.0.0",
-    "tape": "^5.0.0",
-    "temp": "^0.9.0"
+    "tape": "^5.0.0"
   },
   "scripts": {
     "download": "./bin/download",

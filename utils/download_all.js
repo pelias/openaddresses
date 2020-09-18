@@ -1,7 +1,7 @@
 const child_process = require('child_process');
 const async = require('async');
 const fs = require('fs-extra');
-const tmp = require('tmp');
+const temp = require('temp');
 const logger = require('pelias-logger').get('openaddresses-download');
 
 function downloadAll(config, callback) {
@@ -32,7 +32,7 @@ function downloadAll(config, callback) {
 
 function downloadBundle(targetDir, sourceUrl, callback) {
 
-  const tmpZipFile = tmp.tmpNameSync({postfix: '.zip'});
+  const tmpZipFile = temp.path({suffix: '.zip'});
 
   async.series(
     [
