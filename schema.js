@@ -10,6 +10,7 @@ module.exports = Joi.object().keys({
       files: Joi.array().items(Joi.string()),
       datapath: Joi.string().required(true),
       dataHost: Joi.string(),
+      s3Options: Joi.string(),
       adminLookup: Joi.boolean(),
       missingFilesAreFatal: Joi.boolean().default(false).truthy('yes').falsy('no')
     }).unknown(false)

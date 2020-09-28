@@ -3,6 +3,7 @@ const async = require('async');
 const fs = require('fs-extra');
 const temp = require('temp');
 const logger = require('pelias-logger').get('openaddresses-download');
+const _ = require('lodash');
 
 function downloadAll(config, callback) {
   logger.info('Attempting to download all data');
@@ -25,12 +26,12 @@ function downloadAll(config, callback) {
         // all share-alike data
         `${dataHost}/openaddr-collected-global-sa.zip`
       ],
-      downloadBundle.bind(null, targetDir),
+      downloadBundle.bind(null, targetDir, config),
       callback);
   });
 }
 
-function downloadBundle(targetDir, sourceUrl, callback) {
+function downloadBundle(targetDir, config, sourceUrl, callback) {
 
   const tmpZipFile = temp.path({suffix: '.zip'});
 
@@ -39,7 +40,12 @@ function downloadBundle(targetDir, sourceUrl, callback) {
       // download the zip file into the temp directory
       (callback) => {
         logger.debug(`downloading ${sourceUrl}`);
-        child_process.exec(`curl -s -L -X GET -o ${tmpZipFile} ${sourceUrl}`, callback);
+        if (_.startsWith(sourceUrl, 's3://')) {
+          const s3Options = config.imports.openaddresses.s3Options || '';
+          child_process.exec(`aws s3 cp ${sourceUrl} ${tmpZipFile} ${s3Options}`, callback);
+        } else {
+          child_process.exec(`curl -s -L -X GET -o ${tmpZipFile} ${sourceUrl}`, callback);
+        }
       },
       // unzip file into target directory
       (callback) => {

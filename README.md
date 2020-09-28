@@ -145,6 +145,23 @@ downloading customized data. Paths are supported (for example,
 `https://yourhost.com/path/to/your/data`), but must not end with a trailing
 slash.
 
+S3 buckets are supported. Files will be downloaded using aws-cli.
+
+For example: `s3://data.openaddresses.io`.
+
+Note: When using s3, you might need authentcation (IAM instance role, env vars, etc.)
+
+### `imports.openaddresses.s3Options`
+
+* Required: no
+
+If `imports.openaddresses.dataHost` is an s3 bucket, this will add options to the command.
+For example: `--profile my-profile`
+
+This is useful, for example, when downloading from `s3://data.openaddresses.io`,
+as they require the requester to pay for data transfer.
+You can then use the following option: `--request-payer`
+
 ## Parallel Importing
 
 Because OpenAddresses consists of many small files, this importer can be configured to run several instances in parallel that coordinate to import all the data.
