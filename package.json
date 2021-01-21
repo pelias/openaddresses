@@ -22,6 +22,7 @@
     "pelias-logger": "^1.2.1",
     "pelias-model": "^7.1.0",
     "pelias-wof-admin-lookup": "^7.3.0",
+    "split2": "^3.2.2",
     "temp": "^0.9.1",
     "through2": "^3.0.0",
     "through2-filter": "^3.0.0",
