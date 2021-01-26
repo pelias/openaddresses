@@ -1,0 +1,3 @@
+state highway|s.highway|s highway|st.highway|st highway|sh|s.h.|s.h|s h|st.h|st h|s.hw|s hw|st.hw|st hw|s.hwy|s hwy|shwy|s.hgwy|s hgwy|st.hgwy|st hgwy|s.hway|s hway|st.hway|st hway|s.hwy|s hwy|st.hwy|st hwy|s.hi|s hi|st.hi|st hi|statehighway
+state road|sr|stateroad|s.r.|s.r|s r|s.road|s road|st.road|st road|staterd|srd|s.rd|s rd|state rd|strd|st.rd|st rd
+state route|sr|stateroute|s.r.|s.r|s r|s.route|s route|st.route|st route|statert|srt|s.rt|s rt|srte|s.rte|s rte|state rt|state rte|strt|strte|st.rt|st rt|st.rte|st rte
