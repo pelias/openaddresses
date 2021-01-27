@@ -1,0 +1,5 @@
+beach|bch
+fort|ft
+mount|mt
+court|ct|crt
+square|sqr|sqre|squ|sq

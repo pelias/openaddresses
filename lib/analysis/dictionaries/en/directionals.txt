@@ -1,6 +1,5 @@
-center|c|ctr
-central|c|cn|ctrl|cntrl
-centre|c|ctr
+center|ctr
+central|cn|ctrl|cntrl
 east|e
 eastern|eastrn|estrn|estn
 lower|lowr|lwr
@@ -15,6 +14,6 @@ southeast|south east|southe|south e|seast|s east|se|s e|soeast|so east|so e|sthe
 southeastern|south eastern|southeastrn|south eastrn|southestrn|south estrn|southestn|south estn|seastern|s eastern|seastrn|s eastrn|sestrn|s estrn|sestn|s estn|soeastern|so eastern|soeastrn|so eastrn|soestrn|so estrn|soestn|so estn|stheastern|sth eastern|stheastrn|sth eastrn|sthestrn|sth estrn|sthestn|sth estn
 southwest|south west|southw|south w|southwst|south wst|swest|s west|sw|s w|swst|s wst|sowest|so west|so w|sowst|so wst|sthwest|sth west|sthw|sth w|sthwst|sth wst
 southwestern|south western|southwestrn|south westrn|southwstrn|south wstrn|southwstn|south wstn|swestern|s western|swestrn|s westrn|swstrn|s wstrn|swstn|s wstn|sowestern|so western|sowestrn|so westrn|sowstrn|so wstrn|sowstn|so wstn|sthwestern|sth western|sthwestrn|sth westrn|sthwstrn|sth wstrn|sthwstn|sth wstn
-upper|uppr|upr|up
+upper|uppr|upr
 west|w|wst
 western|westrn|wstrn|wstn
