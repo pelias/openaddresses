@@ -22,9 +22,9 @@ const stream = through((chunk, enc, next) => {
   // both analyzers produced the same result
   // skip these lines as they are not helpful
   // for debugging.
-  // if (columns[1] === columns[2]) {
-  //   return next();
-  // }
+  if (columns[1] === columns[2]) {
+    return next();
+  }
 
   var diffString = '';
   var hasRemoval = false;

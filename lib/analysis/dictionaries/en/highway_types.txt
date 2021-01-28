@@ -1,9 +1,0 @@
-state highway|s.highway|s highway|st.highway|st highway|sh|s.h.|s.h|s h|st.h|st h|s.hw|s hw|st.hw|st hw|s.hwy|s hwy|shwy|s.hgwy|s hgwy|st.hgwy|st hgwy|s.hway|s hway|st.hway|st hway|s hwy|st.hwy|st hwy|s.hi|s hi|st.hi|st hi|statehighway
-state route|sr|stateroute|s.r.|s.r|s r|s.route|s route|st.route|st route|statert|srt|s.rt|s rt|srte|s.rte|s rte|state rt|state rte|strt|strte|st.rt|st rt|st.rte|st rte
-county highway|ch|c.h.|c.h|c h|c.hw|c hw|co.hw|co hw|cty.hw|cty hw|c.hgwy|c hgwy|co.hgwy|co hgwy|cty.hgwy|cty hgwy|c.hway|c hway|co.hway|co hway|cty.hway|cty hway|c.hwy|c hwy|co.hwy|co hwy|cty.hwy|cty hwy|c.hi|c hi|co.hi|co hi|cty.hi|cty hi
-county route|cr|c.r.|c.r|c r|co.r|co r|c.rt|c rt|co.rt|co rt|cty.r|cty r|cty.rt|cty rt|c.rte|c rte|co.rte|co rte|cty.rte|cty rte|county touring route
-rural route|rr|r.r|r r
-township highway|th|t.h.|t.h|t h|twp.h|twp h|tshp.h|tshp h|t.hw|t hw|twp.hw|twp hw|tshp.hw|tshp hw|t.hgwy|t hgwy|twp.hgwy|twp hgwy|tshp.hgwy|tshp hgwy|t.hway|t hway|twp.hway|twp hway|tshp.hway|tshp hway|t.hwy|t hwy|twp.hwy|twp hwy|tshp.hwy|tshp hwy|t.hi|t hi|twp.hi|twp hi|tshp.hi|tshp hi
-township route|tr|t.r.|t.r|t r|t rt|t.rt|trt|t.rte|t rte|twpr|twp.r|twp r|twp.rt|twp rt|twp.rte|twp rte|tshp.r|tshp r|tshp.rt|tshp rt|tshp.rte|tshp rte
-us highway|us hwy|u s hwy
-us route|us rte|u s rte
