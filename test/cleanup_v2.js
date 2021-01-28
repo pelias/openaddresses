@@ -111,7 +111,9 @@ tape('generic expansion - multiple generic tokens', (t) => {
   t.end();
 });
 
-// --- Expanding the 'directional' part of the street name ---
+// --- Conversions of the 'directional' part of the street name ---
+// expand: N,S,E,W
+// contract: northwest,northeast,southwest,southeast
 
 // expand directionals
 // note: one issue with contracting directionals is getting
@@ -121,6 +123,12 @@ tape('expand directionals - first token position', (t) => {
   t.equal(analyzer('S Main Street'), 'South Main Street');
   t.equal(analyzer('E Main Street'), 'East Main Street');
   t.equal(analyzer('W Main Street'), 'West Main Street');
+
+  // no-op when already expanded
+  t.equal(analyzer('North Main Street'), 'North Main Street');
+  t.equal(analyzer('South Main Street'), 'South Main Street');
+  t.equal(analyzer('East Main Street'), 'East Main Street');
+  t.equal(analyzer('West Main Street'), 'West Main Street');
   t.end();
 });
 tape('expand directionals - last token position', (t) => {
@@ -128,24 +136,54 @@ tape('expand directionals - last token position', (t) => {
   t.equal(analyzer('Main Street S'), 'Main Street South');
   t.equal(analyzer('Main Street E'), 'Main Street East');
   t.equal(analyzer('Main Street W'), 'Main Street West');
+
+  // no-op when already expanded
+  t.equal(analyzer('Main Street North'), 'Main Street North');
+  t.equal(analyzer('Main Street South'), 'Main Street South');
+  t.equal(analyzer('Main Street East'), 'Main Street East');
+  t.equal(analyzer('Main Street West'), 'Main Street West');
   t.end();
 });
 
 // ignore diagonals
 // note: for now we will ignore diagonals since the expanded
 // for can we quite long.
-tape('expand directionals - first token position', (t) => {
+tape('contract diagonals - first token position', (t) => {
+  t.equal(analyzer('Northeast Main Street'), 'NE Main Street');
+  t.equal(analyzer('Southeast Main Street'), 'SE Main Street');
+  t.equal(analyzer('Northwest Main Street'), 'NW Main Street');
+  t.equal(analyzer('Southwest Main Street'), 'SW Main Street');
+
+  // no-op when already contracted
   t.equal(analyzer('NE Main Street'), 'NE Main Street');
   t.equal(analyzer('SE Main Street'), 'SE Main Street');
   t.equal(analyzer('NW Main Street'), 'NW Main Street');
   t.equal(analyzer('SW Main Street'), 'SW Main Street');
+
+  // uppercase contracted form
+  t.equal(analyzer('ne Main Street'), 'NE Main Street');
+  t.equal(analyzer('Se Main Street'), 'SE Main Street');
+  t.equal(analyzer('nW Main Street'), 'NW Main Street');
+  t.equal(analyzer('sw Main Street'), 'SW Main Street');
   t.end();
 });
-tape('expand directionals - last token position', (t) => {
+tape('contract diagonals - last token position', (t) => {
+  t.equal(analyzer('Main Street Northeast'), 'Main Street NE');
+  t.equal(analyzer('Main Street Southeast'), 'Main Street SE');
+  t.equal(analyzer('Main Street Northwest'), 'Main Street NW');
+  t.equal(analyzer('Main Street Southwest'), 'Main Street SW');
+
+  // no-op when already contracted
   t.equal(analyzer('Main Street NE'), 'Main Street NE');
   t.equal(analyzer('Main Street SE'), 'Main Street SE');
   t.equal(analyzer('Main Street NW'), 'Main Street NW');
   t.equal(analyzer('Main Street SW'), 'Main Street SW');
+
+  // uppercase contracted form
+  t.equal(analyzer('Main Street ne'), 'Main Street NE');
+  t.equal(analyzer('Main Street Se'), 'Main Street SE');
+  t.equal(analyzer('Main Street nW'), 'Main Street NW');
+  t.equal(analyzer('Main Street sw'), 'Main Street SW');
   t.end();
 });
 
@@ -189,6 +227,9 @@ tape('no-ops', (t) => {
   t.equal(analyzer('N Street'), 'N Street');
   t.equal(analyzer('No Street'), 'No Street');
   t.equal(analyzer('North Street'), 'North Street');
+  t.equal(analyzer('South Street'), 'South Street');
+  t.equal(analyzer('East Street'), 'East Street');
+  t.equal(analyzer('West Street'), 'West Street');
   t.equal(analyzer('Northe Street'), 'Northe Street');
 
   // do not anglicise/de-anglicise names
