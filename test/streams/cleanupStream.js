@@ -21,7 +21,7 @@ tape( 'cleanupStream trims whitespace from all fields', function(test) {
     POSTCODE: ' def '
   };
 
-  var cleanupStream = CleanupStream.create();
+  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
 
   test_stream([input], cleanupStream, function(err, records) {
     test.equal(records.length, 1, 'stream length unchanged');
@@ -65,7 +65,7 @@ tape( 'cleanupStream does NOT trim leading 0\'s from house numbers', function(te
     }
   ];
 
-  var cleanupStream = CleanupStream.create();
+  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
 
   test_stream(inputs, cleanupStream, function(err, actual) {
     test.deepEqual(actual, expecteds, 'leading 0\'s should not have been trimmed from NUMBER');
@@ -79,11 +79,11 @@ tape ( 'cleanupStream trims white space in street field', function(test){
       STREET: '34  West\t 93rd \nSt'
   };
 
-  var cleanupStream = CleanupStream.create();
+  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
 
   test_stream([input],cleanupStream, function(err,records){
     test.equal(records.length, 1, 'stream length unchanged');
-    test.equal(records[0].STREET, '34 West 93rd St');
+    test.equal(records[0].STREET, '34 West 93rd Street');
     test.end();
   });
 });
@@ -131,14 +131,14 @@ tape( 'cleanupStream converts all-caps street names to Title Case', function(tes
   },
   {
     NUMBER: '4',
-    STREET: 'É' //should handle non-ASCII characters that can be capitalized
+    STREET: 'É' //should only capitalize when more than one char
   },
   {
     NUMBER: '9',
     STREET: '丁目' //should handle non-latin characters
   }];
 
-  var cleanupStream = CleanupStream.create();
+  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
 
   test_stream(inputs,cleanupStream,function(err,actual){
     test.deepEqual(actual, expecteds,'we expect proper capitalization');
@@ -146,14 +146,14 @@ tape( 'cleanupStream converts all-caps street names to Title Case', function(tes
   });
 });
 
-tape( 'cleanupStream converts directionals to uppercase.', function(test){
+tape( 'cleanupStream expands directionals.', function(test){
   var inputs = [{
     NUMBER: '88',
-    STREET: 'ne GLASGOW STREET'
+    STREET: 'North East Glasgow Street'
   },
   {
     NUMBER: '76',
-    STREET : 'Sw McCallister Street'
+    STREET: 'South West McCallister Street'
   },
   {
     NUMBER: '9923736',
@@ -161,18 +161,18 @@ tape( 'cleanupStream converts directionals to uppercase.', function(test){
   }];
   var expecteds = [{
     NUMBER: '88',
-    STREET: 'NE Glasgow Street'
+    STREET: 'North East Glasgow Street'
   },
   {
     NUMBER: '76',
-    STREET : 'SW McCallister Street'
+    STREET : 'South West McCallister Street'
   },
   {
     NUMBER: '9923736',
     STREET: 'Serenity Street'//should also be unchanged
   }];
 
-  var cleanupStream = CleanupStream.create();
+  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
 
   test_stream(inputs,cleanupStream,function(err,actual){
     test.deepEqual(actual, expecteds,'we expect proper capitalization of street directionals');

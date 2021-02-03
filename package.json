@@ -30,9 +30,12 @@
     "through2-sink": "^1.0.0"
   },
   "devDependencies": {
+    "colors": "^1.4.0",
+    "diff": "^5.0.0",
     "jshint": "^2.9.4",
     "precommit-hook": "^3.0.0",
     "proxyquire": "^2.0.0",
+    "split2": "^3.2.2",
     "stream-mock": "^2.0.3",
     "tap-spec": "^5.0.0",
     "tape": "^5.0.0"

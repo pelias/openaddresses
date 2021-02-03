@@ -8,6 +8,7 @@ require( './import');
 require( './importPipeline');
 require( './parameters' );
 require( './streams/cleanupStream' );
+require( './cleanup_v2' );
 require( './streams/contentHashStream' );
 require( './streams/documentStream' );
 require( './streams/germanicAbbreviationStream');
