@@ -34,6 +34,7 @@ function downloadAll(config, callback) {
 function downloadBundle(targetDir, config, sourceUrl, callback) {
 
   const tmpZipFile = temp.path({suffix: '.zip'});
+  const referer = config.get('imports.openaddresses.dataReferer') || 'https://pelias-results.openaddresses.io';
 
   async.series(
     [
@@ -44,7 +45,7 @@ function downloadBundle(targetDir, config, sourceUrl, callback) {
           const s3Options = config.imports.openaddresses.s3Options || '';
           child_process.exec(`aws s3 cp ${sourceUrl} ${tmpZipFile} ${s3Options}`, callback);
         } else {
-          child_process.exec(`curl -s -L -X GET -o ${tmpZipFile} ${sourceUrl}`, callback);
+          child_process.exec(`curl -s -L -X GET --referer ${referer} -o ${tmpZipFile} ${sourceUrl}`, callback);
         }
       },
       // unzip file into target directory

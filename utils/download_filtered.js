@@ -68,6 +68,7 @@ function getFiles(config, targetDir, main_callback){
 
 function downloadSource(targetDir, file, main_callback) {
   const errorsFatal = config.get('imports.openaddresses.missingFilesAreFatal');
+  const referer = config.get('imports.openaddresses.dataReferer') || 'https://pelias-results.openaddresses.io';
   logger.info(`Downloading ${file.csv}`);
 
   async.series(
@@ -75,7 +76,7 @@ function downloadSource(targetDir, file, main_callback) {
       // download the zip file into the temp directory
       (callback) => {
         logger.debug(`downloading ${file.url}`);
-        child_process.exec(`curl -s -L -X GET -o ${file.zip} ${file.url}`, callback);
+        child_process.exec(`curl -s -L -X GET --referer ${referer} -o ${file.zip} ${file.url}`, callback);
       },
       // unzip file into target directory
       (callback) => {
