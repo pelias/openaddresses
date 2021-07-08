@@ -18,7 +18,7 @@ function downloadAll(config, callback) {
 
     const dataHost = config.get('imports.openaddresses.dataHost') || 'https://data.openaddresses.io';
 
-    async.each(
+    async.eachSeries(
       [
         // all non-share-alike data
         `${dataHost}/openaddr-collected-global.zip`,
