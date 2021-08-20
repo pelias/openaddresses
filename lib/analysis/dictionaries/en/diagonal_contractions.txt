@@ -1,0 +1,4 @@
+SE|southeast
+SW|southwest
+NE|northeast
+NW|northwest
