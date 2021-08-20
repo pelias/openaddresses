@@ -104,7 +104,7 @@ tape('generic expansion - multiple generic tokens', (t) => {
 
 // @todo: what should we do when the 'generic' preceeds the 'specific'?
 // @note: currently this expands 'Ave S' but not 'Ave X' because it thinks
-// that S refers to a diagonal.
+// that S refers to a directional.
 tape('generic expansion - multiple generic tokens', (t) => {
   t.equal(analyzer('AVE X'), 'Ave X');
   t.equal(analyzer('AVE S'), 'Avenue S');
@@ -131,9 +131,7 @@ tape('expand directionals - last token position', (t) => {
   t.end();
 });
 
-// ignore diagonals
-// note: for now we will ignore diagonals since the expanded
-// for can we quite long.
+// do not expand NSEW directionals
 tape('expand directionals - first token position', (t) => {
   t.equal(analyzer('NE Main Street'), 'NE Main Street');
   t.equal(analyzer('SE Main Street'), 'SE Main Street');
@@ -164,6 +162,22 @@ tape('expand directionals - unless followed by a generic', (t) => {
   t.equal(analyzer('N Street Station'), 'N Street Station');
   t.equal(analyzer('N Ave Junction'), 'N Ave Junction');
   t.equal(analyzer('N Avenue Junction'), 'N Avenue Junction');
+  t.end();
+});
+
+// contract english diagonals (southwest,southeast...)
+tape('contract english diagonals - first token position', (t) => {
+  t.equal(analyzer('Northeast Main Street'), 'NE Main Street');
+  t.equal(analyzer('Southeast Main Street'), 'SE Main Street');
+  t.equal(analyzer('Northwest Main Street'), 'NW Main Street');
+  t.equal(analyzer('Southwest Main Street'), 'SW Main Street');
+  t.end();
+});
+tape('contract english diagonals - last token position', (t) => {
+  t.equal(analyzer('Main Street Northeast'), 'Main Street NE');
+  t.equal(analyzer('Main Street Southeast'), 'Main Street SE');
+  t.equal(analyzer('Main Street Northwest'), 'Main Street NW');
+  t.equal(analyzer('Main Street Southwest'), 'Main Street SW');
   t.end();
 });
 
