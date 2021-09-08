@@ -43,7 +43,7 @@ function downloadBundle(targetDir, config, sourceUrl, callback) {
         logger.debug(`downloading ${sourceUrl}`);
         if (_.startsWith(sourceUrl, 's3://')) {
           const s3Options = config.imports.openaddresses.s3Options || '';
-          child_process.exec(`aws s3 cp ${sourceUrl} ${tmpZipFile} ${s3Options}`, callback);
+          child_process.exec(`aws s3 cp ${sourceUrl} ${tmpZipFile} --only-show-errors ${s3Options}`, callback);
         } else {
           child_process.exec(`curl -s -L -X GET --referer ${referer} -o ${tmpZipFile} ${sourceUrl}`, callback);
         }
