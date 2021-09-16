@@ -45,7 +45,28 @@ function downloadBundle(targetDir, config, sourceUrl, callback) {
           const s3Options = config.imports.openaddresses.s3Options || '';
           child_process.exec(`aws s3 cp ${sourceUrl} ${tmpZipFile} --only-show-errors ${s3Options}`, callback);
         } else {
-          child_process.exec(`curl -s -L -X GET --referer ${referer} -o ${tmpZipFile} ${sourceUrl}`, callback);
+          const flags = [
+            '--request GET',                // HTTP GET
+            '--silent',                     // be quiet
+            '--location',                   // follow redirects
+            '--fail',                       // exit with a non-zero code for >=400 responses
+            '--write-out "%{http_code}"',   // print status code to STDOUT
+            `--referer ${referer}`,         // set referer header
+            `--output ${tmpZipFile}`,       // set output filepath
+            '--retry 5',                    // retry this number of times before giving up
+            '--retry-connrefused',          // consider ECONNREFUSED as a transient error
+            '--retry-delay 5'               // sleep this many seconds between retry attempts
+          ].join(' ');
+
+          // the `--fail*` flags cause an error to be returned as the first arg with `error.code`
+          // as the process exit status, the `-w "%{http_code}"` flag writes the HTTP status to STDOUT.
+          child_process.exec(`curl ${flags} ${sourceUrl}`, (error, stdout) => {
+            if (!error) { return callback(); }
+
+            // provide a more user-friendly error message
+            error.message = `cURL request failed, HTTP status: ${stdout}, exit code: ${error.code}`;
+            callback(error);
+          });
         }
       },
       // unzip file into target directory
