@@ -25,7 +25,6 @@ We think open data, open source, and open strategy win over proprietary solution
 # Pelias OpenAddresses importer
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/pelias/openaddresses.svg)](https://greenkeeper.io/)
-[![Build Status](https://travis-ci.org/pelias/openaddresses.svg?branch=master)](https://travis-ci.org/pelias/openaddresses)
 
 ## Overview
 
