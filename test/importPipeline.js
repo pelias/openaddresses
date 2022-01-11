@@ -16,7 +16,7 @@ tape('functional test of importing two small OA files', function(t) {
     // uncomment this to write the actual results to the expected file
     // make sure they look ok though. comma left off so jshint reminds you
     // not to commit this line
-    // fs.writeFileSync(expectedPath, JSON.stringify(actual, null, 2))
+    // require('fs').writeFileSync(expectedPath, JSON.stringify(actual, null, 2))
 
     t.error(err);
     t.deepEquals(actual, expected);
