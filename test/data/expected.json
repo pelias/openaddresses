@@ -20,6 +20,9 @@
         "country_a": [
           null
         ],
+        "country_source": [
+          null
+        ],
         "macroregion": [
           "override macroregion"
         ],
@@ -27,6 +30,9 @@
           "2"
         ],
         "macroregion_a": [
+          null
+        ],
+        "macroregion_source": [
           null
         ],
         "region": [
@@ -38,6 +44,9 @@
         "region_a": [
           null
         ],
+        "region_source": [
+          null
+        ],
         "macrocounty": [
           "override macrocounty"
         ],
@@ -45,6 +54,9 @@
           "4"
         ],
         "macrocounty_a": [
+          null
+        ],
+        "macrocounty_source": [
           null
         ],
         "county": [
@@ -56,6 +68,9 @@
         "county_a": [
           null
         ],
+        "county_source": [
+          null
+        ],
         "borough": [
           "override borough"
         ],
@@ -63,6 +78,9 @@
           "6"
         ],
         "borough_a": [
+          null
+        ],
+        "borough_source": [
           null
         ],
         "locality": [
@@ -74,6 +92,9 @@
         "locality_a": [
           null
         ],
+        "locality_source": [
+          null
+        ],
         "localadmin": [
           "override localadmin"
         ],
@@ -83,6 +104,9 @@
         "localadmin_a": [
           null
         ],
+        "localadmin_source": [
+          null
+        ],
         "neighbourhood": [
           "override neighbourhood"
         ],
@@ -90,6 +114,9 @@
           "9"
         ],
         "neighbourhood_a": [
+          null
+        ],
+        "neighbourhood_source": [
           null
         ]
       },
