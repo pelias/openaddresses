@@ -4,12 +4,8 @@
     "_id": "openaddresses:address:data/input_file_1:7552fdd1d9eb5765",
     "_type": "_doc",
     "data": {
-      "name": {
-        "default": "100 Main St"
-      },
-      "phrase": {
-        "default": "100 Main St"
-      },
+      "name": {},
+      "phrase": {},
       "parent": {
         "country": [
           "override country"
@@ -139,12 +135,8 @@
     "_id": "openaddresses:address:data/input_file_1:e21716b47966b98a",
     "_type": "_doc",
     "data": {
-      "name": {
-        "default": "200 Main St"
-      },
-      "phrase": {
-        "default": "200 Main St"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "200",
         "street": "Main St"
@@ -163,12 +155,8 @@
     "_id": "openaddresses:address:data/input_file_1:7456321cc7d6d352",
     "_type": "_doc",
     "data": {
-      "name": {
-        "default": "0 Main St"
-      },
-      "phrase": {
-        "default": "0 Main St"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "0",
         "street": "Main St"
@@ -187,12 +175,8 @@
     "_id": "openaddresses:address:data/input_file_1:f026cd5494a7e4f4",
     "_type": "_doc",
     "data": {
-      "name": {
-        "default": "00 Elm St"
-      },
-      "phrase": {
-        "default": "00 Elm St"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00",
         "street": "Elm St"
@@ -211,12 +195,8 @@
     "_id": "openaddresses:address:data/input_file_1:4509c0194f1efaca",
     "_type": "_doc",
     "data": {
-      "name": {
-        "default": "00300 Main St"
-      },
-      "phrase": {
-        "default": "00300 Main St"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00300",
         "street": "Main St"
@@ -235,12 +215,8 @@
     "_id": "openaddresses:address:data/input_file_2:fc6d8b0a0e5cda70",
     "_type": "_doc",
     "data": {
-      "name": {
-        "default": "400 Vireo Rd"
-      },
-      "phrase": {
-        "default": "400 Vireo Rd"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "400",
         "street": "Vireo Rd"
@@ -259,12 +235,8 @@
     "_id": "openaddresses:address:data/input_file_2:b7c25b5e6eea7831",
     "_type": "_doc",
     "data": {
-      "name": {
-        "default": "00000 Vireo Rd"
-      },
-      "phrase": {
-        "default": "00000 Vireo Rd"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00000",
         "street": "Vireo Rd"
@@ -283,12 +255,8 @@
     "_id": "openaddresses:address:data/input_file_2:25d52af880bfefc4",
     "_type": "_doc",
     "data": {
-      "name": {
-        "default": "00500 Calle De Lago"
-      },
-      "phrase": {
-        "default": "00500 Calle De Lago"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00500",
         "street": "Calle De Lago"
@@ -307,12 +275,8 @@
     "_id": "openaddresses:address:data/input_file_2:0d9cb0ba093a3d23",
     "_type": "_doc",
     "data": {
-      "name": {
-        "default": "00500 Calle De Lago"
-      },
-      "phrase": {
-        "default": "00500 Calle De Lago"
-      },
+      "name": {},
+      "phrase": {},
       "address_parts": {
         "number": "00500",
         "street": "Calle De Lago"
