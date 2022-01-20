@@ -84,3 +84,63 @@ tape('documentStream uses HASH value if present', function(test) {
     test.end();
   });
 });
+
+tape('documentStream maps GNAF IDs to addendum', function (test) {
+  const input = {
+    ID: 'GAVIC411412475',
+    NUMBER: '360',
+    STREET: 'BRUNSWICK STREET',
+    LAT: -37.79647546,
+    LON: 144.978997
+  };
+  const stats = { badRecordCount: 0 };
+  const documentStream = DocumentStream.create('au/example', stats);
+
+  test_stream([input], documentStream, function (err, actual) {
+    test.equal(actual.length, 1, 'the document should be pushed');
+    test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
+    test.equal(actual[0].getId(), 'au/example:0');
+    test.deepEqual(actual[0].getAddendum('concordances'), {'gnaf:pid': 'GAVIC411412475'});
+    test.end();
+  });
+});
+
+tape('documentStream GNAF pattern match but not AU', function (test) {
+  const input = {
+    ID: 'GAVIC411412475',
+    NUMBER: '360',
+    STREET: 'BRUNSWICK STREET',
+    LAT: -37.79647546,
+    LON: 144.978997
+  };
+  const stats = { badRecordCount: 0 };
+  const documentStream = DocumentStream.create('nz/example', stats);
+
+  test_stream([input], documentStream, function (err, actual) {
+    test.equal(actual.length, 1, 'the document should be pushed');
+    test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
+    test.equal(actual[0].getId(), 'nz/example:0');
+    test.deepEqual(actual[0].getAddendum('concordances'), undefined);
+    test.end();
+  });
+});
+
+tape('documentStream GNAF pattern mismatch', function (test) {
+  const input = {
+    ID: 'invalid',
+    NUMBER: '360',
+    STREET: 'BRUNSWICK STREET',
+    LAT: -37.79647546,
+    LON: 144.978997
+  };
+  const stats = { badRecordCount: 0 };
+  const documentStream = DocumentStream.create('au/example', stats);
+
+  test_stream([input], documentStream, function (err, actual) {
+    test.equal(actual.length, 1, 'the document should be pushed');
+    test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
+    test.equal(actual[0].getId(), 'au/example:0');
+    test.deepEqual(actual[0].getAddendum('concordances'), undefined);
+    test.end();
+  });
+});
