@@ -353,5 +353,263 @@
         "concordances": "{\"gnaf:pid\":\"GAVIC718519668\"}"
       }
     }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:2e7dc83e6d7c43b5",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "10/244 Barkly Street"
+      },
+      "phrase": {
+        "default": "10/244 Barkly Street"
+      },
+      "address_parts": {
+        "number": "244",
+        "street": "Barkly Street",
+        "zip": "3182",
+        "unit": "10"
+      },
+      "center_point": {
+        "lon": 144.980414,
+        "lat": -37.872398
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:2e7dc83e6d7c43b5"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:b9d4e479b3787466",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "10/244-246 Wattletree Road"
+      },
+      "phrase": {
+        "default": "10/244-246 Wattletree Road"
+      },
+      "address_parts": {
+        "number": "10/244-246",
+        "street": "Wattletree Road",
+        "zip": "3144"
+      },
+      "center_point": {
+        "lon": 145.037872,
+        "lat": -37.863785
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:b9d4e479b3787466"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:5d465daf4228aeae",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "10/244-246 Mary Street"
+      },
+      "phrase": {
+        "default": "10/244-246 Mary Street"
+      },
+      "address_parts": {
+        "number": "10/244-246",
+        "street": "Mary Street",
+        "zip": "3121"
+      },
+      "center_point": {
+        "lon": 145.000381,
+        "lat": -37.82896
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:5d465daf4228aeae"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:19c92a8fab88d851",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "10/244 Brunswick Street"
+      },
+      "phrase": {
+        "default": "10/244 Brunswick Street"
+      },
+      "address_parts": {
+        "number": "244",
+        "street": "Brunswick Street",
+        "zip": "3065",
+        "unit": "10"
+      },
+      "center_point": {
+        "lon": 144.978361,
+        "lat": -37.80025
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:19c92a8fab88d851"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:2d93ffa5b82d5815",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "110/244 Dorcas Street"
+      },
+      "phrase": {
+        "default": "110/244 Dorcas Street"
+      },
+      "address_parts": {
+        "number": "244",
+        "street": "Dorcas Street",
+        "zip": "3205",
+        "unit": "110"
+      },
+      "center_point": {
+        "lon": 144.959162,
+        "lat": -37.83319
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:2d93ffa5b82d5815"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:a6e27ffafd14a0da",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "210/244 Dorcas Street"
+      },
+      "phrase": {
+        "default": "210/244 Dorcas Street"
+      },
+      "address_parts": {
+        "number": "244",
+        "street": "Dorcas Street",
+        "zip": "3205",
+        "unit": "210"
+      },
+      "center_point": {
+        "lon": 144.959162,
+        "lat": -37.83319
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:a6e27ffafd14a0da"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:4c18bc2fab1af1ee",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "310/244 Dorcas Street"
+      },
+      "phrase": {
+        "default": "310/244 Dorcas Street"
+      },
+      "address_parts": {
+        "number": "244",
+        "street": "Dorcas Street",
+        "zip": "3205",
+        "unit": "310"
+      },
+      "center_point": {
+        "lon": 144.959162,
+        "lat": -37.83319
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:4c18bc2fab1af1ee"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:d5236248ba736eba",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "410/244 Dorcas Street"
+      },
+      "phrase": {
+        "default": "410/244 Dorcas Street"
+      },
+      "address_parts": {
+        "number": "244",
+        "street": "Dorcas Street",
+        "zip": "3205",
+        "unit": "410"
+      },
+      "center_point": {
+        "lon": 144.959162,
+        "lat": -37.83319
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:d5236248ba736eba"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:7dbcebf7bd632ef8",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "510/244 Dorcas Street"
+      },
+      "phrase": {
+        "default": "510/244 Dorcas Street"
+      },
+      "address_parts": {
+        "number": "244",
+        "street": "Dorcas Street",
+        "zip": "3205",
+        "unit": "510"
+      },
+      "center_point": {
+        "lon": 144.959162,
+        "lat": -37.83319
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:7dbcebf7bd632ef8"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_4:822280a9b8a92d85",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "10/244 Pascoe Vale Road"
+      },
+      "phrase": {
+        "default": "10/244 Pascoe Vale Road"
+      },
+      "address_parts": {
+        "number": "244",
+        "street": "Pascoe Vale Road",
+        "zip": "3040",
+        "unit": "10"
+      },
+      "center_point": {
+        "lon": 144.925714,
+        "lat": -37.751689
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_4:822280a9b8a92d85"
+    }
   }
 ]
