@@ -85,13 +85,13 @@ tape('documentStream uses HASH value if present', function(test) {
   });
 });
 
-tape('documentStream maps GNAF IDs to addendum', function (test) {
+tape('documentStream valid country_code lowercase', function (test) {
   const input = {
-    ID: 'GAVIC411412475',
-    NUMBER: '360',
-    STREET: 'BRUNSWICK STREET',
-    LAT: -37.79647546,
-    LON: 144.978997
+    NUMBER: '5',
+    STREET: '101st Avenue',
+    LAT: 5,
+    LON: 6,
+    HASH: 'abcd'
   };
   const stats = { badRecordCount: 0 };
   const documentStream = DocumentStream.create('au/example', stats);
@@ -99,48 +99,64 @@ tape('documentStream maps GNAF IDs to addendum', function (test) {
   test_stream([input], documentStream, function (err, actual) {
     test.equal(actual.length, 1, 'the document should be pushed');
     test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
-    test.equal(actual[0].getId(), 'au/example:0');
-    test.deepEqual(actual[0].getAddendum('concordances'), {'gnaf:pid': 'GAVIC411412475'});
+    test.deepEqual(actual[0].getMeta('country_code'), 'AU', 'country_code set');
     test.end();
   });
 });
 
-tape('documentStream GNAF pattern match but not AU', function (test) {
+tape('documentStream valid country_code uppercase', function (test) {
   const input = {
-    ID: 'GAVIC411412475',
-    NUMBER: '360',
-    STREET: 'BRUNSWICK STREET',
-    LAT: -37.79647546,
-    LON: 144.978997
+    NUMBER: '5',
+    STREET: '101st Avenue',
+    LAT: 5,
+    LON: 6,
+    HASH: 'abcd'
   };
   const stats = { badRecordCount: 0 };
-  const documentStream = DocumentStream.create('nz/example', stats);
+  const documentStream = DocumentStream.create('AU/example', stats);
 
   test_stream([input], documentStream, function (err, actual) {
     test.equal(actual.length, 1, 'the document should be pushed');
     test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
-    test.equal(actual[0].getId(), 'nz/example:0');
-    test.deepEqual(actual[0].getAddendum('concordances'), undefined);
+    test.deepEqual(actual[0].getMeta('country_code'), 'AU', 'country_code set');
     test.end();
   });
 });
 
-tape('documentStream GNAF pattern mismatch', function (test) {
+tape('documentStream invalid country_code', function (test) {
   const input = {
-    ID: 'invalid',
-    NUMBER: '360',
-    STREET: 'BRUNSWICK STREET',
-    LAT: -37.79647546,
-    LON: 144.978997
+    NUMBER: '5',
+    STREET: '101st Avenue',
+    LAT: 5,
+    LON: 6,
+    HASH: 'abcd'
   };
   const stats = { badRecordCount: 0 };
-  const documentStream = DocumentStream.create('au/example', stats);
+  const documentStream = DocumentStream.create('foo/example', stats); // note: does not match pattern
 
   test_stream([input], documentStream, function (err, actual) {
     test.equal(actual.length, 1, 'the document should be pushed');
     test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
-    test.equal(actual[0].getId(), 'au/example:0');
-    test.deepEqual(actual[0].getAddendum('concordances'), undefined);
+    test.deepEqual(actual[0].getMeta('country_code'), undefined, 'country_code not set');
+    test.end();
+  });
+});
+
+tape('documentStream store reference to OA object in meta', function (test) {
+  const input = {
+    NUMBER: '5',
+    STREET: '101st Avenue',
+    LAT: 5,
+    LON: 6,
+    HASH: 'abcd'
+  };
+  const stats = { badRecordCount: 0 };
+  const documentStream = DocumentStream.create('example', stats);
+
+  test_stream([input], documentStream, function (err, actual) {
+    test.equal(actual.length, 1, 'the document should be pushed');
+    test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
+    test.deepEqual(actual[0].getMeta('oa'), input, 'OA reference stored in meta');
     test.end();
   });
 });

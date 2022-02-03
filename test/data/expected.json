@@ -1,7 +1,7 @@
 [
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:7552fdd1d9eb5765",
+    "_id": "openaddresses:address:input_file_1:7552fdd1d9eb5765",
     "_type": "_doc",
     "data": {
       "name": {
@@ -131,12 +131,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:7552fdd1d9eb5765"
+      "source_id": "input_file_1:7552fdd1d9eb5765"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:e21716b47966b98a",
+    "_id": "openaddresses:address:input_file_1:e21716b47966b98a",
     "_type": "_doc",
     "data": {
       "name": {
@@ -155,12 +155,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:e21716b47966b98a"
+      "source_id": "input_file_1:e21716b47966b98a"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:7456321cc7d6d352",
+    "_id": "openaddresses:address:input_file_1:7456321cc7d6d352",
     "_type": "_doc",
     "data": {
       "name": {
@@ -179,12 +179,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:7456321cc7d6d352"
+      "source_id": "input_file_1:7456321cc7d6d352"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:f026cd5494a7e4f4",
+    "_id": "openaddresses:address:input_file_1:f026cd5494a7e4f4",
     "_type": "_doc",
     "data": {
       "name": {
@@ -203,12 +203,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:f026cd5494a7e4f4"
+      "source_id": "input_file_1:f026cd5494a7e4f4"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_1:4509c0194f1efaca",
+    "_id": "openaddresses:address:input_file_1:4509c0194f1efaca",
     "_type": "_doc",
     "data": {
       "name": {
@@ -227,12 +227,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_1:4509c0194f1efaca"
+      "source_id": "input_file_1:4509c0194f1efaca"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_2:fc6d8b0a0e5cda70",
+    "_id": "openaddresses:address:input_file_2:fc6d8b0a0e5cda70",
     "_type": "_doc",
     "data": {
       "name": {
@@ -251,12 +251,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_2:fc6d8b0a0e5cda70"
+      "source_id": "input_file_2:fc6d8b0a0e5cda70"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_2:b7c25b5e6eea7831",
+    "_id": "openaddresses:address:input_file_2:b7c25b5e6eea7831",
     "_type": "_doc",
     "data": {
       "name": {
@@ -275,12 +275,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_2:b7c25b5e6eea7831"
+      "source_id": "input_file_2:b7c25b5e6eea7831"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_2:25d52af880bfefc4",
+    "_id": "openaddresses:address:input_file_2:25d52af880bfefc4",
     "_type": "_doc",
     "data": {
       "name": {
@@ -299,12 +299,12 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_2:25d52af880bfefc4"
+      "source_id": "input_file_2:25d52af880bfefc4"
     }
   },
   {
     "_index": "pelias",
-    "_id": "openaddresses:address:data/input_file_2:0d9cb0ba093a3d23",
+    "_id": "openaddresses:address:input_file_2:0d9cb0ba093a3d23",
     "_type": "_doc",
     "data": {
       "name": {
@@ -323,7 +323,35 @@
       },
       "source": "openaddresses",
       "layer": "address",
-      "source_id": "data/input_file_2:0d9cb0ba093a3d23"
+      "source_id": "input_file_2:0d9cb0ba093a3d23"
+    }
+  },
+  {
+    "_index": "pelias",
+    "_id": "openaddresses:address:au/input_file_3:0c0641950f5693a0",
+    "_type": "_doc",
+    "data": {
+      "name": {
+        "default": "10 Smith Street"
+      },
+      "phrase": {
+        "default": "10 Smith Street"
+      },
+      "address_parts": {
+        "number": "10",
+        "street": "Smith Street",
+        "zip": "input postcode"
+      },
+      "center_point": {
+        "lon": 144.931874,
+        "lat": -37.791488
+      },
+      "source": "openaddresses",
+      "layer": "address",
+      "source_id": "au/input_file_3:0c0641950f5693a0",
+      "addendum": {
+        "concordances": "{\"gnaf:pid\":\"GAVIC718519668\"}"
+      }
     }
   }
 ]
