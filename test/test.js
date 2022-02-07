@@ -11,6 +11,8 @@ require( './streams/cleanupStream' );
 require( './cleanup_v2' );
 require( './streams/contentHashStream' );
 require( './streams/documentStream' );
+require( './streams/gnafMapperStream' );
 require( './streams/germanicAbbreviationStream');
 require( './streams/isUSorCAHouseNumberZero' );
 require( './streams/recordStream' );
+require( './streams/unitSplittingMapperStream' );

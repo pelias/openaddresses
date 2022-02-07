@@ -8,7 +8,7 @@ const stream_mock = require('stream-mock');
 const expectedPath = path.join(__dirname, 'data/expected.json');
 const expected = require(expectedPath);
 
-tape('functional test of importing two small OA files', function(t) {
+tape('functional test of importing four small OA files', function(t) {
   // expect two assertions, one for the error and one for the data
   t.plan(2);
 
@@ -52,10 +52,13 @@ tape('functional test of importing two small OA files', function(t) {
   });
 
   // test fixtures
+  const dirPath = path.join(__dirname, 'data');
   const inputFiles = [
-    path.join(__dirname, 'data/input_file_1.csv'),
-    path.join(__dirname, 'data/input_file_2.csv')
+    path.join(dirPath, 'input_file_1.csv'),
+    path.join(dirPath, 'input_file_2.csv'),
+    path.join(dirPath, 'au/input_file_3.csv'),
+    path.join(dirPath, 'au/input_file_4.csv')
   ];
 
-  importPipeline.create(inputFiles, path.resolve(__dirname), adminLookupStream);
+  importPipeline.create(inputFiles, dirPath, adminLookupStream);
 });
