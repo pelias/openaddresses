@@ -32,7 +32,7 @@ module.exports.tests.australasian_solidus = function (test) {
   test('maps - split unit from housenumber', t => {
     var stream = mapper();
     stream.pipe(through.obj((doc, enc, next) => {
-      t.deepEqual(doc.getName('default'), '2/14 Smith Street', 'unchanged');
+      t.deepEqual(doc.getName('default'), '14 Smith Street', 'unchanged');
       t.deepEqual(doc.getAddress('unit'), '2', 'mapped');
       t.deepEqual(doc.getAddress('number'), '14', 'mapped');
       t.deepEqual(doc.getAddress('street'), 'Smith Street', 'unchanged');
@@ -53,7 +53,7 @@ module.exports.tests.australasian_solidus_with_whitespace = function (test) {
   test('maps - split unit from housenumber', t => {
     var stream = mapper();
     stream.pipe(through.obj((doc, enc, next) => {
-      t.deepEqual(doc.getName('default'), '2 /  14 Smith Street', 'unchanged');
+      t.deepEqual(doc.getName('default'), '14 Smith Street', 'unchanged');
       t.deepEqual(doc.getAddress('unit'), '2', 'mapped');
       t.deepEqual(doc.getAddress('number'), '14', 'mapped');
       t.deepEqual(doc.getAddress('street'), 'Smith Street', 'unchanged');
@@ -74,7 +74,7 @@ module.exports.tests.australasian_flat_prefix = function (test) {
   test('maps - split unit from housenumber', t => {
     var stream = mapper();
     stream.pipe(through.obj((doc, enc, next) => {
-      t.deepEqual(doc.getName('default'), 'Flat 2 14 Smith Street', 'unchanged');
+      t.deepEqual(doc.getName('default'), '14 Smith Street', 'unchanged');
       t.deepEqual(doc.getAddress('unit'), '2', 'mapped');
       t.deepEqual(doc.getAddress('number'), '14', 'mapped');
       t.deepEqual(doc.getAddress('street'), 'Smith Street', 'unchanged');
@@ -95,7 +95,7 @@ module.exports.tests.australasian_flat_prefix_abbreviated = function (test) {
   test('maps - split unit from housenumber', t => {
     var stream = mapper();
     stream.pipe(through.obj((doc, enc, next) => {
-      t.deepEqual(doc.getName('default'), 'F 2 14 Smith Street', 'unchanged');
+      t.deepEqual(doc.getName('default'), '14 Smith Street', 'unchanged');
       t.deepEqual(doc.getAddress('unit'), '2', 'mapped');
       t.deepEqual(doc.getAddress('number'), '14', 'mapped');
       t.deepEqual(doc.getAddress('street'), 'Smith Street', 'unchanged');
@@ -116,7 +116,7 @@ module.exports.tests.australasian_unit_prefix = function (test) {
   test('maps - split unit from housenumber', t => {
     var stream = mapper();
     stream.pipe(through.obj((doc, enc, next) => {
-      t.deepEqual(doc.getName('default'), 'Unit 2 14 Smith Street', 'unchanged');
+      t.deepEqual(doc.getName('default'), '14 Smith Street', 'unchanged');
       t.deepEqual(doc.getAddress('unit'), '2', 'mapped');
       t.deepEqual(doc.getAddress('number'), '14', 'mapped');
       t.deepEqual(doc.getAddress('street'), 'Smith Street', 'unchanged');
@@ -137,7 +137,7 @@ module.exports.tests.australasian_apartment_prefix = function (test) {
   test('maps - split unit from housenumber', t => {
     var stream = mapper();
     stream.pipe(through.obj((doc, enc, next) => {
-      t.deepEqual(doc.getName('default'), 'Apartment 2 14 Smith Street', 'unchanged');
+      t.deepEqual(doc.getName('default'), '14 Smith Street', 'unchanged');
       t.deepEqual(doc.getAddress('unit'), '2', 'mapped');
       t.deepEqual(doc.getAddress('number'), '14', 'mapped');
       t.deepEqual(doc.getAddress('street'), 'Smith Street', 'unchanged');
@@ -158,7 +158,7 @@ module.exports.tests.australasian_apartment_prefix_abbreviated = function (test)
   test('maps - split unit from housenumber', t => {
     var stream = mapper();
     stream.pipe(through.obj((doc, enc, next) => {
-      t.deepEqual(doc.getName('default'), 'APT 2 14 Smith Street', 'unchanged');
+      t.deepEqual(doc.getName('default'), '14 Smith Street', 'unchanged');
       t.deepEqual(doc.getAddress('unit'), '2', 'mapped');
       t.deepEqual(doc.getAddress('number'), '14', 'mapped');
       t.deepEqual(doc.getAddress('street'), 'Smith Street', 'unchanged');
@@ -179,7 +179,7 @@ module.exports.tests.australasian_allow_no_space_after_flat_designation = functi
   test('maps - split unit from housenumber', t => {
     var stream = mapper();
     stream.pipe(through.obj((doc, enc, next) => {
-      t.deepEqual(doc.getName('default'), 'APT2 14 Smith Street', 'unchanged');
+      t.deepEqual(doc.getName('default'), '14 Smith Street', 'unchanged');
       t.deepEqual(doc.getAddress('unit'), '2', 'mapped');
       t.deepEqual(doc.getAddress('number'), '14', 'mapped');
       t.deepEqual(doc.getAddress('street'), 'Smith Street', 'unchanged');
