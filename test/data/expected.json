@@ -360,10 +360,10 @@
     "_type": "_doc",
     "data": {
       "name": {
-        "default": "10/244 Barkly Street"
+        "default": "244 Barkly Street"
       },
       "phrase": {
-        "default": "10/244 Barkly Street"
+        "default": "244 Barkly Street"
       },
       "address_parts": {
         "number": "244",
@@ -436,10 +436,10 @@
     "_type": "_doc",
     "data": {
       "name": {
-        "default": "10/244 Brunswick Street"
+        "default": "244 Brunswick Street"
       },
       "phrase": {
-        "default": "10/244 Brunswick Street"
+        "default": "244 Brunswick Street"
       },
       "address_parts": {
         "number": "244",
@@ -462,10 +462,10 @@
     "_type": "_doc",
     "data": {
       "name": {
-        "default": "110/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "phrase": {
-        "default": "110/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "address_parts": {
         "number": "244",
@@ -488,10 +488,10 @@
     "_type": "_doc",
     "data": {
       "name": {
-        "default": "210/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "phrase": {
-        "default": "210/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "address_parts": {
         "number": "244",
@@ -514,10 +514,10 @@
     "_type": "_doc",
     "data": {
       "name": {
-        "default": "310/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "phrase": {
-        "default": "310/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "address_parts": {
         "number": "244",
@@ -540,10 +540,10 @@
     "_type": "_doc",
     "data": {
       "name": {
-        "default": "410/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "phrase": {
-        "default": "410/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "address_parts": {
         "number": "244",
@@ -566,10 +566,10 @@
     "_type": "_doc",
     "data": {
       "name": {
-        "default": "510/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "phrase": {
-        "default": "510/244 Dorcas Street"
+        "default": "244 Dorcas Street"
       },
       "address_parts": {
         "number": "244",
@@ -592,10 +592,10 @@
     "_type": "_doc",
     "data": {
       "name": {
-        "default": "10/244 Pascoe Vale Road"
+        "default": "244 Pascoe Vale Road"
       },
       "phrase": {
-        "default": "10/244 Pascoe Vale Road"
+        "default": "244 Pascoe Vale Road"
       },
       "address_parts": {
         "number": "244",
