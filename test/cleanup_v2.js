@@ -181,6 +181,27 @@ tape('contract english diagonals - last token position', (t) => {
   t.end();
 });
 
+// add missing English street name ordinals
+tape('add missing English street name ordinals', (t) => {
+  t.equal(analyzer('W 26 St'), 'West 26th Street');
+  t.equal(analyzer('W 26th St'), 'West 26th Street');
+  t.equal(analyzer('1 St'), '1st Street');
+  t.equal(analyzer('2 Rd'), '2nd Road');
+  t.equal(analyzer('3 Ave'), '3rd Avenue');
+  t.equal(analyzer('4 Ln'), '4th Lane');
+  t.equal(analyzer('11 St'), '11th Street');
+  t.equal(analyzer('12 Rd'), '12th Road');
+  t.equal(analyzer('13 Ave'), '13th Avenue');
+  t.equal(analyzer('14 Ln'), '14th Lane');
+  t.equal(analyzer('101 St'), '101st Street');
+  t.equal(analyzer('102 Rd'), '102nd Road');
+  t.equal(analyzer('103 Ave'), '103rd Avenue');
+  t.equal(analyzer('104 Ln'), '104th Lane');
+  t.equal(analyzer('no 1 st'), 'No 1 Street');
+  t.equal(analyzer('no #1 st'), 'No #1 Street');
+  t.end();
+});
+
 // --- NOOP inputs which should never change ---
 
 // no-ops, these inputs should not change regardless of the algorithm used
@@ -223,7 +244,7 @@ tape('misc', (t) => {
   t.equal(analyzer('YELLOWSTONE BLVD'), 'Yellowstone Boulevard');
   t.equal(analyzer('YESHIVA LN'), 'Yeshiva Lane');
   t.equal(analyzer('WYGANT PL'), 'Wygant Place');
-  t.equal(analyzer('W  262 ST'), 'West 262 Street');
+  t.equal(analyzer('W  262 ST'), 'West 262nd Street');
   t.equal(analyzer('W 26TH ST'), 'West 26th Street');
   t.equal(analyzer('WILLIE MC DONALD WAY'), 'Willie Mc Donald Way');
   t.equal(analyzer('West 93rd Street'), 'West 93rd Street');
@@ -232,7 +253,7 @@ tape('misc', (t) => {
   t.equal(analyzer('E  HAMPTON BLVD'), 'East Hampton Boulevard');
   t.equal(analyzer('MARATHON PKWY'), 'Marathon Parkway');
   t.equal(analyzer('ANDREWS AVE  S'), 'Andrews Avenue South');
-  t.equal(analyzer('W  13 ST'), 'West 13 Street');
+  t.equal(analyzer('W  13 ST'), 'West 13th Street');
   t.end();
 });
 
