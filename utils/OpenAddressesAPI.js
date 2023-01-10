@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const axios = require('axios');
 const config = require('pelias-config');
+const logger = require('pelias-logger').get('openaddresses');
 const HOST = 'https://batch.openaddresses.io';
 
 class OpenAddressesAPI {
@@ -10,13 +11,22 @@ class OpenAddressesAPI {
   }
 
   // remove file extensions from 'source'
-  normalize(source) {
+  static normalize(source) {
     if (!_.isString(source)) { return source; }
-    return source.replace(/\.[^/.]+$/, '');
+    const norm = source.replace(/\.[^/.]+$/, '');
+
+    // source definitions previously required a file extension.
+    // please remove file extensions from your ~/pelias.json file
+    // to silence these warning messages.
+    if (source !== norm) {
+      logger.warn(`source definitions no longer require a file extension '${source}'`);
+    }
+
+    return norm;
   }
 
   // return the http url for a specific job id
-  url(job) {
+  static url(job) {
     return `${HOST}/api/job/${job}/output/source.geojson.gz`;
   }
 
@@ -25,11 +35,10 @@ class OpenAddressesAPI {
     return _.get(this.config, 'validated') === true;
   }
 
-  async lookup(filename) {
-    // normalize 'source' property
+  async lookup(source) {
     // support the 'validated' property for financial supporters
     const params = {
-      source: this.normalize(filename),
+      source,
       layer: 'addresses',
       validated: this.isValidatedModeEnabled() ? 'true' : 'false'
     };

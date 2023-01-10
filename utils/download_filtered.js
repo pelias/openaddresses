@@ -7,6 +7,9 @@ const temp = require('temp');
 const logger = require('pelias-logger').get('openaddresses-download');
 const Bottleneck = require('bottleneck/es5');
 
+const OpenAddressesAPI = require('./OpenAddressesAPI');
+const oa = new OpenAddressesAPI();
+
 function downloadFiltered(config, callback) {
   const targetDir = config.imports.openaddresses.datapath;
   const errorsFatal = config.get('imports.openaddresses.missingFilesAreFatal');
@@ -56,18 +59,10 @@ function downloadFiltered(config, callback) {
 }
 
 async function getSources(files) {
-  const OpenAddressesAPI = require('./OpenAddressesAPI');
-  const oa = new OpenAddressesAPI();
-
   return await Promise.all(files.map(async file => {
 
-    // source definitions previously required a file extension.
-    // please remove file extensions from your ~/pelias.json file
-    // to silence these warning messages.
-    let id = file.replace(/\.[^\/.]+$/, '');
-    if (id !== file) {
-      logger.warn(`source definitions no longer require a file extension '${file}'`);
-    }
+    // normalize source
+    let id = OpenAddressesAPI.normalize(file);
 
     // lookup the source using the OpenAddresses API
     // to find the most current job id and ensure validity
@@ -80,7 +75,7 @@ async function getSources(files) {
     }
 
     // valid source
-    return { id, url: oa.url(version.job) };
+    return { id, url: OpenAddressesAPI.url(version.job) };
   }));
 }
 
