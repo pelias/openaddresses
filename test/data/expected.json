@@ -2,7 +2,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:input_file_1:7552fdd1d9eb5765",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "100 Main St"
@@ -137,7 +136,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:input_file_1:e21716b47966b98a",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "200 Main St"
@@ -161,7 +159,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:input_file_1:7456321cc7d6d352",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "0 Main St"
@@ -185,7 +182,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:input_file_1:f026cd5494a7e4f4",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "00 Elm St"
@@ -209,7 +205,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:input_file_1:4509c0194f1efaca",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "00300 Main St"
@@ -233,7 +228,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:input_file_2:fc6d8b0a0e5cda70",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "400 Vireo Rd"
@@ -257,7 +251,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:input_file_2:b7c25b5e6eea7831",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "00000 Vireo Rd"
@@ -281,7 +274,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:input_file_2:25d52af880bfefc4",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "00500 Calle De Lago"
@@ -305,7 +297,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:input_file_2:0d9cb0ba093a3d23",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "00500 Calle De Lago"
@@ -329,7 +320,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_3:0c0641950f5693a0",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "10 Smith Street"
@@ -357,7 +347,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:2e7dc83e6d7c43b5",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "244 Barkly Street"
@@ -383,7 +372,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:b9d4e479b3787466",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "10/244-246 Wattletree Road"
@@ -408,7 +396,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:5d465daf4228aeae",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "10/244-246 Mary Street"
@@ -433,7 +420,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:19c92a8fab88d851",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "244 Brunswick Street"
@@ -459,7 +445,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:2d93ffa5b82d5815",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "244 Dorcas Street"
@@ -485,7 +470,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:a6e27ffafd14a0da",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "244 Dorcas Street"
@@ -511,7 +495,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:4c18bc2fab1af1ee",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "244 Dorcas Street"
@@ -537,7 +520,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:d5236248ba736eba",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "244 Dorcas Street"
@@ -563,7 +545,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:7dbcebf7bd632ef8",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "244 Dorcas Street"
@@ -589,7 +570,6 @@
   {
     "_index": "pelias",
     "_id": "openaddresses:address:au/input_file_4:822280a9b8a92d85",
-    "_type": "_doc",
     "data": {
       "name": {
         "default": "244 Pascoe Vale Road"
