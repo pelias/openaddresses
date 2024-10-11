@@ -165,7 +165,7 @@ You can then use the following option: `--request-payer`
 * Required: no
 * Default: Shared token for the pelias project
 
-Since openaddresses moved from [results.openaddresses.io](https://results.openaddresses.io) to [batch.openaddresses.org](https://batch.openaddresses.org), you need a token to access the data. There is a default shared token for the Pelias project, but if you want to use it seriously, create your own account and token on [batch.openaddresses.org. ](https://batch.openaddresses.org) to avoid possible throttling/bandwidth limit or (temporary) suspension.
+Since openaddresses moved from [results.openaddresses.io](https://results.openaddresses.io) to [batch.openaddresses.io](https://batch.openaddresses.io), you need a token to access the data. There is a default shared token for the Pelias project, but if you want to use it seriously, create your own account and token on [batch.openaddresses.io. ](https://batch.openaddresses.io) to avoid possible throttling/bandwidth limit or (temporary) suspension.
 
 
 ## Parallel Importing
