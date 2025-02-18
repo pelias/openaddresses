@@ -184,13 +184,13 @@
     "_id": "openaddresses:address:input_file_1:f026cd5494a7e4f4",
     "data": {
       "name": {
-        "default": "00 Elm St"
+        "default": "0 Elm St"
       },
       "phrase": {
-        "default": "00 Elm St"
+        "default": "0 Elm St"
       },
       "address_parts": {
-        "number": "00",
+        "number": "0",
         "street": "Elm St"
       },
       "center_point": {
@@ -207,13 +207,13 @@
     "_id": "openaddresses:address:input_file_1:4509c0194f1efaca",
     "data": {
       "name": {
-        "default": "00300 Main St"
+        "default": "300 Main St"
       },
       "phrase": {
-        "default": "00300 Main St"
+        "default": "300 Main St"
       },
       "address_parts": {
-        "number": "00300",
+        "number": "300",
         "street": "Main St"
       },
       "center_point": {
@@ -253,13 +253,13 @@
     "_id": "openaddresses:address:input_file_2:b7c25b5e6eea7831",
     "data": {
       "name": {
-        "default": "00000 Vireo Rd"
+        "default": "0 Vireo Rd"
       },
       "phrase": {
-        "default": "00000 Vireo Rd"
+        "default": "0 Vireo Rd"
       },
       "address_parts": {
-        "number": "00000",
+        "number": "0",
         "street": "Vireo Rd"
       },
       "center_point": {
@@ -276,13 +276,13 @@
     "_id": "openaddresses:address:input_file_2:25d52af880bfefc4",
     "data": {
       "name": {
-        "default": "00500 Calle De Lago"
+        "default": "500 Calle De Lago"
       },
       "phrase": {
-        "default": "00500 Calle De Lago"
+        "default": "500 Calle De Lago"
       },
       "address_parts": {
-        "number": "00500",
+        "number": "500",
         "street": "Calle De Lago"
       },
       "center_point": {
@@ -299,13 +299,13 @@
     "_id": "openaddresses:address:input_file_2:0d9cb0ba093a3d23",
     "data": {
       "name": {
-        "default": "00500 Calle De Lago"
+        "default": "500 Calle De Lago"
       },
       "phrase": {
-        "default": "00500 Calle De Lago"
+        "default": "500 Calle De Lago"
       },
       "address_parts": {
-        "number": "00500",
+        "number": "500",
         "street": "Calle De Lago"
       },
       "center_point": {
