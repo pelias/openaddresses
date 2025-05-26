@@ -9,6 +9,7 @@
   "dependencies": {
     "@hapi/joi": "^16.0.1",
     "async": "^3.1.0",
+    "axios": "^1.2.2",
     "bottleneck": "^2.19.5",
     "combined-stream": "^1.0.7",
     "csv-parse": "^5.0.3",

@@ -12,8 +12,8 @@ module.exports = Joi.object().keys({
       dataHost: Joi.string(),
       s3Options: Joi.string(),
       adminLookup: Joi.boolean(),
-      token: Joi.string(),
-      missingFilesAreFatal: Joi.boolean().default(false).truthy('yes').falsy('no')
+      missingFilesAreFatal: Joi.boolean().default(false).truthy('yes').falsy('no'),
+      token: Joi.string().required(true),
     }).unknown(false)
   }).unknown(true)
 }).unknown(true);

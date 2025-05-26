@@ -142,6 +142,7 @@ tape( 'unknown config fields should throw error', function(test) {
     imports: {
       openaddresses: {
         datapath: 'this is the datapath',
+        token: 'abc',
         unknown: 'value'
       }
     }
@@ -153,11 +154,12 @@ tape( 'unknown config fields should throw error', function(test) {
 
 });
 
-tape( 'configuration with only datapath should not throw error', function(test) {
+tape( 'configuration with only datapath & token should not throw error', function(test) {
   const config = {
     imports: {
       openaddresses: {
-        datapath: 'this is the datapath'
+        datapath: 'this is the datapath',
+        token: 'abc'
       }
     }
   };
@@ -172,6 +174,7 @@ tape( 'valid configuration should not throw error', function(test) {
     imports: {
       openaddresses: {
         datapath: 'this is the datapath',
+        token: 'abc',
         adminLookup: false,
         files: ['file 1', 'file 2']
       }
@@ -188,6 +191,7 @@ tape( 'unknown children of imports should not throw error', function(test) {
     imports: {
       openaddresses: {
         datapath: 'this is the datapath',
+        token: 'abc',
         adminLookup: false,
         files: ['file 1', 'file 2']
       },
@@ -205,6 +209,7 @@ tape( 'unknown children of root should not throw error', function(test) {
     imports: {
       openaddresses: {
         datapath: 'this is the datapath',
+        token: 'abc',
         adminLookup: false,
         files: ['file 1', 'file 2']
       }
