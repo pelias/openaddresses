@@ -268,6 +268,14 @@ tape('misc directionals', (t) => {
   t.end();
 });
 
+tape('rue', (t) => {
+  t.equal(analyzer('R CORGA', 'pt'), 'Rua Corga');
+  t.equal(analyzer('R CRISTÓVÃO COLOMBO', 'pt'), 'Rua Cristóvão Colombo');
+  t.equal(analyzer('R 31 DE JANEIRO', 'pt'), 'Rua 31 De Janeiro');
+  t.equal(analyzer('R ANTÓNIO JOSE PAIVA E SOUSA', 'pt'), 'Rua António Jose Paiva E Sousa');
+  t.end();
+});
+
 // tape('prefix expansions', (t) => {
 //   t.equal(analyzer('ST JAMES ST'), 'Saint James Street');
 //   t.equal(analyzer('ST JAMES AVE'), 'Saint James Avenue');
