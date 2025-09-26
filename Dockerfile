@@ -3,7 +3,10 @@ FROM pelias/baseimage
 
 # downloader apt dependencies
 # note: this is done in one command in order to keep down the size of intermediate containers
-RUN apt-get update && apt-get install --no-install-recommends -y awscli && rm -rf /var/lib/apt/lists/*
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && ./aws/install \
+    && rm -rf awscliv2.zip aws
 
 # change working dir
 ENV WORKDIR /code/pelias/openaddresses
