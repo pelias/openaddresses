@@ -21,7 +21,7 @@
     "pelias-config": "^7.0.0",
     "pelias-dbclient": "^4.0.0",
     "pelias-logger": "^2.0.0",
-    "pelias-model": "^11.0.0",
+    "pelias-model": "^11.1.0",
     "pelias-wof-admin-lookup": "^8.0.0",
     "split2": "^3.2.2",
     "temp": "^0.9.1",
