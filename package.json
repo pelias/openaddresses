@@ -19,7 +19,7 @@
     "minimist": "^1.2.0",
     "pelias-blacklist-stream": "^2.0.0",
     "pelias-config": "^7.0.0",
-    "pelias-dbclient": "^4.3.0",
+    "pelias-dbclient": "^4.4.0",
     "pelias-logger": "^2.0.0",
     "pelias-model": "^11.1.0",
     "pelias-wof-admin-lookup": "^8.0.0",
