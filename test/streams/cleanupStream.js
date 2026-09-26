@@ -1,11 +1,13 @@
 var tape = require( 'tape' );
 
 var CleanupStream = require( '../../lib/streams/cleanupStream' );
+var fileContext = require( '../../lib/fileContext' );
 
 const stream_mock = require('stream-mock');
 
-function test_stream(input, testedStream, callback) {
-  const reader = new stream_mock.ObjectReadableMock(input);
+function test_stream(input, testedStream, callback, idPrefix) {
+  const context = fileContext.create('/data/file.csv', idPrefix || 'us/file');
+  const reader = new stream_mock.ObjectReadableMock(input.map((row) => fileContext.attach(row, context)));
   const writer = new stream_mock.ObjectWritableMock();
   writer.on('error', (e) => callback(e));
   writer.on('finish', () => callback(null, writer.data));
@@ -21,7 +23,7 @@ tape( 'cleanupStream trims whitespace from all fields', function(test) {
     POSTCODE: ' def '
   };
 
-  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
+  var cleanupStream = CleanupStream.create();
 
   test_stream([input], cleanupStream, function(err, records) {
     test.equal(records.length, 1, 'stream length unchanged');
@@ -65,7 +67,7 @@ tape( 'cleanupStream does NOT trim leading 0\'s from house numbers', function(te
     }
   ];
 
-  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
+  var cleanupStream = CleanupStream.create();
 
   test_stream(inputs, cleanupStream, function(err, actual) {
     test.deepEqual(actual, expecteds, 'leading 0\'s should not have been trimmed from NUMBER');
@@ -79,7 +81,7 @@ tape ( 'cleanupStream trims white space in street field', function(test){
       STREET: '34  West\t 93rd \nSt'
   };
 
-  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
+  var cleanupStream = CleanupStream.create();
 
   test_stream([input],cleanupStream, function(err,records){
     test.equal(records.length, 1, 'stream length unchanged');
@@ -138,7 +140,7 @@ tape( 'cleanupStream converts all-caps street names to Title Case', function(tes
     STREET: '丁目' //should handle non-latin characters
   }];
 
-  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
+  var cleanupStream = CleanupStream.create();
 
   test_stream(inputs,cleanupStream,function(err,actual){
     test.deepEqual(actual, expecteds,'we expect proper capitalization');
@@ -172,7 +174,7 @@ tape( 'cleanupStream expands directionals.', function(test){
     STREET: 'Serenity Street'//should also be unchanged
   }];
 
-  var cleanupStream = CleanupStream.create({ countryCode: 'us' });
+  var cleanupStream = CleanupStream.create();
 
   test_stream(inputs,cleanupStream,function(err,actual){
     test.deepEqual(actual, expecteds,'we expect proper capitalization of street directionals');

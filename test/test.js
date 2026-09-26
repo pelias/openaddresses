@@ -7,6 +7,7 @@ require( './isValidCsvRecord' );
 require( './import');
 require( './importPipeline');
 require( './parameters' );
+require( './fileContext' );
 require( './streams/cleanupStream' );
 require( './cleanup_v2' );
 require( './streams/contentHashStream' );
