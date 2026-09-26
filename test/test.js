@@ -10,6 +10,7 @@ require( './parameters' );
 require( './streams/cleanupStream' );
 require( './cleanup_v2' );
 require( './streams/contentHashStream' );
+require( './streams/streetlessAddressStream' );
 require( './streams/documentStream' );
 require( './streams/gnafMapperStream' );
 require( './streams/isUSorCAHouseNumberZero' );
