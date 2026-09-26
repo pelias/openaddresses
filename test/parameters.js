@@ -9,7 +9,7 @@ var parameters = require( '../lib/parameters' );
 tape( 'interpretUserArgs() correctly handles arguments', function ( test ){
   var testCase = [
       [ 'test'  ],
-      { dirPath: 'test', 'parallel-count': undefined, 'parallel-id': undefined },
+      { dirPath: 'test' },
   ];
 
   test.deepEqual(
@@ -188,74 +188,22 @@ tape('getFileList returns fully qualified path names when config has a files lis
   });
 });
 
-tape('getFileList handles parallel builds', function(test) {
-  var peliasConfig = {
-    imports: {
-      openaddresses: {
-        files: ['filea.csv', 'fileb.csv', 'filec.csv']
-      }
-    }
-  };
 
-  temp.mkdir('parallelBuilds', function(err, temporary_dir) {
-    test.test('3 workers, id 0', function(t) {
-      var args = {
-        dirPath: temporary_dir,
-        'parallel-count': 3,
-        'parallel-id': 0
-      };
+tape('getParallelism prefers OPENADDRESSES_PARALLELISM over the config', function(test) {
+  const config = { imports: { openaddresses: { parallelism: 3 } } };
 
-      var expected = [path.join(temporary_dir, 'filea.csv')];
+  test.equal(parameters.getParallelism(config, {}), 3, 'config used when no env var');
+  test.equal(parameters.getParallelism(config, { OPENADDRESSES_PARALLELISM: '2' }), 2, 'env var wins');
+  test.equal(parameters.getParallelism(config, { OPENADDRESSES_PARALLELISM: '1' }), 1, 'env var can lower it');
+  test.equal(parameters.getParallelism({ imports: { openaddresses: {} } }, {}), 1, 'defaults to 1');
+  test.end();
+});
 
-      var actual = parameters.getFileList(peliasConfig, args);
+tape('getParallelism ignores invalid OPENADDRESSES_PARALLELISM values', function(test) {
+  const config = { imports: { openaddresses: { parallelism: 3 } } };
 
-      t.deepEqual(actual, expected, 'only first file is indexed');
-      t.end();
-    });
-
-    test.test('3 workers, id 1', function(t) {
-      var args = {
-        dirPath: temporary_dir,
-        'parallel-count': 3,
-        'parallel-id': 1
-      };
-
-      var expected = [path.join(temporary_dir, 'fileb.csv')];
-
-      var actual = parameters.getFileList(peliasConfig, args);
-
-      t.deepEqual(actual, expected, 'only second file indexed');
-      t.end();
-    });
-
-    test.test('3 workers, id 2', function(t) {
-      var args = {
-        dirPath: temporary_dir,
-        'parallel-count': 3,
-        'parallel-id': 2
-      };
-
-      var expected = [path.join(temporary_dir, 'filec.csv')];
-
-      var actual = parameters.getFileList(peliasConfig, args);
-
-      t.deepEqual(actual, expected, 'only third file indexed');
-      t.end();
-    });
-
-    test.test('3 workers, id 3', function(t) {
-      var args = {
-        dirPath: temporary_dir,
-        'parallel-count': 3,
-        'parallel-id': 3
-      };
-
-      var expected = [];
-
-      var actual = parameters.getFileList(peliasConfig, args);
-
-      t.deepEqual(actual, expected, 'file list is empty');
-      t.end();
-    });
+  ['', '0', '-2', '1.5', 'lots'].forEach((bad) => {
+    test.equal(parameters.getParallelism(config, { OPENADDRESSES_PARALLELISM: bad }), 3, `'${bad}' ignored`);
   });
+  test.end();
 });

@@ -1,6 +1,5 @@
 const _ = require('lodash');
-const through = require('through2');
-const split = require('split2');
+const readline = require('readline');
 require('colors');
 const Diff = require('diff');
 const delim = '|';
@@ -11,8 +10,7 @@ const analyzers = {
 };
 
 // print each line
-const stream = through((chunk, enc, next) => {
-  const line = chunk.toString('utf8');
+function analyze(line) {
   const columns = [line];
 
   _.forEach(analyzers, analyzer => {
@@ -23,7 +21,7 @@ const stream = through((chunk, enc, next) => {
   // skip these lines as they are not helpful
   // for debugging.
   if (columns[1] === columns[2]) {
-    return next();
+    return;
   }
 
   var diffString = '';
@@ -39,14 +37,13 @@ const stream = through((chunk, enc, next) => {
 
   // only show lines where characters have been removed
   // if (!hasRemoval){
-  //   return next();
+  //   return;
   // }
 
   console.log(columns.join(delim));
-  next();
-});
+}
 
 // print header line
-stream.once('pipe', () => console.log(_.concat(['input'], _.keys(analyzers), ['diff']).join(delim)));
+console.log(_.concat(['input'], _.keys(analyzers), ['diff']).join(delim));
 
-process.stdin.pipe(split()).pipe(stream);
+readline.createInterface({ input: process.stdin }).on('line', analyze);

@@ -221,3 +221,16 @@ tape( 'unknown children of root should not throw error', function(test) {
   test.end();
 
 });
+
+tape( 'parallelism must be a positive integer and defaults to 1', function(test) {
+  const config = (extra) => ({
+    imports: { openaddresses: Object.assign({ datapath: 'path', token: 'abc' }, extra) }
+  });
+
+  test.equal(schema.validate(config({})).value.imports.openaddresses.parallelism, 1, 'defaults to 1');
+  test.equal(schema.validate(config({ parallelism: 3 })).value.imports.openaddresses.parallelism, 3, 'value kept');
+  [0, -1, 1.5, 'many'].forEach((bad) => {
+    test.throws(validate.bind(null, config({ parallelism: bad })), `${bad} should throw`);
+  });
+  test.end();
+});

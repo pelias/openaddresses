@@ -5,6 +5,8 @@ const map = require('through2-map');
 const proxyquire = require('proxyquire');
 const stream_mock = require('stream-mock');
 
+const rowSource = require('../lib/rowSource');
+
 const expectedPath = path.join(__dirname, 'data/expected.json');
 const expected = require(expectedPath);
 
@@ -60,5 +62,5 @@ tape('functional test of importing four small OA files', function(t) {
     path.join(dirPath, 'au/input_file_4.csv')
   ];
 
-  importPipeline.create(inputFiles, dirPath, adminLookupStream);
+  importPipeline.create(rowSource.createRowStream(inputFiles, dirPath), 'test', adminLookupStream);
 });

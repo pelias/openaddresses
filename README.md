@@ -169,12 +169,31 @@ Since openaddresses moved from [results.openaddresses.io](https://results.openad
 
 ## Parallel Importing
 
-Because OpenAddresses consists of many small files, this importer can be configured to run several instances in parallel that coordinate to import all the data.
+The importer can run several import pipelines in parallel. A single coordinator reads the files one at a time, and hands blocks of records to worker processes, each of which runs the full import pipeline.
 
-To use this functionality, replace calls to `npm start` with
+To use this functionality, set `imports.openaddresses.parallelism` in your Pelias config:
 
-```bash
-npm run parallel 3 # replace 3 with your desired level of paralellism
+```json
+{
+  "imports": {
+    "openaddresses": {
+      "parallelism": 3
+    }
+  }
+}
 ```
 
-Generally, a parallelism of 2 or 3 is suitable for most tasks.
+Generally, a parallelism of 2 or 3 is suitable for most tasks. The default of `1` runs the whole import in a single process.
+
+The level can also be given on the command line, or with an environment variable. Either takes priority over the config:
+
+```bash
+npm run parallel 3                    # replace 3 with your desired level of parallelism
+OPENADDRESSES_PARALLELISM=3 npm start
+```
+
+### `imports.openaddresses.parallelism`
+* Required: no
+* Default: `1`
+
+The number of import pipelines to run in parallel.

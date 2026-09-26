@@ -8,8 +8,7 @@ var logger = require( 'pelias-logger' ).get( 'openaddresses' );
 
 var parameters = require( './lib/parameters' );
 var importPipeline = require( './lib/importPipeline' );
-
-const adminLookupStream = require('pelias-wof-admin-lookup');
+var rowSource = require( './lib/rowSource' );
 
 // Pretty-print the total time the import took.
 function startTiming() {
@@ -24,10 +23,6 @@ function startTiming() {
 
 var args = parameters.interpretUserArgs( process.argv.slice( 2 ) );
 
-const adminLayers = ['neighbourhood', 'borough', 'locality', 'localadmin',
-  'county', 'macrocounty', 'region', 'macroregion', 'dependency', 'country',
-  'empire', 'continent'];
-
 if( 'exitCode' in args ){
   ((args.exitCode > 0) ? console.error : console.info)( args.errMessage );
   process.exit( args.exitCode );
@@ -41,12 +36,21 @@ if( 'exitCode' in args ){
 
   var files = parameters.getFileList(peliasConfig, args);
 
-  const importer_id = args['parallel-id'];
-  let importer_name = 'openaddresses';
+  // a parallelism greater than one runs a single reader which fans its output
+  // out to that many worker processes, each running the full pipeline
+  const parallelism = parameters.getParallelism(peliasConfig);
 
-  if (importer_id !== undefined) {
-    importer_name = `openaddresses-${importer_id}`;
+  if (parallelism > 1) {
+    require('./lib/parallel/coordinator').run(files, args.dirPath, parallelism);
+  } else {
+    logger.info( 'Importing %s files.', files.length );
+
+    const source = rowSource.createRowStream(files, args.dirPath);
+    source.on('error', (err) => {
+      logger.error(err.message);
+      process.exit(1);
+    });
+
+    importPipeline.create(source, 'openaddresses');
   }
-
-  importPipeline.create( files, args.dirPath, adminLookupStream.create(adminLayers), importer_name);
 }

@@ -10,15 +10,9 @@ shift
 if [[ $count -gt 1 ]]; then
 	echo "openaddresses: starting $count parallel builds"
 
-	# spawn $count parallel builds, passing correct params and all arguments
-	for i in `seq 0 $(($count-1))`; do
-		cmd="./bin/start --parallel-count $count --parallel-id $i $@"
-		$cmd &
-	done
-
-	# don't let this script finish until all parallel builds have finished
-	wait
-else
-	# invalid count value, run normal build
-	exec ./bin/start $@
+	# the importer runs the workers itself, this just sets the parallelism
+	# (which takes priority over imports.openaddresses.parallelism)
+	export OPENADDRESSES_PARALLELISM=$count
 fi
+
+exec ./bin/start $@

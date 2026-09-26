@@ -6,8 +6,8 @@ const DocumentStream = require( '../../lib/streams/documentStream' );
 const fileContext = require( '../../lib/fileContext' );
 
 // rows arrive with the context of the file they were read from
-function fromFile(record, idPrefix) {
-  return fileContext.attach(record, fileContext.create(`/data/${idPrefix}.csv`, idPrefix));
+function fromFile(record, idPrefix, uid) {
+  return fileContext.attach(record, fileContext.create(`/data/${idPrefix}.csv`, idPrefix), uid);
 }
 
 function test_stream(input, testedStream, callback) {
@@ -57,7 +57,8 @@ tape( 'documentStream creates id with filename-based prefix', function(test) {
     STREET: '101st Avenue',
     LAT: 5,
     LON: 6,
-    POSTCODE: ''
+    POSTCODE: '',
+    HASH: '1234'
   };
 
   const stats = { badRecordCount: 0 };
@@ -66,8 +67,47 @@ tape( 'documentStream creates id with filename-based prefix', function(test) {
   test_stream([fromFile(input, 'prefix')], documentStream, function(err, actual) {
     test.equal(actual.length, 1, 'the document should be pushed' );
     test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
-    test.equal(actual[0].getId(), 'prefix:0');
+    test.equal(actual[0].getId(), 'prefix:1234');
     test.equal(actual[0].getMeta('file'), '/data/prefix.csv', 'source file stored in meta');
+    test.end();
+  });
+});
+
+tape('documentStream falls back to the row uid when there is no HASH', function(test) {
+  const input = { NUMBER: '5', STREET: '101st Avenue', LAT: 5, LON: 6 };
+  const stats = { badRecordCount: 0 };
+
+  test_stream([
+    fromFile(Object.assign({}, input), 'prefix', '3-7'),
+    fromFile(Object.assign({ HASH: 'abcd' }, input), 'prefix', '3-8')
+  ], DocumentStream.create(stats), function(err, actual) {
+    test.deepEqual(actual.map((doc) => doc.getId()), ['prefix:3-7', 'prefix:abcd'], 'HASH is preferred');
+    test.end();
+  });
+});
+
+tape('documentStream handles rows from different files in one stream', function(test) {
+  const input = { NUMBER: '5', STREET: '101st Avenue', LAT: 5, LON: 6, HASH: 'abcd' };
+  const stats = { badRecordCount: 0 };
+
+  test_stream([
+    fromFile(Object.assign({}, input), 'au/one'),
+    fromFile(Object.assign({}, input), 'us/two')
+  ], DocumentStream.create(stats), function(err, actual) {
+    test.deepEqual(actual.map((doc) => doc.getId()), ['au/one:abcd', 'us/two:abcd']);
+    test.deepEqual(actual.map((doc) => doc.getMeta('country_code')), ['AU', 'US']);
+    test.end();
+  });
+});
+
+tape('documentStream rejects records without file context', function(test) {
+  const stats = { badRecordCount: 0 };
+
+  const input = { NUMBER: '5', STREET: '101st Avenue', LAT: 5, LON: 6 };
+
+  test_stream([input], DocumentStream.create(stats), function(err, actual) {
+    test.equal(actual.length, 0, 'no documents should be pushed');
+    test.equal(stats.badRecordCount, 1, 'bad record count updated');
     test.end();
   });
 });
@@ -164,31 +204,6 @@ tape('documentStream store reference to OA object in meta', function (test) {
     test.equal(actual.length, 1, 'the document should be pushed');
     test.equal(stats.badRecordCount, 0, 'bad record count unchanged');
     test.deepEqual(actual[0].getMeta('oa'), input, 'OA reference stored in meta');
-    test.end();
-  });
-});
-
-tape('documentStream handles rows from different files in one stream', function(test) {
-  const input = { NUMBER: '5', STREET: '101st Avenue', LAT: 5, LON: 6, HASH: 'abcd' };
-  const stats = { badRecordCount: 0 };
-
-  test_stream([
-    fromFile(Object.assign({}, input), 'au/one'),
-    fromFile(Object.assign({}, input), 'us/two')
-  ], DocumentStream.create(stats), function(err, actual) {
-    test.deepEqual(actual.map((doc) => doc.getId()), ['au/one:abcd', 'us/two:abcd']);
-    test.deepEqual(actual.map((doc) => doc.getMeta('country_code')), ['AU', 'US']);
-    test.end();
-  });
-});
-
-tape('documentStream rejects records without file context', function(test) {
-  const stats = { badRecordCount: 0 };
-  const input = { NUMBER: '5', STREET: '101st Avenue', LAT: 5, LON: 6 };
-
-  test_stream([input], DocumentStream.create(stats), function(err, actual) {
-    test.equal(actual.length, 0, 'no documents should be pushed');
-    test.equal(stats.badRecordCount, 1, 'bad record count updated');
     test.end();
   });
 });
