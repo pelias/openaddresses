@@ -5,6 +5,10 @@ var peliasModel = require( 'pelias-model' );
 
 var recordStream = require( '../../lib/streams/recordStream' );
 
+var fs = require( 'fs' );
+var temp = require( 'temp' ).track();
+var path = require( 'path' );
+
 /**
  * Tests whether records read from `test/openaddresses_sample.csv` are created
  * into Document objects with expected values.
@@ -60,6 +64,33 @@ tape( 'Don\'t create records for invalid data.', function ( test ){
       done();
     }
   ));
+});
+
+tape( 'A stray quote inside an unquoted value does not stop the import', function ( test ){
+  temp.mkdir('strayQuote', function ( err, dir ){
+    var file = path.join(dir, 'stray.csv');
+    fs.writeFileSync(file, [
+      'LON,LAT,NUMBER,STREET',
+      '1,2,10,5" Pipe Road',
+      '3,4,20,Main Street'
+    ].join('\n') + '\n');
+
+    var numbers = [];
+    recordStream.create([file], dir).pipe( through.obj(
+      function write( doc, _, next ){
+        numbers.push(doc.getAddress('number'));
+        next();
+      },
+      function end( done ){
+        test.deepEqual(numbers, ['10', '20'], 'both records imported');
+        test.end();
+        done();
+      }
+    )).on('error', function ( e ){
+      test.fail(e.message);
+      test.end();
+    });
+  });
 });
 
 tape( 'getIdPrefix returns prefix based on OA directory structure - csv', function( test ) {
